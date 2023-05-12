@@ -1,0 +1,8 @@
+Django==3.2.15
+Pillow
+celery
+django-allauth
+django-debug-toolbar
+psycopg2-binary
+stripe
+django-redis

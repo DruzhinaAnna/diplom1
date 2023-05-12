@@ -1,0 +1,19 @@
+body {
+    background-image: linear-gradient(180deg,rgba(205, 214, 219, 0.6),rgba(205, 214, 219, 0.6)),url("../img/background.jpg") no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    padding-top: 56px;
+}
+
+#start-purchase-btn {
+    background-color: #23364e;
+    border-color: #23364e;
+    color: white;
+}
+
+#start-purchase-link {
+    text-decoration: none;
+    color: white;
+}
