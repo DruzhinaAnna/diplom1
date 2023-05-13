@@ -1,11 +1,73 @@
 body {
-    background-image: linear-gradient(180deg,rgba(205, 214, 219, 0.6),rgba(205, 214, 219, 0.6)),url("../img/background.jpg") no-repeat;
+    background-image: linear-gradient(180deg,rgba(205, 214, 219, 0.6),rgba(205, 214, 219, 0.65)),url("../img/background.jpg");
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
-    padding-top: 56px;
+    padding-top: 110px;
 }
+
+
+.image{
+ height:300px;
+ width:500px;
+ position:absolute;
+ left: 690px;
+ top: 100px;
+ opacity:1;
+}
+.image:hover{
+
+    opacity:0.6;
+  transition:0.5s;
+  }
+.image1{
+ height:300px;
+ width:500px;
+ position:absolute;
+ left: 900px;
+ top: 320px;
+ opacity:1;
+}
+.image1:hover{
+
+    opacity:0.6;
+  transition:0.5s;
+  }
+
+.push {
+  list-style: none;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}
+.push li {
+  position: relative;
+  padding: 20px 0 20px 40px;
+  color: #15202e;
+  font-size:18px;
+  cursor: pointer;
+}
+.push li:before {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #4F5151;
+  content: "";
+  left: 0;
+  transition: .3s ease-in-out;
+  top: 27px;
+}
+.push li:after {
+  position: absolute;
+  border-left: 1px dotted #4F5151;
+  width: 1px;
+  bottom: -12px;
+  content: "";
+  left: 3px;
+  top: 48px;
+}
+.push li:hover:before{box-shadow: 0 0 0 10px rgba(0,0,0,.2)}
+.push li:last-child:after {content: none;}
 
 #start-purchase-btn {
     background-color: #23364e;

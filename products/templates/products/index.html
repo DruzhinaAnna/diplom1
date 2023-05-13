@@ -12,22 +12,30 @@
         <!--        Информационное сообщение-->
 
 
-      <!--    </div>-->
-<!--        <p><img src="{% static 'vendor/img/background2.jpg' %}" alt="Письма мастера дзен"></p>-->
-<!--<div class="plan">-->
-<!--    <img src="{% static 'vendor/img/background2.jpg' %}">-->
-<!--</div>-->
+
         <div class="container">
+
             <div class="row">
+
                 <div class="col-lg-6">
+                    <img class="image1" src="{% static 'vendor/img/background2.jpg'%}">
+                    <img class="image" src="{% static 'vendor/img/background1.png'%}">
+
                     <h1 class="mt-5">KanbanPM</h1>
-                    <p>
-                        Новые образы и лучшие бренды на Store.
-                        Бесплатная доставка по всему миру! Аутлет: до -70% Собственный бренд. -20% новым покупателям.
+                    <p  style = "font-size:18px; ">
+                        Визуализируйте рабочие процессы с помощью KanbanPM!
+                        <br>Какую полезную информацию можно извлечь из такой визуализации:
+                        <ul class="push">
+                        <li>Внимание к незавершенным задачам</li>
+                        <li>Гибкость планирования рабочих процессов</li>
+                        <li>Контроль сроков выполнения</li>
+                        <li>Фокусирование на задачах, наиболее приоритетных в данный момент</li>
+                        <li>Группировка задач на основании статусов</li>
+                        </ul>
                     </p>
                     <button id="start-purchase-btn" type="button" class="btn btn-lg">
                         <a id="start-purchase-link" href="{% url 'products:index' %}">
-                            Начать покупки
+                            Начать работу
                         </a>
                     </button>
                 </div>
