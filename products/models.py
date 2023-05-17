@@ -105,3 +105,6 @@ class Support(models.Model):
     email = models.EmailField(blank=True)
     number = models.CharField(max_length=11)
     discussion = models.TextField()
+
+    class Meta:
+        verbose_name = 'support'
