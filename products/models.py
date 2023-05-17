@@ -1,10 +1,12 @@
 import stripe
 from django.conf import settings
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 from users.models import User
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
+countries = (("RU", "Россия"), ("US", "США"))
 
 
 class ProductCategory(models.Model):
@@ -94,3 +96,12 @@ class Basket(models.Model):
             'sum': float(self.sum()),
         }
         return basket_item
+
+
+class Support(models.Model):
+    first_name = models.CharField(max_length=256)
+    last_name = models.CharField(max_length=256)
+    country = models.CharField(verbose_name='Страна', max_length=10, choices=countries)
+    email = models.EmailField(blank=True)
+    number = models.CharField(max_length=11)
+    discussion = models.TextField()

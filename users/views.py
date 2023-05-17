@@ -36,7 +36,7 @@ class UserProfileView(TitleMixin, UpdateView):
 
 
 class EmailVerificationView(TitleMixin, TemplateView):
-    title = 'Store - Подтверждение электронной почты'
+    title = 'KanbanPM - Подтверждение электронной почты'
     template_name = 'users/email_verification.html'
 
     def get(self, request, *args, **kwargs):
