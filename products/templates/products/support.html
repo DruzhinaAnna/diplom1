@@ -6,65 +6,98 @@
 {% endblock %}
 
 {% block content %}
+<main>
+        <div class="container">
+            <div class="fon1"></div>
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    {% if form.errors %}
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert"
+                             style="margin-top: 50px;">
+                            {{ form.errors }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endif %}
+                    <div class="card shadow-lg border-0 rounded-lg mt-5">
 
-<div class="card-body">
-    <form action="{% url 'products:registration' %}" method="post">
-        {% csrf_token %}
-        <div class="form-row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="small mb-1" for="{{ form.first_name.id_for_label }}">
-                        Имя
-                    </label>
-                    {{ form.first_name }}
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="small mb-1" for="{{ form.last_name.id_for_label }}">
-                        Фамилия
-                    </label>
-                    {{ form.last_name }}
-                </div>
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="col-md-6">
-                <label class="small mb-1" for="{{ form.username.id_for_label }}">
-                    Имя пользователя
-                </label>
-                {{ form.username }}
-            </div>
-            <div class="col-md-6">
-                <label class="small mb-1" for="{{ form.email.id_for_label }}">
-                    Адрес электронной почты
-                </label>
-                {{ form.email }}
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="small mb-1" for="{{ form.country.id_for_label }}">
-                        Страна
-                    </label>
-                    {{ form.country }}
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="small mb-1" for="{{ form.discussion.id_for_label }}">
-                        Подтверждение пароля
-                    </label>
-                    {{ form.discussion }}
-                </div>
-            </div>
-        </div>
-        <div class="form-group mt-4 mb-0">
-            <input class="btn btn-primary btn-block" type="submit" value="Создать аккаунт">
-        </div>
-    </form>
+                        <div class="card-body">
+                            <form action="{% url 'products:support' %}" method="post">
+                                {% csrf_token %}
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="small mb-1" for="{{ form.first_name.id_for_label }}">
+                                                Имя
+                                            </label>
+                                            {{ form.first_name }}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="small mb-1" for="{{ form.last_name.id_for_label }}">
+                                                Фамилия
+                                            </label>
+                                            {{ form.last_name }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="{{ form.username.id_for_label }}">
+                                             Адрес электронной почты
+                                        </label>
+                                        {{ form.username }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="{{ form.email.id_for_label }}">
+                                           Телефон
+                                        </label>
+                                        {{ form.email }}
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="small mb-1" for="{{ form.password1.id_for_label }}">
+                                                Страна
+                                            </label>
+                                            {{ form.password1 }}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="small mb-1" for="{{ form.password2.id_for_label }}">
+                                                Задайте ваш вопрос
+                                            </label>
+                                            {{ form.password2 }}
+                                        </div>
 </div>
+                                </div>
+                                 <p style="color: orange;"> Поля, отмеченные звёздочкой (*), являются обязательными.</p>
+                                <input type="checkbox" class="custom-checkbox" id="happy" name="happy" value="yes">
+                                <label for="happy">
+                                Отправляя эту форму, вы соглашаетесь с тем, что вы предоставляете KanbanPM свои личные данные
+                                    , а также с тем, что KanbanPM может выйти с вами на связь по этому вопросу.</label>
+                                <div class="form-group mt-4 mb-0">
+                                    <input class="btn btn-primary btn-block" type="submit" value="Отправить ">
+                                </div>
+                            </form>
+                        </div>
 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 {% endblock %}
 
+
+{% block footer %}
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy;  2023</p>
+        </div>
+    </footer>
+{% endblock %}
