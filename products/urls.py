@@ -4,13 +4,23 @@ from products.views import ProductsListView, SupportListView, basket_add, basket
 
 app_name = 'products'
 
+# urlpatterns = [
+#     path('', ProductsListView.as_view(), name='index'),
+#     path('category/<int:category_id>/', ProductsListView.as_view(), name='category'),
+#     path('page/<int:page>/', ProductsListView.as_view(), name='paginator'),
+#
+#     path('baskets/add/<int:product_id>/', basket_add, name='basket_add'),
+#     path('baskets/remove/<int:basket_id>/', basket_remove, name='basket_remove'),
+#
+#     path('support', SupportListView.as_view(), name='support'),
+# ]
+
 urlpatterns = [
     path('', ProductsListView.as_view(), name='index'),
+    path('support/', SupportListView.as_view(), name='support'),
     path('category/<int:category_id>/', ProductsListView.as_view(), name='category'),
     path('page/<int:page>/', ProductsListView.as_view(), name='paginator'),
-
     path('baskets/add/<int:product_id>/', basket_add, name='basket_add'),
     path('baskets/remove/<int:basket_id>/', basket_remove, name='basket_remove'),
 
-    path('support', SupportListView.as_view(), name='support'),
 ]

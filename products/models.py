@@ -101,7 +101,7 @@ class Basket(models.Model):
 class Support(models.Model):
     first_name = models.CharField(max_length=256)
     last_name = models.CharField(max_length=256)
-    country = models.CharField(verbose_name='Страна', max_length=10, choices=countries)
+    country = models.CharField(max_length=256)
     email = models.EmailField(blank=True)
     number = models.CharField(max_length=11)
     discussion = models.TextField()
