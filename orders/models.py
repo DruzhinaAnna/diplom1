@@ -41,7 +41,7 @@ class Order(models.Model):
 
 class Task(models.Model):
     name = models.CharField(max_length=20)
-    owner = models.
+    owner = models.CharField(max_length=20)
     date = models.DateTimeField()
     expired = models.DateTimeField()
     description = models.CharField(max_length=256)
