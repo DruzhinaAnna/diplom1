@@ -40,11 +40,22 @@ class Order(models.Model):
 
 
 class Task(models.Model):
+    NOT_COMPLETE = 0
+    IN_PROGRESS = 1
+    DONE = 2
+
+    STATUSES = (
+        (NOT_COMPLETE, 'Не завершено'),
+        (IN_PROGRESS, 'В процессе'),
+        (DONE, 'Готово'),
+    )
+
     name = models.CharField(max_length=20)
-    owner = models.CharField(max_length=20)
-    date = models.DateTimeField()
+    date = models.DateTimeField(auto_now_add=True)
     expired = models.DateTimeField()
+    status = models.SmallIntegerField(default=NOT_COMPLETE, choices=STATUSES)
     description = models.CharField(max_length=256)
+    initiator = models.ForeignKey(to=User, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'tasks'

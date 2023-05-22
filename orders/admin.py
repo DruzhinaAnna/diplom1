@@ -17,10 +17,10 @@ class OrderAdmin(admin.ModelAdmin):
 
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ('__str__', 'name')
+    list_display = ('__str__', 'status')
     fields = (
         'date',
-        ('name', 'owner'),
-        'expired', 'description',
+        ('name', 'initiator'),
+        'status', 'expired', 'description'
     )
-    # readonly_fields = ('id', 'date')
+    readonly_fields = ('date',)

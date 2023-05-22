@@ -12,9 +12,9 @@ class User(AbstractUser):
 
 
 class EmailVerification(models.Model):
-    code = models.UUIDField(unique=True)
-    user = models.ForeignKey(to=User, on_delete=models.CASCADE)
-    created = models.DateTimeField(auto_now_add=True)
+    code = models.UUIDField(unique=True, null=True)
+    user = models.ForeignKey(to=User, null=True, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True, null=True)
     expiration = models.DateTimeField()
 
     def __str__(self):
