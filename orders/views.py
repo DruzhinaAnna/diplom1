@@ -3,6 +3,7 @@ from http import HTTPStatus
 import stripe
 from django.conf import settings
 from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import TemplateView
@@ -106,3 +107,11 @@ def fulfill_order(session):
     order_id = int(session.metadata.order_id)
     order = Order.objects.get(id=order_id)
     order.update_after_payment()
+
+
+def main(request):
+    return render(request, 'orders/main.html')
+
+
+def mytasks(request):
+    return render(request, 'orders/my-tasks.html')

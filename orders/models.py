@@ -37,3 +37,18 @@ class Order(models.Model):
         }
         baskets.delete()
         self.save()
+
+
+class Task(models.Model):
+    name = models.CharField(max_length=20)
+    owner = models.
+    date = models.DateTimeField()
+    expired = models.DateTimeField()
+    description = models.CharField(max_length=256)
+
+    class Meta:
+        verbose_name = 'tasks'
+        verbose_name_plural = 'tasks'
+
+    def __str__(self):
+        return self.name
