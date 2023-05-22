@@ -1,10 +1,11 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import HttpResponseRedirect
+from django.shortcuts import HttpResponseRedirect, render
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 
 from common.views import TitleMixin
 from products.models import Basket, Product, Support, ProductCategory
+from products.forms import Supporting
 
 
 class IndexView(TitleMixin, TemplateView):
@@ -31,6 +32,7 @@ class ProductsListView(TitleMixin, ListView):
 
 class SupportListView(TitleMixin, ListView):
     model = Support
+    form_class = Supporting
     template_name = 'products/support.html'
     paginate_by = 3
     title = 'KanbanPM'
@@ -44,6 +46,7 @@ class SupportListView(TitleMixin, ListView):
         context = super(SupportListView, self).get_context_data()
         context['categories'] = ProductCategory.objects.all()
         return context
+
 
 @login_required
 def basket_add(request, product_id):
@@ -65,3 +68,8 @@ def basket_remove(request, basket_id):
     basket = Basket.objects.get(id=basket_id)
     basket.delete()
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+
+def support_function(request):
+    form = Supporting()
+    return render(request, 'products/support.html', {'form': form})

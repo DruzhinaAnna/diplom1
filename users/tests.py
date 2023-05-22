@@ -12,8 +12,8 @@ class UserRegistrationViewTestCase(TestCase):
 
     def setUp(self):
         self.data = {
-            'first_name': 'Valerii', 'last_name': 'Pavlikov',
-            'username': 'valerii', 'email': 'valerypavlikov@yandex.ru',
+            'first_name': 'Anna', 'last_name': 'Druzhina',
+            'username': 'annadruzhina', 'email': 'anyuta.druzhina@yandex.ru',
             'password1': '12345678pP', 'password2': '12345678pP',
         }
         self.path = reverse('users:registration')
@@ -22,7 +22,7 @@ class UserRegistrationViewTestCase(TestCase):
         response = self.client.get(self.path)
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
-        self.assertEqual(response.context_data['title'], 'Store - Регистрация')
+        self.assertEqual(response.context_data['title'], 'KanbanPM - Регистрация')
         self.assertTemplateUsed(response, 'users/registration.html')
 
     def test_user_registration_post_success(self):

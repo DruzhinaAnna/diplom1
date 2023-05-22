@@ -101,10 +101,14 @@ class Basket(models.Model):
 class Support(models.Model):
     first_name = models.CharField(max_length=256)
     last_name = models.CharField(max_length=256)
-    country = models.CharField(max_length=256)
+    # country = models.CharField(max_length=256)
     email = models.EmailField(blank=True)
     number = models.CharField(max_length=11)
     discussion = models.TextField()
 
     class Meta:
         verbose_name = 'support'
+        verbose_name_plural = 'support'
+
+    def __str__(self):
+        return self.name

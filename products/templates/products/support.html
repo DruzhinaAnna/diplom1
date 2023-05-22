@@ -1,14 +1,8 @@
-{% extends 'products/base.html' %}
-{% load static cache humanize %}
-
-{% block css %}
-    <link href="{% static 'vendor/css/products.css' %}" rel="stylesheet">
-{% endblock %}
+{% extends 'users/base.html' %}
 
 {% block content %}
-<main>
+    <main>
         <div class="container">
-            <div class="fon1"></div>
             <div class="row justify-content-center">
                 <div class="col-lg-7">
                     {% if form.errors %}
@@ -21,7 +15,8 @@
                         </div>
                     {% endif %}
                     <div class="card shadow-lg border-0 rounded-lg mt-5">
-
+                        <div class="card-header"><h3 class="text-center font-weight-light my-4">Создать аккаунт</h3>
+                        </div>
                         <div class="card-body">
                             <form action="{% url 'products:support' %}" method="post">
                                 {% csrf_token %}
@@ -46,13 +41,13 @@
                                 <div class="form-row">
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="{{ form.email.id_for_label }}">
-                                             Адрес электронной почты
+                                            Имя пользователя
                                         </label>
                                         {{ form.email }}
                                     </div>
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="{{ form.number.id_for_label }}">
-                                           Телефон
+                                            Адрес электронной почты
                                         </label>
                                         {{ form.number }}
                                     </div>
@@ -60,44 +55,37 @@
                                 <div class="form-row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="small mb-1" for="{{ form.country.id_for_label }}">
-                                                Страна
+                                            <label class="small mb-1" for="{{ form.discussion.id_for_label }}">
+                                                Пароль
                                             </label>
-                                            {{ form.country }}
+                                            {{ form.discussion }}
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="small mb-1" for="{{ form.discussion.id_for_label }}">
-                                                Задайте ваш вопрос
+                                            <label class="small mb-1" for="{{ form.password2.id_for_label }}">
+                                                Подтверждение пароля
                                             </label>
-                                            {{ form.discussion }}
+                                            {{ form.password2 }}
                                         </div>
-</div>
+                                    </div>
                                 </div>
-                                 <p style="color: orange;"> Поля, отмеченные звёздочкой (*), являются обязательными.</p>
-                                <input type="checkbox" class="custom-checkbox" id="happy" name="happy" value="yes">
-                                <label for="happy">
-                                Отправляя эту форму, вы соглашаетесь с тем, что вы предоставляете KanbanPM свои личные данные
-                                    , а также с тем, что KanbanPM может выйти с вами на связь по этому вопросу.</label>
                                 <div class="form-group mt-4 mb-0">
-                                    <input class="btn btn-primary btn-block" type="submit" value="Отправить ">
+                                    <input class="btn btn-primary btn-block" type="submit" value="Создать аккаунт">
                                 </div>
                             </form>
                         </div>
 
+                        <div class="card-footer text-center">
+                            <div class="small">
+                                <a href="{% url 'users:login' %}">
+                                    Уже есть аккаунт? Авторизоваться
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </main>
-{% endblock %}
-
-
-{% block footer %}
-    <footer class="py-5 bg-dark">
-        <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy;  2023</p>
-        </div>
-    </footer>
 {% endblock %}
