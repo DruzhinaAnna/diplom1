@@ -54,7 +54,8 @@
     <div class="dropdown">
         <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2"
            data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="{% static 'vendor/img/users/default_avatar.jpg'%}" alt="" class="rounded-circle me-2" width="32" height="32">
+            <img src="{% static 'vendor/img/users/default_avatar.jpg'%}" alt="" class="rounded-circle me-2" width="32"
+                 height="32">
             <strong>Анна Дружина</strong>
         </a>
         <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
@@ -68,18 +69,29 @@
         </ul>
     </div>
 </div>
- <div class="content">
-  <h1>Мои задачи</h1>
-   <ul class="horizontal-links">
-      <li><a href="#" onclick="loadContent('list')">Список</a></li>
-      <li><a href="#" onclick="loadContent('board')">Доска</a></li>
-      <li><a href="#" onclick="loadContent('calendar')">Календарь</a></li>
-      <li><a href="#" onclick="loadContent('files')">Файлы</a></li>
-  </ul>
-   <div class="task-links">
-  </div>
-  <div id="task-content">
-    <!-- Здесь будет загружаться контент в зависимости от выбранной ссылки -->
-  </div>
+
+<div class="content">
+    <h1>Мои задачи</h1>
+    <ul class="horizontal-links">
+        <li><a href="#" onclick="loadContent('list')">Список</a></li>
+        <li><a href="#" onclick="loadContent('board')">Доска</a></li>
+        <li><a href="#" onclick="loadContent('calendar')">Календарь</a></li>
+        <li><a href="#" onclick="loadContent('files')">Файлы</a></li>
+    </ul>
+
+    <div class="task-links">
+    </div>
+    <div id="task-content">
+        <!-- Здесь будет загружаться контент в зависимости от выбранной ссылки -->
+        {% for task in tasks %}
+            <a href="#"><h5>{{ task.name }}</h5></a>
+            <p>{{ task.date }}</p>
+            <select value>
+                <option selected="selected">{{ task.get_status_display }}</option>
+                <option> {{ task.get_status_display }} </option>
+            </select>
+            <hr>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}

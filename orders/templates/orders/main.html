@@ -7,6 +7,7 @@
 {% endblock %}
 
 {% block content %}
+
 <script src="{% static 'vendor/js/date.js' %}"></script>
 <!-- Основное содержимое страницы -->
 <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 180px;">
@@ -77,10 +78,18 @@
         <div class="form-row">
             <div class="form" draggable="true" id="form1" ondragstart="dragStart(event, 'form1')">
                 <h3><a href="{% url 'orders:my-tasks' %}">Мои задачи</a></h3>
+
                 {% for task in tasks %}
                     <a href="#"><h5>{{ task.name }}</h5></a>
                     <p>{{ task.date }}</p><hr>
                 {% endfor %}
+
+                <form method="post" , enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit"> Submit</button>
+                </form>
+
                 <div class="actions-button">
                     <img src="{% static 'vendor/img/three-dots.jpg' %}" onclick="toggleFormDropdown(event)">
                     <div class="form-dropdown-content" id="form-dropdown-content">

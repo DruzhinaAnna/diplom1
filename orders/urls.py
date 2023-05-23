@@ -17,5 +17,5 @@ urlpatterns = [
          name='order_canceled'),
 
     path('main/', main, name="main"),
-    path('my-tasks/', mytasks, name="my-tasks")
+    path('my-tasks/', mytasks, name="my-tasks"),
 ]

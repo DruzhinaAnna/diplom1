@@ -65,12 +65,13 @@ class Task(models.Model):
         return self.name
 
 
-# class Resume(models.Model):
-#     name = models.CharField(max_length=255, blank=False, null=False)
-#     file = models.FileField(upload_to='orders/', null=True)
-#
-#     def __repr__(self):
-#         return 'Resume(%s, %s)' % (self.name, self.file)
-#
-#     def __str__(self):
-#         return self.name
+class Resume(models.Model):
+    email = models.EmailField()
+    name = models.CharField(max_length=255, blank=False, null=False)
+    file = models.FileField(upload_to='orders/', null=True)
+
+    def __repr__(self):
+        return 'Resume(%s, %s)' % (self.name, self.file)
+
+    def __str__(self):
+        return self.name

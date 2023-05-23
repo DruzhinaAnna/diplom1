@@ -13,7 +13,7 @@ from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 
 from common.views import TitleMixin
-from orders.forms import OrderForm, UploadFileForm
+from orders.forms import OrderForm, ResumeForm
 from orders.models import Order, Task
 from products.models import Basket
 
@@ -112,15 +112,26 @@ def fulfill_order(session):
 
 @login_required
 def main(request):
-    context = {
-        'tasks': Task.objects.filter(initiator=request.user)
-    }
+    if request.method == 'POST':
+        form = ResumeForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect("/")
+    else:
+        form = ResumeForm
+        context = {
+            'tasks': Task.objects.filter(initiator=request.user),
+            'form': form
+        }
     return render(request, 'orders/main.html', context)
 
 
 @login_required
 def mytasks(request):
-    return render(request, 'orders/my-tasks.html')
+    context = {
+        'tasks': Task.objects.filter(initiator=request.user)
+    }
+    return render(request, 'orders/my-tasks.html', context)
 
 
 def saving(request):
@@ -142,12 +153,5 @@ def handle_uploaded_file(f):
             destination.write(chunk)
 
 
-def upload_file(request):
-    if request.method == 'POST':
-        form = UploadFileForm(request.POST, request.FILES)
-        if form.is_valid():
-            handle_uploaded_file(request.FILES['file'])
-            return HttpResponseRedirect('/success/url/')
-    else:
-        form = UploadFileForm()
-    return render(request, 'upload.html', {'form': form})
+# def upload_resume(request):
+

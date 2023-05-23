@@ -2,7 +2,7 @@ from datetime import datetime
 
 from django import forms
 
-from orders.models import Order
+from orders.models import Order, Resume
 
 
 class OrderForm(forms.ModelForm):
@@ -34,6 +34,7 @@ class OrderForm(forms.ModelForm):
 #         attrs={'class': 'form-control', 'placeholder': 'Введите описание'}))
 #     # initiator = forms.CharField(widget=)
 
-class UploadFileForm(forms.Form):
-    title = forms.CharField(max_length=50)
-    file = forms.FileField()
+class ResumeForm(forms.ModelForm):
+    class Meta:
+        model = Resume
+        fields = ['email', 'name', 'file']
