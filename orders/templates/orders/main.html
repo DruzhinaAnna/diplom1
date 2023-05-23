@@ -1,5 +1,11 @@
+{% extends 'products/base.html' %}
+{% load humanize %}
+
+{% block content %}
+
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Главная</title>
     <style>
@@ -9,7 +15,7 @@
       margin: 0;
       padding: 0;
     }
-    
+
     .navbar {
       background-color: #f8f8f8;
       border-bottom: 1px solid #ddd;
@@ -29,11 +35,11 @@
       background-size: 16px; /* Изменено */
     }
 
-    
+
     .navbar .dropdown {
       margin-left: 10px;
     }
-    
+
     .navbar .dropdown .dropbtn {
       font-size: 16px;
       border: none;
@@ -43,7 +49,7 @@
       cursor: pointer;
       padding: 5px;
     }
-    
+
     .navbar .dropdown-content {
       display: none;
       position: absolute;
@@ -52,22 +58,22 @@
       box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
       z-index: 1;
     }
-    
+
     .navbar .dropdown-content a {
       color: #333;
       padding: 8px 12px;
       text-decoration: none;
       display: block;
     }
-    
+
     .navbar .dropdown-content a:hover {
       background-color: #f1f1f1;
     }
-    
+
     .navbar .dropdown:hover .dropdown-content {
       display: block;
     }
-    
+
     /* Стили для SideBar */
     .sidebar {
       background-color: #f8f8f8;
@@ -80,33 +86,33 @@
       left: 0;
       transition: margin-left 0.3s ease-in-out;
     }
-    
+
     .sidebar.hide {
       margin-left: -200px;
     }
-    
+
     .sidebar .menu-item {
       margin-bottom: 10px;
     }
-    
+
     .sidebar .menu-item a {
       display: block;
       color: #333;
       text-decoration: none;
       padding: 5px;
     }
-    
+
     .sidebar .menu-item a:hover {
       background-color: #ddd;
     }
-    
+
     /* Стили для контента */
     .content {
-   
+
       margin-left: 220px;
       padding: 20px;
     }
-    
+
     /* Стили для выпадающего меню "Создать" */
     .create-dropdown-content {
       position: absolute;
@@ -116,30 +122,31 @@
       z-index: 1;
       display: none;
     }
-    
+
     .create-dropdown-content a {
       color: #333;
       padding: 8px 12px;
       text-decoration: none;
       display: block;
     }
-    
+
     .create-dropdown-content a:hover {
       background-color: #f1f1f1;
     }
-    
+
     /* Стили для кнопки скрытия SideBar */
     .sidebar-toggle {
       cursor: pointer;
       padding: 10px;
     }
-    
+
     .sidebar-toggle .bar {
       width: 25px;
       height: 3px;
       background-color: #333;
       margin: 5px 0;
     }
+
 
     </style>
     <script>
@@ -168,8 +175,10 @@
       sidebar.classList.toggle("hide");
     }
 
+
     </script>
 </head>
+
 <body>
 <!-- NavBar -->
 <div class="navbar">
@@ -333,6 +342,7 @@
     margin-right: 10px;
   }
 
+
 </style>
 <script>
   var draggedFormId;
@@ -488,6 +498,7 @@ function removeImage() {
     }
   }
 
+
 </script>
 
 <script>
@@ -501,6 +512,7 @@ function removeImage() {
 
   // Обновление текста с текущей датой
   document.getElementById('current-date').innerText = getCurrentDate();
+
 
 </script>
 
