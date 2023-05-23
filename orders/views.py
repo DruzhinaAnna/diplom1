@@ -2,6 +2,7 @@ from http import HTTPStatus
 
 import stripe
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
@@ -12,8 +13,8 @@ from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 
 from common.views import TitleMixin
-from orders.forms import OrderForm
-from orders.models import Order
+from orders.forms import OrderForm, UploadFileForm
+from orders.models import Order, Task
 from products.models import Basket
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -109,9 +110,44 @@ def fulfill_order(session):
     order.update_after_payment()
 
 
+@login_required
 def main(request):
-    return render(request, 'orders/main.html')
+    context = {
+        'tasks': Task.objects.filter(initiator=request.user)
+    }
+    return render(request, 'orders/main.html', context)
 
 
+@login_required
 def mytasks(request):
     return render(request, 'orders/my-tasks.html')
+
+
+def saving(request):
+    if request.method == "POST":
+        task = Task()
+        task.name = request.POST.get("name")
+        task.date = request.POST.get("age")
+        task.expired = request.POST.get("expired")
+        task.status = request.POST.get("status")
+        task.description = request.POST.get("description")
+        task.initiator = request.POST.get("initiator")
+        task.save()
+    return HttpResponseRedirect("/")
+
+
+def handle_uploaded_file(f):
+    with open('test.txt', 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
+
+
+def upload_file(request):
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            handle_uploaded_file(request.FILES['file'])
+            return HttpResponseRedirect('/success/url/')
+    else:
+        form = UploadFileForm()
+    return render(request, 'upload.html', {'form': form})

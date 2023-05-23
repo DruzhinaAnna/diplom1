@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django import forms
 
 from orders.models import Order
@@ -18,3 +20,20 @@ class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = ('first_name', 'last_name', 'email', 'address')
+
+
+# class TaskForm(forms.ModelForm):
+#     name = forms.CharField(widget=forms.TextInput(
+#         attrs={'class': 'form-control', 'placeholder': 'Введите название'}))
+#     date = forms.DateTimeField(widget=forms.DateTimeInput(
+#         attrs={'class': 'form-control', 'placeholder': '2'}))
+#     expired = forms.DateTimeField(widget=forms.DateTimeInput(
+#         attrs={'class': 'form-control', 'placeholder': '01.01.1900'}))
+#     # status = forms.MultipleChoiceField(widget=forms.MultipleHiddenInput()
+#     description = forms.CharField(widget=forms.TextInput(
+#         attrs={'class': 'form-control', 'placeholder': 'Введите описание'}))
+#     # initiator = forms.CharField(widget=)
+
+class UploadFileForm(forms.Form):
+    title = forms.CharField(max_length=50)
+    file = forms.FileField()
