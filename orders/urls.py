@@ -1,7 +1,7 @@
 from django.urls import path
 
 from orders.views import (CanceledTemplateView, OrderCreateView,
-                          OrderDetailView, OrderListView, SuccessTemplateView, main, mytasks)
+                          OrderDetailView, OrderListView, SuccessTemplateView, main, mytasks, board, upload)
 
 app_name = 'orders'
 
@@ -18,4 +18,6 @@ urlpatterns = [
 
     path('main/', main, name="main"),
     path('my-tasks/', mytasks, name="my-tasks"),
+    path('board', board, name="board"),
+    path('upload/', upload, name="upload"),
 ]

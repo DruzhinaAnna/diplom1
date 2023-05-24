@@ -1,4 +1,4 @@
-body {
+    body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
@@ -191,3 +191,122 @@ body {
       .sort-menu.show {
         display: block;
       }
+
+
+      .sort-container {
+  position: relative;
+  display: inline-block;
+}
+
+.sort-menu1 {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1;
+  display: none;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+.sort-option1 {
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.sort-option1:hover {
+  background-color: #ddd;
+}
+
+.show {
+  display: block;
+}
+.board-form {
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  height: 70vh;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+
+/* Стили для контейнера формы */
+.form-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+
+.small-form {
+  display: inline-block;
+  width: 300px;
+  padding: 10px;
+  margin-right: 10px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+
+}
+/* Стили для названия формы */
+.form-title {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.small-form h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+.small-form:hover {
+  background-color: #e0e0e0;
+}
+/* Стили для кнопок */
+.form-button {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+/* Стили для картинок кнопок */
+.form-button img {
+  width: 100%;
+  height: 100%;
+}
+
+    .task-container {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.task-container label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.task-container input[type="text"],
+.task-container textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.task-container img {
+  width: 30px;
+  margin-left: 5px;
+}

@@ -73,20 +73,63 @@
 <div class="content">
     <h1>Мои задачи</h1>
     <ul class="horizontal-links">
-        <li><a href="#" onclick="loadContent('list')">Список</a></li>
-        <li><a href="{% url 'orders:board' %}" onclick="loadContent('board')">Доска</a></li>
+        <li><a href="{% url 'orders:my-tasks' %}" onclick="loadContent('list')">Список</a></li>
+        <li><a href="#" onclick="loadContent('board')">Доска</a></li>
         <li><a href="#" onclick="loadContent('calendar')">Календарь</a></li>
         <li><a href="#" onclick="loadContent('files')">Файлы</a></li>
     </ul>
+
     <div class="task-links"></div>
     <div id="task-content">
         {% for task in tasks %}
-            <label>Название: <a href="#"><h5>{{ task.name }}</h5></a></label>
-            <label>Дата создания: <p>{{ task.date }}</p></label>
-            <label>Дата дедлайна: <p>{{ task.expired }}</p></label>
-            <hr>
+        <div class="small-form" draggable="true">
+            <div class="form-container"><h3 class="form-title">Сделать сегодня</h3><img
+                    src="/static/vendor/js/trash.jpg" style="width: 30px; margin-left: 5px;"><img
+                    src="/static/vendor/js/plus_lg.jpg" class="form-button"></div>
+            <div class="task-container" style="border: 1px solid black; padding: 10px; margin-bottom: 10px;">
+                <label>Название задачи: <input type="text" style="margin-left: 5px;" value="{{ task.name }}"></label>
+                <p>Дата создания: {{ task.date }}</p>
+                <label>Дата окончания задачи: <input type="date" value="{{ task.expired }}"></label>
+                <label>Статус задачи:
+<!--                    <select class="mdb-select md-form" id="material" name="material">-->
+<!--                        {% for task in form.task.field.choices.queryset %}-->
+<!--                        <option value="{{ task.id }}">{{ task.title }}</option>-->
+<!--                        {% endfor %}-->
+<!--                    </select>-->
+<!--                    <select>-->
+<!--                        <option selected="selected">{{ task.get_status_display }}</option>-->
+<!--                        <option value="inProgress">В процессе</option>-->
+<!--                        <option value="completed">Готово</option>-->
+<!--                    </select></label>-->
+                    <select id="task" name="task_list" onChange="redirectUrl()">
+                        <option selected="selected">{{ task.get_status_display }}</option>
+                        {% for task in tasks %}
+                            <option
+                                {% if task == current_task %} selected="selected" {% endif %}>
+                                {{task.get_status_display|capfirst}}
+                            </option>
+                        {% endfor %}
+                    </select>
+                <label>Описание задачи: <textarea rows="4" style="width: 100%;"></textarea></label>
+                <label>Исполнитель: <input type="text" value="{{ task.initiator }}" disabled></label>
+                <p>
+                    <a href="{% url 'orders:upload' %}">
+                        <img src="/static/vendor/js/paperclip.jpg" style="width: 30px; margin-left: 5px;">
+                    </a>
+                </p>
+                <img src="/static/vendor/js/trash.jpg" style="width: 30px; margin-left: 5px;"></div>
+        </div>
         {% endfor %}
-        <!-- Здесь будет загружаться контент в зависимости от выбранной ссылки -->
     </div>
 </div>
 {% endblock %}
+
+<!--{% for task in tasks %}-->
+<!--    <a href="#"><h5>{{ task.name }}</h5></a>-->
+<!--    <p>{{ task.date }}</p>-->
+<!--    <select value>-->
+<!--        <option selected="selected">{{ task.get_status_display }}</option>-->
+<!--        <option> {{ task.get_status_display }}</option>-->
+<!--    </select>-->
+<!--    <hr>-->
+<!--{% endfor %}-->

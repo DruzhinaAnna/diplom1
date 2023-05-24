@@ -2,7 +2,7 @@ from datetime import datetime
 
 from django import forms
 
-from orders.models import Order, Resume
+from orders.models import Order, Resume, Task
 
 
 class OrderForm(forms.ModelForm):
@@ -33,6 +33,16 @@ class OrderForm(forms.ModelForm):
 #     description = forms.CharField(widget=forms.TextInput(
 #         attrs={'class': 'form-control', 'placeholder': 'Введите описание'}))
 #     # initiator = forms.CharField(widget=)
+#
+#     class Meta:
+#         model = Task
+#         fields = ['name', 'material', 'priority', 'is_active']
+#         labels = {
+#             'title': 'Название Модели',
+#             'material': 'Материал',
+#             'priority': 'Приоритет сортировки',
+#             'is_active': 'Активна (включена)',
+#         }
 
 class ResumeForm(forms.ModelForm):
     class Meta:

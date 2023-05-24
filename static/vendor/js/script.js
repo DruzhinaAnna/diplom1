@@ -1,4 +1,3 @@
-// Функция для отображения/скрытия выпадающего меню у кнопки "Создать"
 function toggleCreateDropdown() {
       var createDropdownContent = document.getElementById("create-dropdown-content");
       createDropdownContent.style.display = createDropdownContent.style.display === "block" ? "none" : "block";

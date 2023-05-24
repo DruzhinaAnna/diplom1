@@ -1,3 +1,394 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Мои задачи</title>
+  <style>
+    /* Стили для NavBar */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .navbar {
+      background-color: #f8f8f8;
+      border-bottom: 1px solid #ddd;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .navbar input[type="text"] {
+      padding: 5px 30px 5px 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      width: 220px;
+      background-image: url("search.jpg");
+      background-repeat: no-repeat;
+      background-position: 95% center;
+      background-size: 16px; /* Изменено */
+    }
+
+    
+    .navbar .dropdown {
+      margin-left: 10px;
+    }
+    
+    .navbar .dropdown .dropbtn {
+      font-size: 16px;
+      border: none;
+      outline: none;
+      color: #333;
+      background-color: inherit;
+      cursor: pointer;
+      padding: 5px;
+    }
+    
+    .navbar .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+    
+    .navbar .dropdown-content a {
+      color: #333;
+      padding: 8px 12px;
+      text-decoration: none;
+      display: block;
+    }
+    
+    .navbar .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+    
+    .navbar .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    
+    /* Стили для SideBar */
+    .sidebar {
+      background-color: #f8f8f8;
+      border-right: 1px solid #ddd;
+      height: 100vh;
+      width: 200px;
+      padding: 10px;
+      position: fixed;
+      top: 70px;
+      left: 0;
+      transition: margin-left 0.3s ease-in-out;
+    }
+    
+    .sidebar.hide {
+      margin-left: -200px;
+    }
+    
+    .sidebar .menu-item {
+      margin-bottom: 10px;
+    }
+    
+    .sidebar .menu-item a {
+      display: block;
+      color: #333;
+      text-decoration: none;
+      padding: 5px;
+    }
+    
+    .sidebar .menu-item a:hover {
+      background-color: #ddd;
+    }
+    
+    /* Стили для контента */
+    .content {
+   
+      margin-left: 220px;
+      padding: 20px;
+    }
+    
+    /* Стили для выпадающего меню "Создать" */
+    .create-dropdown-content {
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+      display: none;
+    }
+    
+    .create-dropdown-content a {
+      color: #333;
+      padding: 8px 12px;
+      text-decoration: none;
+      display: block;
+    }
+    
+    .create-dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+    
+    /* Стили для кнопки скрытия SideBar */
+    .sidebar-toggle {
+      cursor: pointer;
+      padding: 10px;
+    }
+    
+    .sidebar-toggle .bar {
+      width: 25px;
+      height: 3px;
+      background-color: #333;
+      margin: 5px 0;
+    }
+    .horizontal-links {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.horizontal-links li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.horizontal-links li:last-child {
+  margin-right: 0;
+}
+.task-links {
+  border-top: 1px solid #a7a7a7;
+  padding-top: 10px;
+  margin-top: 20px;
+}
+.add-task-button {
+  display: inline-block;
+  background-color: #f1f1f1;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.sort-button {
+  display: inline-block;
+  
+  background-color: #f1f1f1;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+  position:relative;
+}
+.sort-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: white;
+        border: 1px solid #ccc;
+        padding: 10px;
+        display: none;
+      }
+
+      .sort-option {
+        cursor: pointer;
+        margin-bottom: 5px;
+        text-align: left;
+        font-size: 14px;
+      }
+      .sort-menu.show {
+        display: block;
+      }
+      
+      
+      .sort-container {
+  position: relative;
+  display: inline-block;
+}
+
+.sort-menu1 {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1;
+  display: none;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+.sort-option1 {
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.sort-option1:hover {
+  background-color: #ddd;
+}
+
+.show {
+  display: block;
+}
+.board-form {
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  height: 70vh;
+  margin-top: 10px; 
+  display: flex;
+  justify-content: space-evenly;
+}
+
+  
+/* Стили для контейнера формы */
+.form-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+
+.small-form {
+  display: inline-block;
+  width: 300px;
+  padding: 10px;
+  margin-right: 10px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  
+}
+/* Стили для названия формы */
+.form-title {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.small-form h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+.small-form:hover {
+  background-color: #e0e0e0;
+}
+/* Стили для кнопок */
+.form-button {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+/* Стили для картинок кнопок */
+.form-button img {
+  width: 100%;
+  height: 100%;
+}
+
+    .task-container {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.task-container label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.task-container input[type="text"],
+.task-container textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.task-container img {
+  width: 30px;
+  margin-left: 5px;
+}
+
+
+
+
+
+
+     
+  </style>
+</head>
+<body>
+  <!-- NavBar -->
+  <div class="navbar">
+    <div class="sidebar-toggle" onclick="toggleSidebar()">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+    <div style="flex: 1; text-align: center;">
+      <input type="text" placeholder="Поиск">
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn" onclick="toggleDropdown()">Учетная запись</button>
+      <div class="dropdown-content" id="dropdown-content">
+        <a href="#">Мой профиль</a>
+        <a href="#">Настройки</a>
+        <a href="#">Выйти</a>
+      </div>
+    </div>
+  </div>
+  
+  <!-- SideBar -->
+  <div class="sidebar" id="sidebar">
+    <div class="menu-item">
+      <a href="4.html">Главная</a>
+    </div>
+    <div class="menu-item">
+       <a href="my-tasks.html">Мои задачи</a>
+    </div>
+    <div class="menu-item">
+      <a href="#">Входящие</a>
+    </div>
+    <div class="menu-item">
+      <div class="dropdown">
+        <button class="dropbtn create-btn" style="margin: 0 auto; width: 150px; height: 30px;" onclick="toggleCreateDropdown()">Создать</button>
+
+        <div class="create-dropdown-content" id="create-dropdown-content">
+          <a href="#">Задача</a>
+          <a href="#">Проект</a>
+          <a href="#">Сообщение</a>
+        </div>
+      </div>
+    </div>
+  </div>
+ <div class="content">
+  <h1>Мои задачи</h1>
+   <ul class="horizontal-links">
+      <li><a href="#" onclick="loadContent('list')">Список</a></li>
+      <li><a href="#" onclick="loadContent('board')">Доска</a></li>
+      <li><a href="#" onclick="loadContent('calendar')">Календарь</a></li>
+      <li><a href="#" onclick="loadContent('files')">Файлы</a></li>
+  </ul>
+   <div class="task-links">
+  </div>
+  <div id="task-content">
+    <!-- Здесь будет загружаться контент в зависимости от выбранной ссылки -->
+  </div>
+</div>
+
+<script>
 function loadContent(page) {
   var taskContent = document.getElementById("task-content");
   taskContent.innerHTML = "";
@@ -95,14 +486,14 @@ function loadContent(page) {
 
     var sortContainer = document.createElement("div");
     sortContainer.className = "sort-container";
-
+	
   var addSectionButton = document.createElement("button");
 addSectionButton.className = "add-section-button";
 
 
 addSectionButton.style.position = "relative";
 addSectionButton.style.top = "0"; // Пример отступа сверху
-addSectionButton.style.left= "719px"; // Пример отступа справа
+addSectionButton.style.left= "1332px"; // Пример отступа справа
 
 
 
@@ -206,7 +597,7 @@ var taskDeleteImage= document.createElement("img");
         lastForm.parentNode.appendChild(newForm);
       } else {
         document.body.appendChild(newForm);
-
+      
     }
   }}
 
@@ -218,10 +609,10 @@ var taskDeleteImage= document.createElement("img");
   });
 
 
-
+  
     var sortButton = document.createElement("button");
     sortButton.className = "sort-button";
-    sortButton.style.position = "relative";
+    sortButton.style.position = "relative"; 
     sortButton.onclick = function() {
       var sortMenu = document.getElementById("sort-menu1");
       sortMenu.classList.toggle("show");
@@ -236,8 +627,8 @@ var taskDeleteImage= document.createElement("img");
     var sortButtonLabel = document.createTextNode("Сортировать");
     sortButton.appendChild(arrowImage);
     sortButton.appendChild(sortButtonLabel);
-
-
+    
+     
 
     var sortMenu = document.createElement("div");
     sortMenu.id = "sort-menu1";
@@ -398,7 +789,7 @@ var taskDeleteImage3= document.createElement("img");
   taskContainer.className = "task-container";
   taskContainer.style.border = "1px solid black";
   taskContainer.style.padding = "10px";
-
+  
   taskContainer.style.marginBottom = "10px";
 
   var taskTitleLabel = document.createElement("label");
@@ -456,7 +847,7 @@ var taskDeleteImage3= document.createElement("img");
   taskAttachmentImage.style.width = "30px";
   taskAttachmentImage.style.marginLeft = "5px";
   taskContainer.appendChild(taskAttachmentImage);
-
+  
   var taskDeleteImage4 = document.createElement("img");
   taskDeleteImage4.src = "/static/vendor/js/trash.jpg";
   taskDeleteImage4.style.width = "30px";
@@ -469,7 +860,7 @@ var taskDeleteImage3= document.createElement("img");
 
   form.appendChild(taskContainer);
 }
-
+    
    var dragSrcEl = null;
 
     function handleDragStart(e) {
@@ -531,28 +922,32 @@ var taskDeleteImage3= document.createElement("img");
     // Контент для страницы "Файлы"
   }
 }
-
+</script>
+<script>
 // Функция для отображения/скрытия выпадающего меню у кнопки "Создать"
-    function toggleCreateDropdown() {
-      var createDropdownContent = document.getElementById("create-dropdown-content");
-      createDropdownContent.style.display = createDropdownContent.style.display === "block" ? "none" : "block";
-    }
+function toggleCreateDropdown() {
+  var createDropdownContent = document.getElementById("create-dropdown-content");
+  createDropdownContent.style.display = createDropdownContent.style.display === "block" ? "none" : "block";
+}
 
-    // Функция для скрытия выпадающего меню при нажатии на пустое место
-    window.onclick = function(event) {
-      if (!event.target.matches('.create-btn')) {
-        var createDropdowns = document.getElementsByClassName("create-dropdown-content");
-        for (var i = 0; i < createDropdowns.length; i++) {
-          var openCreateDropdown = createDropdowns[i];
-          if (openCreateDropdown.style.display === "block") {
-            openCreateDropdown.style.display = "none";
-          }
-        }
+// Функция для скрытия выпадающего меню при нажатии на пустое место
+window.onclick = function(event) {
+  if (!event.target.matches('.create-btn')) {
+    var createDropdowns = document.getElementsByClassName("create-dropdown-content");
+    for (var i = 0; i < createDropdowns.length; i++) {
+      var openCreateDropdown = createDropdowns[i];
+      if (openCreateDropdown.style.display === "block") {
+        openCreateDropdown.style.display = "none";
       }
     }
+  }
+}
 
-    // Функция для скрытия/отображения SideBar
-    function toggleSidebar() {
-      var sidebar = document.getElementById("sidebar");
-      sidebar.classList.toggle("hide");
-    }
+// Функция для скрытия/отображения SideBar
+function toggleSidebar() {
+  var sidebar = document.getElementById("sidebar");
+  sidebar.classList.toggle("hide");
+}
+</script>
+</body>
+</html>

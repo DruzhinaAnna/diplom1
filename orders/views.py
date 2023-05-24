@@ -14,7 +14,7 @@ from django.views.generic.list import ListView
 
 from common.views import TitleMixin
 from orders.forms import OrderForm, ResumeForm
-from orders.models import Order, Task
+from orders.models import Order, Task, Resume
 from products.models import Basket
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -112,17 +112,9 @@ def fulfill_order(session):
 
 @login_required
 def main(request):
-    if request.method == 'POST':
-        form = ResumeForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect("/")
-    else:
-        form = ResumeForm
-        context = {
-            'tasks': Task.objects.filter(initiator=request.user),
-            'form': form
-        }
+    context = {
+        'tasks': Task.objects.filter(initiator=request.user),
+    }
     return render(request, 'orders/main.html', context)
 
 
@@ -132,6 +124,14 @@ def mytasks(request):
         'tasks': Task.objects.filter(initiator=request.user)
     }
     return render(request, 'orders/my-tasks.html', context)
+
+
+@login_required
+def board(request):
+    context = {
+        'tasks': Task.objects.filter(initiator=request.user)
+    }
+    return render(request, 'orders/board.html', context)
 
 
 def saving(request):
@@ -153,5 +153,21 @@ def handle_uploaded_file(f):
             destination.write(chunk)
 
 
-# def upload_resume(request):
+def upload(request):
+    if request.method == 'POST':
+        form = ResumeForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect("/")
+    else:
+        form = ResumeForm
+        context = {
+            'form': form
+        }
+    return render(request, 'orders/upload.html', context)
 
+
+# def download(request):
+#     if request.method == 'GET':
+#         files = Resume.objects.order_by('title')
+#         return render(request, "orders/files.html", {"files": files})

@@ -80,15 +80,15 @@
                 <h3><a href="{% url 'orders:my-tasks' %}">Мои задачи</a></h3>
 
                 {% for task in tasks %}
-                    <a href="#"><h5>{{ task.name }}</h5></a>
+                    <a href="#"><h6>{{ task.name }}</h6></a>
                     <p>{{ task.date }}</p><hr>
                 {% endfor %}
 
-                <form method="post" , enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <button type="submit"> Submit</button>
-                </form>
+<!--                <form method="post" , enctype="multipart/form-data">-->
+<!--                    {% csrf_token %}-->
+<!--                    {{ form.as_p }}-->
+<!--                    <button type="submit"> Submit</button>-->
+<!--                </form>-->
 
                 <div class="actions-button">
                     <img src="{% static 'vendor/img/three-dots.jpg' %}" onclick="toggleFormDropdown(event)">
