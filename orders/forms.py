@@ -3,6 +3,7 @@ from datetime import datetime
 from django import forms
 
 from orders.models import Order, Resume, Task
+from datetime import date
 
 
 class OrderForm(forms.ModelForm):
@@ -29,22 +30,23 @@ class OrderForm(forms.ModelForm):
 #         attrs={'class': 'form-control', 'placeholder': '2'}))
 #     expired = forms.DateTimeField(widget=forms.DateTimeInput(
 #         attrs={'class': 'form-control', 'placeholder': '01.01.1900'}))
-#     # status = forms.MultipleChoiceField(widget=forms.MultipleHiddenInput()
+#     status = forms.MultipleChoiceField(widget=forms.MultipleHiddenInput())
 #     description = forms.CharField(widget=forms.TextInput(
 #         attrs={'class': 'form-control', 'placeholder': 'Введите описание'}))
 #     # initiator = forms.CharField(widget=)
-#
-#     class Meta:
-#         model = Task
-#         fields = ['name', 'material', 'priority', 'is_active']
-#         labels = {
-#             'title': 'Название Модели',
-#             'material': 'Материал',
-#             'priority': 'Приоритет сортировки',
-#             'is_active': 'Активна (включена)',
-#         }
+
+    # class Meta:
+    #     model = Task
+    #     fields = ['name', 'date', 'expired', 'status', 'description']
+    #     # labels = {
+    #     #     'title': 'Название Модели',
+    #     #     'material': 'Материал',
+    #     #     'priority': 'Приоритет сортировки',
+    #     #     'is_active': 'Активна (включена)',
+    #     # }
+
 
 class ResumeForm(forms.ModelForm):
     class Meta:
         model = Resume
-        fields = ['email', 'name', 'file']
+        fields = ['file']

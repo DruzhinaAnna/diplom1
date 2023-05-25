@@ -1,0 +1,505 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Главная</title>
+  <style>
+    /* Стили для NavBar */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .navbar {
+      background-color: #f8f8f8;
+      border-bottom: 1px solid #ddd;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .navbar input[type="text"] {
+      padding: 5px 30px 5px 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      width: 220px;
+      background-image: url("search.jpg");
+      background-repeat: no-repeat;
+      background-position: 95% center;
+      background-size: 16px; /* Изменено */
+    }
+
+    
+    .navbar .dropdown {
+      margin-left: 10px;
+    }
+    
+    .navbar .dropdown .dropbtn {
+      font-size: 16px;
+      border: none;
+      outline: none;
+      color: #333;
+      background-color: inherit;
+      cursor: pointer;
+      padding: 5px;
+    }
+    
+    .navbar .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+    
+    .navbar .dropdown-content a {
+      color: #333;
+      padding: 8px 12px;
+      text-decoration: none;
+      display: block;
+    }
+    
+    .navbar .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+    
+    .navbar .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    
+    /* Стили для SideBar */
+    .sidebar {
+      background-color: #f8f8f8;
+      border-right: 1px solid #ddd;
+      height: 100vh;
+      width: 200px;
+      padding: 10px;
+      position: fixed;
+      top: 70px;
+      left: 0;
+      transition: margin-left 0.3s ease-in-out;
+    }
+    
+    .sidebar.hide {
+      margin-left: -200px;
+    }
+    
+    .sidebar .menu-item {
+      margin-bottom: 10px;
+    }
+    
+    .sidebar .menu-item a {
+      display: block;
+      color: #333;
+      text-decoration: none;
+      padding: 5px;
+    }
+    
+    .sidebar .menu-item a:hover {
+      background-color: #ddd;
+    }
+    
+    /* Стили для контента */
+    .content {
+   
+      margin-left: 220px;
+      padding: 20px;
+    }
+    
+    /* Стили для выпадающего меню "Создать" */
+    .create-dropdown-content {
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+      display: none;
+    }
+    
+    .create-dropdown-content a {
+      color: #333;
+      padding: 8px 12px;
+      text-decoration: none;
+      display: block;
+    }
+    
+    .create-dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+    
+    /* Стили для кнопки скрытия SideBar */
+    .sidebar-toggle {
+      cursor: pointer;
+      padding: 10px;
+    }
+    
+    .sidebar-toggle .bar {
+      width: 25px;
+      height: 3px;
+      background-color: #333;
+      margin: 5px 0;
+    }
+  </style>
+  <script>
+    // Функция для отображения/скрытия выпадающего меню у кнопки "Создать"
+    function toggleCreateDropdown() {
+      var createDropdownContent = document.getElementById("create-dropdown-content");
+      createDropdownContent.style.display = createDropdownContent.style.display === "block" ? "none" : "block";
+    }
+    
+    // Функция для скрытия выпадающего меню при нажатии на пустое место
+    window.onclick = function(event) {
+      if (!event.target.matches('.create-btn')) {
+        var createDropdowns = document.getElementsByClassName("create-dropdown-content");
+        for (var i = 0; i < createDropdowns.length; i++) {
+          var openCreateDropdown = createDropdowns[i];
+          if (openCreateDropdown.style.display === "block") {
+            openCreateDropdown.style.display = "none";
+          }
+        }
+      }
+    }
+    
+    // Функция для скрытия/отображения SideBar
+    function toggleSidebar() {
+      var sidebar = document.getElementById("sidebar");
+      sidebar.classList.toggle("hide");
+    }
+  </script>
+</head>
+<body>
+  <!-- NavBar -->
+  <div class="navbar">
+    <div
+class="sidebar-toggle"
+onclick="toggleSidebar()">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+    <div style="flex: 1; text-align: center;">
+      <input type="text" placeholder="Поиск">
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn" onclick="toggleDropdown()">Учетная запись</button>
+      <div class="dropdown-content" id="dropdown-content">
+        <a href="#">Мой профиль</a>
+        <a href="#">Настройки</a>
+        <a href="#">Выйти</a>
+      </div>
+    </div>
+  </div>
+  
+  <!-- SideBar -->
+  <div class="sidebar" id="sidebar">
+    <div class="menu-item">
+      <a href="#">Главная</a>
+    </div>
+    <div class="menu-item">
+       <a href="my-tasks.html">Мои задачи</a>
+    </div>
+    <div class="menu-item">
+      <a href="#">Входящие</a>
+    </div>
+    <div class="menu-item">
+      <div class="dropdown">
+        <button class="dropbtn create-btn" style="margin: 0 auto; width: 150px; height: 30px;" onclick="toggleCreateDropdown()">Создать</button>
+
+        <div class="create-dropdown-content" id="create-dropdown-content">
+          <a href="#">Задача</a>
+          <a href="#">Проект</a>
+          <a href="#">Сообщение</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Основное содержимое страницы -->
+<div class="content" ondragover="allowDrop(event)" ondrop="drop(event)">
+
+
+  
+  <h1>Главная</h1>
+  <p id="current-date"></p>
+    <div class="form-container" ondragover="allowDrop(event)" ondrop="drop(event)">
+    <div class="form-row">
+    <div class="form" draggable="true" id="form1" ondragstart="dragStart(event, 'form1')">
+  <h3><a href="my-tasks.html">Мои задачи</a></h3>
+  
+  <div class="actions-button">
+    <img src="three-dots.jpg" onclick="toggleFormDropdown(event)">
+    <div class="form-dropdown-content" id="form-dropdown-content">
+      <a href="#" onclick="handleFormDropdownSelection('half')">Половина</a>
+      <a href="#" onclick="handleFormDropdownSelection('fullscreen')">Полный экран</a>
+      <a href="#" onclick="handleFormDropdownSelection('view-tasks')">Просмотр всех моих задач</a>
+      <a href="#" onclick="handleFormDropdownSelection('delete-widget')">Удалить виджет</a>
+    </div>
+  </div>
+        </div>
+
+      <div class="form" draggable="true" id="form2" ondragstart="dragStart(event, 'form2')">
+        <h3>Проекты</h3>
+        <p>Это форма 2</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<style>
+.form-dropdown-content {
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  display: none;
+}
+
+.form-dropdown-content a {
+  color: #333;
+  padding: 8px 12px;
+  text-decoration: none;
+  display: block;
+}
+
+.form-dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+.form {
+    position: relative;
+  }
+
+  .actions-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: none;
+    cursor: pointer;
+  }
+
+  .form:hover .actions-button {
+    display: block;
+  }
+
+  .actions-button img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .actions-button:hover::after {
+    content: "Действия";
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px;
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 12px;
+    color: #333;
+  }
+  .content {
+    margin-top: 20px;
+  }
+
+  h1 {
+    margin-bottom: 10px;
+  }
+
+  #current-date {
+    margin-bottom: 10px;
+  }
+
+  .form-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-row {
+    display: flex;
+  }
+
+  .form {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    width: 508px;
+    height: 380px;
+    padding: 10px;
+    margin-right: 10px;
+  }
+</style>
+<script>
+  var draggedFormId;
+
+  // Функция для сохранения идентификатора формы при начале перетаскивания
+  function dragStart(event, formId) {
+    event.dataTransfer.setData("text/plain", formId);
+    draggedFormId = formId;
+  }
+  function toggleFormDropdown(event) {
+  var formDropdownContent = event.target.nextElementSibling;
+  formDropdownContent.style.display = formDropdownContent.style.display === "block" ? "none" : "block";
+  // Функция для скрытия выпадающего меню при нажатии на пустое место
+window.onclick = function(event) {
+  if (!event.target.matches('.actions-button img')) {
+    var formDropdowns = document.getElementsByClassName("form-dropdown-content");
+    for (var i = 0; i < formDropdowns.length; i++) {
+      var openFormDropdown = formDropdowns[i];
+      if (openFormDropdown.style.display === "block") {
+        openFormDropdown.style.display = "none";
+      }
+    }
+  }
+}
+}
+// Переменная для хранения исходных размеров формы
+var originalFormSize;
+var originalForm2Size;
+var originalForm2Margin;
+var originalImageMargin;
+
+// Функция для обработки выбора опции в выпадающем списке первой формы
+function handleFormDropdownSelection(option) {
+  var form1 = document.getElementById("form1");
+  var form2 = document.getElementById("form2");
+  var plusCircleButton = '<img src="plus-circle.jpg" onclick="removeImage()" alt="Plus Circle" width="65" height="65" style="position: absolute; left: calc(50% + 20px); top: 50%; transform: translate(-50%, -50%); margin-left: 240px;" />';
+
+  // Сохраняем исходные размеры формы и смещение картинки, если они еще не сохранены
+  if (!originalFormSize) {
+    originalFormSize = form1.style.width;
+    originalForm2Size = form2.style.width;
+    originalForm2Margin = form2.style.marginLeft;
+    var plusCircleElement = document.querySelector("#form1 + div img");
+    if (plusCircleElement) {
+      originalImageMargin = plusCircleElement.style.marginLeft;
+    }
+  }
+
+  switch (option) {
+    case "fullscreen":
+      form2.style.display = "none";
+      form1.style.width = "100%";
+      form2.style.width = "100%";
+      break;
+    case "view-tasks":
+      window.location.href = "my-tasks.html";
+      break;
+    case "delete-widget":
+      form1.style.display = "none";
+      form2.style.position = "static";
+      form2.style.display = "inline-block";
+      form2.style.verticalAlign = "top";
+      form2.style.marginLeft = "530px"; // Смещение второй формы на 100px вправо
+      var container = document.createElement("div");
+      container.style.position = "relative";
+      container.style.display = "inline-block";
+      container.style.textAlign = "center";
+      container.style.marginRight = "10px";
+      container.style.marginBottom = "10px";
+      container.innerHTML = plusCircleButton;
+      form1.insertAdjacentElement("afterend", container);
+      break;
+    case "half":
+      if (originalFormSize) {
+        form1.style.width = originalFormSize;
+        form2.style.display = "block";
+        form2.style.width = originalForm2Size;
+        var plusCircleElement = document.querySelector("#form1 + div img");
+        if (plusCircleElement) {
+          plusCircleElement.parentElement.remove();
+        }
+        // Сбрасываем сохраненные размеры формы и смещение картинки
+        originalFormSize = null;
+        originalForm2Size = null;
+        originalForm2Margin = null;
+        originalImageMargin = null;
+      }
+      break;
+    default:
+      break;
+  }
+
+  // Устанавливаем чуть меньший размер для обеих форм при возврате
+  if (!originalFormSize && option !== "fullscreen") {
+    form1.style.width = "32%";
+    form2.style.width = "32%";
+  }
+}
+
+// Функция для удаления картинки и возврата первой формы
+function removeImage() {
+  var form1 = document.getElementById("form1");
+  var plusCircleElement = document.querySelector("img[alt='Plus Circle']");
+  if (plusCircleElement) {
+    plusCircleElement.remove();
+  }
+  form1.style.display = "block";
+
+  // Восстанавливаем исходные размеры формы и смещение второй формы
+  if (originalFormSize) {
+    form1.style.width = originalFormSize;
+    form2.style.marginLeft = originalForm2Margin;
+    originalFormSize = null;
+    originalForm2Size = null;
+    originalForm2Margin = null;
+    originalImageMargin = null;
+  }
+}
+
+
+
+
+
+
+  // Функция для предотвращения перетаскивания форм за пределы секции Content
+  function allowDrop(event) {
+    event.preventDefault();
+  }
+
+  // Функция для обработки события сброса формы в секции Content
+  function drop(event) {
+    event.preventDefault();
+    var droppedFormId = event.dataTransfer.getData("text/plain");
+    var droppedForm = document.getElementById(droppedFormId);
+    var targetForm = event.target.closest('.form');
+
+    if (targetForm && targetForm.id !== droppedFormId) {
+      if (draggedFormId === droppedFormId) {
+        // Перемещение формы внутри себя
+        var parentContainer = targetForm.parentNode;
+        parentContainer.insertBefore(droppedForm, targetForm);
+      } else {
+        // Обмен местами двух форм
+        var nextSibling = targetForm.nextSibling;
+        var parentContainer = targetForm.parentNode;
+
+        if (nextSibling === droppedForm) {
+          parentContainer.insertBefore(droppedForm, targetForm);
+        } else {
+          parentContainer.insertBefore(targetForm, droppedForm);
+        }
+      }
+    }
+  }
+</script>
+
+<script>
+  // Функция для получения текущей даты
+  function getCurrentDate() {
+    var date = new Date();
+    var options = { weekday: 'long', day: 'numeric', month: 'long' };
+    var formattedDate = date.toLocaleDateString('ru-RU', options);
+    return formattedDate;
+  }
+
+  // Обновление текста с текущей датой
+  document.getElementById('current-date').innerText = getCurrentDate();
+</script>
+
+</body>
+</html>
+

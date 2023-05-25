@@ -18,14 +18,14 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {% for order in object_list %}
+                        {% for file in files %}
                             <tr>
-                                <th scope="row">{{ order.id }}</th>
-                                <td>{{ order.get_status_display }}</td>
-                                <td>{{ order.created|naturaltime }}</td>
-                                <td>{{ order.basket_history.total_sum|intcomma }} руб.</td>
+                                <th scope="row">{{ file.id }}</th>
+                                <td>{{ file.initiator }}</td>
+<!--                                <td>{{ order.created|naturaltime }}</td>-->
+<!--                                <td>{{ order.basket_history.total_sum|intcomma }} руб.</td>-->
                                 <td>
-                                    <a href="{% url 'orders:order' order.id %}">просмотреть</a>
+                                    <a href="{% url 'orders:files' file.id %}">просмотреть</a>
                                 </td>
                             </tr>
                         {% endfor %}

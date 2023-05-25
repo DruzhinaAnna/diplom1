@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.db import models
 
 from products.models import Basket
@@ -66,12 +68,20 @@ class Task(models.Model):
 
 
 class Resume(models.Model):
-    email = models.EmailField()
-    name = models.CharField(max_length=255, blank=False, null=False)
     file = models.FileField(upload_to='orders/', null=True)
+    initiator = models.ForeignKey(to=User, on_delete=models.CASCADE, null=True)
+
+    class Meta:
+        verbose_name = 'files'
+        verbose_name_plural = 'files'
 
     def __repr__(self):
-        return 'Resume(%s, %s)' % (self.name, self.file)
+        return 'Resume(%s)' % self.file
 
     def __str__(self):
-        return self.name
+        return self.file
+
+
+@property
+def is_past_due(self):
+    return date.today() == self.date

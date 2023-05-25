@@ -10,7 +10,7 @@
 
 <script src="{% static 'vendor/js/date.js' %}"></script>
 <!-- Основное содержимое страницы -->
-<div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 180px;">
+<div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 180px; height: 800px">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
         <svg class="bi me-2" width="40" height="32">
             <use xlink:href="#bootstrap"></use>
@@ -59,13 +59,13 @@
             <strong>Анна Дружина</strong>
         </a>
         <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-            <li><a class="dropdown-item" href="#">Задачу</a></li>
-            <li><a class="dropdown-item" href="#">Проект</a></li>
-            <li><a class="dropdown-item" href="#">Сообщение</a></li>
+            <li><a class="dropdown-item" href="#">Создать задачу</a></li>
+            <li><a class="dropdown-item" href="#">Создать проект</a></li>
+            <li><a class="dropdown-item" href="#">Сообщения</a></li>
             <li>
                 <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" href="#">Выйти</a></li>
+            <li><a class="dropdown-item" href="{% url 'users:logout' %}">Выйти</a></li>
         </ul>
     </div>
 </div>
@@ -80,8 +80,8 @@
                 <h3><a href="{% url 'orders:my-tasks' %}">Мои задачи</a></h3>
 
                 {% for task in tasks %}
-                    <a href="#"><h6>{{ task.name }}</h6></a>
-                    <p>{{ task.date }}</p><hr>
+                    <a><h6>{{ task.name }}</h6></a>
+                    <label>Создано: <p>{{ task.date|date:"d.m.Y" }}</p></label><hr>
                 {% endfor %}
 
 <!--                <form method="post" , enctype="multipart/form-data">-->

@@ -1,8 +1,10 @@
+from datetime import date
 from http import HTTPStatus
 
 import stripe
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
@@ -16,6 +18,8 @@ from common.views import TitleMixin
 from orders.forms import OrderForm, ResumeForm
 from orders.models import Order, Task, Resume
 from products.models import Basket
+
+from .forms import ResumeForm
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -138,7 +142,7 @@ def saving(request):
     if request.method == "POST":
         task = Task()
         task.name = request.POST.get("name")
-        task.date = request.POST.get("age")
+        task.date = request.POST.get("date")
         task.expired = request.POST.get("expired")
         task.status = request.POST.get("status")
         task.description = request.POST.get("description")
@@ -167,7 +171,20 @@ def upload(request):
     return render(request, 'orders/upload.html', context)
 
 
-# def download(request):
-#     if request.method == 'GET':
-#         files = Resume.objects.order_by('title')
-#         return render(request, "orders/files.html", {"files": files})
+def upload_file(request):
+    if request.method == "POST":
+        form = ResumeForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect("orders/board/")
+    else:
+        form = ResumeForm()
+    return render(request, "orders/upload.html", {"form": form})
+
+# class AddTask(TitleMixin, SuccessMessageMixin, CreateView):
+#     model = Task
+#     form_class = TaskForm
+#     template_name = 'orders/add-task.html'
+#     success_url = reverse_lazy('users:login')
+#     success_message = 'Задача успешно добавлена!'
+#     title = 'KanbanPM - Добавление задачи'

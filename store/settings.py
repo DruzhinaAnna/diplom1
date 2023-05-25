@@ -133,6 +133,9 @@ LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'UTC'
 
+DATE_INPUT_FORMATS = ['%d.%m.%Y']
+DATE_FORMAT = ['%d.%m.%Y']
+
 USE_I18N = True
 
 USE_TZ = True
@@ -157,12 +160,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'users.User'
 LOGIN_URL = '/users/login/'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/orders/main'
 LOGOUT_REDIRECT_URL = '/'
 
 # Sending emails
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_FROM = 'annadruzina48828@gmail.com'
 EMAIL_HOST_USER = 'annadruzina48828@gmail.com'

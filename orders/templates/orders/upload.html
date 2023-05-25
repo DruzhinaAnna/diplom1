@@ -2,12 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>111</title>
+    <title>KandanPM - загрузить файл</title>
 </head>
 <body>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
+        <label>Загузить файл</label>
+            {{ form.file }}
+            {{ form.initiator_id }}
+<!--        {{ form.as_p }}-->
         <button type="submit">Submit</button>
     </form>
 </body>

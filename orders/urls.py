@@ -20,4 +20,5 @@ urlpatterns = [
     path('my-tasks/', mytasks, name="my-tasks"),
     path('board', board, name="board"),
     path('upload/', upload, name="upload"),
+    # path('add-task/', AddTask.as_view(), name='add-task')
 ]

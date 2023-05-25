@@ -1,0 +1,21 @@
+{% extends 'products/base.html' %}
+{% load humanize %}
+{% load static %}
+
+{% block css %}
+<link href="{% static 'vendor/css/main.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+<script src="{% static 'vendor/js/date.js' %}"></script>
+<!-- Основное содержимое страницы -->
+
+<form action="{% url 'users:registration' %}" method="POST">
+  {{ form.as_p }}
+  <div class="form-group mt-4 mb-0">
+    <input class="btn btn-primary btn-block" type="submit" value="Создать аккаунт">
+  </div>
+</form>
+
+{% endblock %}
