@@ -181,6 +181,11 @@ def upload_file(request):
         form = ResumeForm()
     return render(request, "orders/upload.html", {"form": form})
 
+
+def calender(request):
+    return render(request, 'orders/calender.html')
+
+
 # class AddTask(TitleMixin, SuccessMessageMixin, CreateView):
 #     model = Task
 #     form_class = TaskForm

@@ -1,0 +1,26 @@
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+    }
+
+    th {
+      background-color: lightgray;
+    }
+
+    .current-day {
+      background-color: yellow;
+    }
+
+    .task-form {
+      border: 1px solid #dddddd;
+      padding: 8px;
+    }
+
+    #week-controls {
+      display: none;
+    }

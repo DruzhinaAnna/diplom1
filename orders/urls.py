@@ -1,7 +1,8 @@
 from django.urls import path
 
 from orders.views import (CanceledTemplateView, OrderCreateView,
-                          OrderDetailView, OrderListView, SuccessTemplateView, main, mytasks, board, upload)
+                          OrderDetailView, OrderListView, SuccessTemplateView, main, mytasks, board, upload,
+                          calender)
 
 app_name = 'orders'
 
@@ -20,5 +21,6 @@ urlpatterns = [
     path('my-tasks/', mytasks, name="my-tasks"),
     path('board', board, name="board"),
     path('upload/', upload, name="upload"),
+    path('calender', calender, name="calender"),
     # path('add-task/', AddTask.as_view(), name='add-task')
 ]
