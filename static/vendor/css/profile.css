@@ -1,3 +1,10 @@
 body {
-    padding-top: 56px;
+background-image: linear-gradient(180deg,rgba(205, 214, 219, 0.7),rgba(205, 214, 219, 0.65)),url("../img/background.jpg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+
+    padding-top: 150px;
+    font-family: Poppins-Regular;
 }
