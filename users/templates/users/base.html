@@ -9,7 +9,10 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
     <title>{{ title }}</title>
+
     <link href="{% static 'vendor/css/auth.css' %}" rel="stylesheet"/>
+    <link href="{% static 'vendor/img/favicon.ico' %}" rel="icon">
+{% block additional_css %}{% endblock %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"
             crossorigin="anonymous"></script>
 </head>

@@ -35,7 +35,7 @@ class SupportListView(TitleMixin, ListView):
     form_class = Supporting
     template_name = 'products/support.html'
     paginate_by = 3
-    title = 'KanbanPM'
+    title = 'KanbanPM-Техническая поддержка'
 
     def get_queryset(self):
         queryset = super(SupportListView, self).get_queryset()
