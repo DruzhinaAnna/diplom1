@@ -18,7 +18,7 @@ class Supporting(forms.ModelForm):
     number = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form-control py-4', 'placeholder': 'Введите номер телефона'}))
     discussion = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-control py-4', 'placeholder': 'Введите номер телефона'}))
+        'class': 'form-control py-4', 'placeholder': 'Введите свой вопрос'}))
 
     # country = forms.CharField(verbose_name='Страна', max_length=5, choices=temp)
 

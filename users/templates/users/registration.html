@@ -19,7 +19,7 @@
                         </div>
                     {% endif %}
                     <div class="card shadow-lg border-0 rounded-lg mt-5 ">
-                        <div class="card-header border-top border-left"><h3 class="text-center font-weight-light my-4">Создать аккаунт</h3>
+                        <div class="card-header border-top border-left"><h1 class="text-center font-weight-light my-4">Создать аккаунт</h1>
                         </div>
                         <div class="card-body border-left">
                             <form action="{% url 'users:registration' %}" method="post">
@@ -81,8 +81,8 @@
                         </div>
                         <div class="card-footer text-center border-left">
                             <div class="small">
-                                <a href="{% url 'users:login' %}">
-                                    Уже есть аккаунт? Авторизоваться
+                               Уже есть аккаунт? <a href="{% url 'users:login' %}">
+                                     <u>Авторизоваться!</u>
                                 </a>
                             </div>
                         </div>

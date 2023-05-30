@@ -4,7 +4,8 @@ body {
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
-    padding-top: 110px;
+    padding-top: 95px;
+    font-family: Poppins-Regular;
     }
       footer {
         position: fixed;
@@ -12,6 +13,11 @@ body {
         width: 100%;
         margin-top: 20px; /* Пример отступа сверху */
     }
+    .orange-star {
+    color: orange;
+    font-size:30px;
+    vertical-align: middle;
+}
 .custom-checkbox {
   position: absolute;
   z-index: -1;
@@ -25,8 +31,8 @@ body {
 .custom-checkbox+label::before {
   content: '';
   display: inline-block;
-  width: 1em;
-  height: 1em;
+  width: 1.5em;
+  height: 1.5em;
   flex-shrink: 0;
   flex-grow: 0;
   border: 1px solid #adb5bd;

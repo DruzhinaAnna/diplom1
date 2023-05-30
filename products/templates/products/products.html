@@ -10,7 +10,7 @@
     <div class="container">
         <div class="fon1"></div>
         <div class="row justify-content-center">
-            <div class="col-lg-7">
+            <div class="col-7 mx-auto">
                 {% if form.errors %}
                 <div class="alert alert-warning alert-dismissible fade show" role="alert"
                      style="margin-top: 50px;">
@@ -23,21 +23,21 @@
                 <div class="card shadow-lg border-0 rounded-lg mt-5">
 
                     <div class="card-body">
-                        <form action="{% url 'products:support' %}" method="post">
+                        <form method="post">
                             {% csrf_token %}
                             <div class="form-row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="small mb-1" for="{{ form.first_name.id_for_label }}">
-                                            Имя
+                                        <label class="small mb-1" style="font-size: 110%;" for="{{ form.first_name.id_for_label }}">
+                                            Имя<span class="orange-star">*</span>
                                         </label>
                                         {{ form.first_name }}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="small mb-1" for="{{ form.last_name.id_for_label }}">
-                                            Фамилия
+                                        <label class="small mb-1"style="font-size: 110%;" for="{{ form.last_name.id_for_label }}">
+                                            Фамилия<span class="orange-star">*</span>
                                         </label>
                                         {{ form.last_name }}
                                     </div>
@@ -45,44 +45,37 @@
                             </div>
                             <div class="form-row">
                                 <div class="col-md-6">
-                                    <label class="small mb-1" for="{{ form.username.id_for_label }}">
-                                        Адрес электронной почты
-                                    </label>
-                                    {{ form.username }}
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="small mb-1" for="{{ form.email.id_for_label }}">
-                                        Телефон
+                                    <label class="small mb-1"style="font-size: 110%;" for="{{ form.email.id_for_label }}">
+                                        Адрес электронной почты<span class="orange-star">*</span>
                                     </label>
                                     {{ form.email }}
                                 </div>
+                                <div class="col-md-6">
+                                    <label class="small mb-1" style="font-size: 110%;"for="{{ form.number.id_for_label }}">
+                                        Телефон<span class="orange-star"></span>
+                                    </label>
+                                    {{ form.number }}
+                                </div>
                             </div>
                             <div class="form-row">
+
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="small mb-1" for="{{ form.password1.id_for_label }}">
-                                            Страна
+                                        <label class="small mb-1" style="font-size: 110%;" for="{{ form.discussion.id_for_label }}">
+                                            Задайте ваш вопрос<span class="orange-star">*</span>
                                         </label>
-                                        {{ form.password1 }}
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="small mb-1" for="{{ form.password2.id_for_label }}">
-                                            Задайте ваш вопрос
-                                        </label>
-                                        {{ form.password2 }}
+                                        {{ form.discussion }}
                                     </div>
                                 </div>
                             </div>
-                            <p style="color: orange;"> Поля, отмеченные звёздочкой (*), являются обязательными.</p>
+                            <p style="color: orange;font-size: 110%;"> Поля, отмеченные звёздочкой(<span class="orange-star">*</span>) , являются обязательными.</p>
                             <input type="checkbox" class="custom-checkbox" id="happy" name="happy" value="yes">
-                            <label for="happy">
+                            <label for="happy" style="font-size: 110%;">
                                 Отправляя эту форму, вы соглашаетесь с тем, что вы предоставляете KanbanPM свои личные
                                 данные
                                 , а также с тем, что KanbanPM может выйти с вами на связь по этому вопросу.</label>
                             <div class="form-group mt-4 mb-0">
-                                <input class="btn btn-primary btn-block" type="submit" value="Отправить ">
+<input class="btn btn-primary btn-block" style="background-color: #4169E1;font-size:1.1rem;border-color: #4169E1;" type="submit" value="Отправить ">
                             </div>
                         </form>
                     </div>
@@ -96,7 +89,7 @@
 
 
 {% block footer %}
-<footer class="py-5 bg-dark">
+<footer class="py-4 bg-dark">
     <div class="container">
         <p class="m-0 text-center text-white">Copyright &copy; 2023</p>
     </div>

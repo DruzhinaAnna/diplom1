@@ -72,4 +72,4 @@ def basket_remove(request, basket_id):
 
 def support_function(request):
     form = Supporting()
-    return render(request, 'products/support.html', {'form': form})
+    return render(request, 'products/products.html', {'form': form})
