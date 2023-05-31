@@ -193,3 +193,7 @@ def calender(request):
 #     success_url = reverse_lazy('users:login')
 #     success_message = 'Задача успешно добавлена!'
 #     title = 'KanbanPM - Добавление задачи'
+
+
+def anna(request):
+    return render(request, 'orders/Anna.html')

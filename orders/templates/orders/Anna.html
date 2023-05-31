@@ -1,11 +1,91 @@
 {% extends 'products/base.html' %}
-{% load static cache humanize %}
+{% load humanize %}
+{% load static %}
 
 {% block css %}
 <link href="{% static 'vendor/css/Anna.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
+<script src="{% static 'vendor/js/date.js' %}"></script>
+<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;height:100vh;">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+            <svg class="bi me-2" width="40" height="32">
+                <use xlink:href="#bootstrap"></use>
+            </svg>
+            <span class="fs-4"></span>
+        </a>
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item">
+                <a href="{% url 'orders:anna' %}" class="nav-link active" aria-current="page">
+                    <svg class="bi me-2" width="16" height="16">
+                        <use xlink:href="#home"></use>
+                    </svg>
+                    Главная
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'orders:calender' %}" class="nav-link text-white">
+                    <svg class="bi me-2" width="16" height="16">
+                        <use xlink:href="#speedometer2"></use>
+                    </svg>
+                    Календарь
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link text-white">
+                    <svg class="bi me-2" width="16" height="16">
+                        <use xlink:href="#table"></use>
+                    </svg>
+                    Проекты
+                </a>
+            </li>
+            <li>
+    <a href="#subtasks" class="nav-link text-white" data-bs-toggle="collapse">
+        <svg class="bi me-2" width="16" height="16">
+            <use xlink:href="#grid"></use>
+        </svg>
+        Задачи
+    </a>
+    <div class="collapse" id="subtasks">
+        <ul class="nav flex-column  pl-4">
+            <li class="nav-item">
+                <a href="{% url 'orders:list' %}" class="nav-link text-white">Список</a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'orders:board' %}" class="nav-link text-white">Доска</a>
+            </li>
+            <!-- Добавьте нужные вам подзадачи здесь -->
+        </ul>
+    </div>
+</li>
+<li>
+                <a href="#" class="nav-link text-white">
+                    <svg class="bi me-2" width="16" height="16">
+                        <use xlink:href="#table"></use>
+                    </svg>
+                    Файлы
+                </a>
+            </li>
+        </ul>
+        <hr>
+        <div class="dropdown">
+            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="{% static 'vendor/img/users/default_avatar.jpg'%}" alt="" width="32" height="32" class="rounded-circle me-2">
+                <strong style="padding-left:5px;">Админ</strong>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+
+
+                <li><a class="dropdown-item" href="/users/profile/1/">Мой профиль</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#">Выйти</a></li>
+            </ul>
+        </div>
+    </div>
 <main>
     <div class="container">
 

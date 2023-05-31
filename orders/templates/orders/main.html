@@ -10,12 +10,12 @@
 
 <script src="{% static 'vendor/js/date.js' %}"></script>
 <!-- Основное содержимое страницы -->
-<div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 180px; height: 800px">
+<div class=" sidebar" style="width: 180px; height: 800px">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
         <svg class="bi me-2" width="40" height="32">
             <use xlink:href="#bootstrap"></use>
         </svg>
-        <span class="fs-4">Меню</span>
+
     </a>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
@@ -59,12 +59,12 @@
             <strong>Админ</strong>
         </a>
         <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-            <li><a class="dropdown-item" href="#">Создать задачу</a></li>
-            <li><a class="dropdown-item" href="#">Создать проект</a></li>
-            <li><a class="dropdown-item" href="#">Сообщения</a></li>
-            <li>
-                <hr class="dropdown-divider">
-            </li>
+<!--           <li><a class="dropdown-item" href="#">Создать задачу</a></li>&ndash;&gt;-->
+<!--            <li><a class="dropdown-item" href="#">Создать проект</a></li>-->
+
+<!--            <li>-->
+<!--                <hr class="dropdown-divider">-->
+<!--            </li>-->
             <li><a class="dropdown-item" href="{% url 'users:logout' %}">Выйти</a></li>
         </ul>
     </div>

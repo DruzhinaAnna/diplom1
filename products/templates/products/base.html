@@ -50,11 +50,11 @@
                             <li>
                                 <a class="dropdown-item" href="{% url 'users:profile' user.id %}">Профиль</a>
                             </li>
-                            <li><a class="dropdown-item" href="{% url 'orders:main' %}">Задачи</a></li>
+                            <li><a class="dropdown-item" href="{% url 'orders:main' %}">Главная страница</a></li>
                             {% if user.is_superuser or user.is_staff %}
                                 <li>
                                     <a class="dropdown-item" href="{% url 'admin:index' %}">
-                                        Админ-панель
+                                        Панель администратора
                                     </a>
                                 </li>
                             {% endif %}
@@ -93,6 +93,9 @@
 
 <!-- FontAwesome script -->
 <script src="{% static 'vendor/fontawesome/fontawesome-icons.js' %}" crossorigin="anonymous"></script>
+
+
+
 </body>
 
 </html>
