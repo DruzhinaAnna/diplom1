@@ -1,3 +1,23 @@
 body{
-background-color:red;
+
+
+}
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 240px;
+        padding: 20px;
+        background-color: #343a40;
+        color: #fff;
+        overflow-y: auto;
+
+        height:100vh;
+    }
+    .content {
+
+  margin-left: 200px; /* Ширина боковой панели */
+  width:80vw;
+  /* Дополнительные стили для основного контента */
 }
