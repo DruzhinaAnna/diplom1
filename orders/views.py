@@ -194,6 +194,6 @@ def calender(request):
 #     success_message = 'Задача успешно добавлена!'
 #     title = 'KanbanPM - Добавление задачи'
 
-
+@login_required
 def anna(request):
     return render(request, 'orders/Anna.html')
