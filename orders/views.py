@@ -133,6 +133,7 @@ def mytasks(request):
 @login_required
 def board(request):
     context = {
+        'title': 'Kanban - Board',
         'tasks': Task.objects.filter(initiator=request.user)
     }
     return render(request, 'orders/board.html', context)
@@ -182,6 +183,7 @@ def upload_file(request):
     return render(request, "orders/upload.html", {"form": form})
 
 
+@login_required
 def calender(request):
     return render(request, 'orders/calender.html')
 

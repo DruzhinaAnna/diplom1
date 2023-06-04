@@ -1,177 +1,217 @@
 {% extends 'orders/base.html' %}
-{% load humanize %}
 {% load static %}
 
 {% block css %}
-<!--<link href="{% static 'vendor/css/main.css' %}" rel="stylesheet">-->
-<!--<link href="{% static 'vendor/css/tasks.css' %}" rel="stylesheet">-->
+    <link href="{% static 'vendor/css/board.css' %}">
+{% endblock %}
+
+{% block title %}
+    <title>{{ title }}</title>
 {% endblock %}
 
 {% block content %}
-<!-- SideBar -->
-<!--<div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 180px;">-->
-<!--    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">-->
-<!--        <svg class="bi me-2" width="40" height="32">-->
-<!--            <use xlink:href="#bootstrap"></use>-->
-<!--        </svg>-->
-<!--        <span class="fs-4">Меню</span>-->
-<!--    </a>-->
-<!--    <hr>-->
-<!--    <ul class="nav nav-pills flex-column mb-auto">-->
-<!--        <li class="nav-item">-->
-<!--            <a href="#" class="nav-link active" aria-current="page">-->
-<!--                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house"-->
-<!--                     viewBox="0 0 16 16">-->
-<!--                    <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>-->
-<!--                </svg>-->
-<!--                Главная-->
-<!--            </a>-->
-<!--        </li>-->
-<!--        <li>-->
-<!--            <a href="{% url 'orders:my-tasks' %}" class="nav-link link-dark">-->
-<!--                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"-->
-<!--                     class="bi bi-list-task" viewBox="0 0 16 16">-->
-<!--                    <path fill-rule="evenodd"-->
-<!--                          d="M2 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5H2zM3 3H2v1h1V3z"/>-->
-<!--                    <path d="M5 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM5.5 7a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 4a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9z"/>-->
-<!--                    <path fill-rule="evenodd"-->
-<!--                          d="M1.5 7a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5V7zM2 7h1v1H2V7zm0 3.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5H2zm1 .5H2v1h1v-1z"/>-->
-<!--                </svg>-->
-<!--                Мои задачи-->
-<!--            </a>-->
-<!--        </li>-->
-<!--        <li>-->
-<!--            <a href="#" class="nav-link link-dark">-->
-<!--                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"-->
-<!--                     class="bi bi-envelope" viewBox="0 0 16 16">-->
-<!--                    <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>-->
-<!--                </svg>-->
-<!--                Входящие-->
-<!--            </a>-->
-<!--        </li>-->
-<!--    </ul>-->
-<!--    <hr>-->
-<!--    <div class="dropdown">-->
-<!--        <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2"-->
-<!--           data-bs-toggle="dropdown" aria-expanded="false">-->
-<!--            <img src="{% static 'vendor/img/users/default_avatar.jpg'%}" alt="" class="rounded-circle me-2" width="32"-->
-<!--                 height="32">-->
-<!--            <strong>Админ</strong>-->
-<!--        </a>-->
-<!--        <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">-->
-<!--            <li><a class="dropdown-item" href="#">Задачу</a></li>-->
-<!--            <li><a class="dropdown-item" href="#">Проект</a></li>-->
-<!--            <li><a class="dropdown-item" href="#">Сообщение</a></li>-->
-<!--            <li>-->
-<!--                <hr class="dropdown-divider">-->
-<!--            </li>-->
-<!--            <li><a class="dropdown-item" href="#">Выйти</a></li>-->
-<!--        </ul>-->
-<!--    </div>-->
-<!--</div>-->
+<script src="{% static 'vendor/js/board1.js'%}"></script>
+<script src="{% static 'vendor/js/board2.js'%}"></script>
+<script src="{% static 'vendor/js/board3.js'%}"></script>
 
-<div class="content">
-    <h1>Мои задачи</h1>
-    <ul class="horizontal-links">
-        <li><a href="{% url 'orders:my-tasks' %}" onclick="loadContent('list')">Список</a></li>
-        <li><a href="#">Доска</a></li>
-        <li><a href="{% url 'orders:calender' %}" onclick="loadContent('calendar')">Календарь</a></li>
-        <li><a href="#" onclick="loadContent('files')">Файлы</a></li>
-    </ul>
+<div class="test" id="test">
+    <div class="container-fluid" style="padding: 300px; margin-top: -200px;">
 
-    <div class="task-links"></div>
-    <div id="task-content">
-        {% for task in tasks %}
-            {% if task.expired != date.today %}
-                    <div class="small-form" draggable="true">
-                            <div class="form-container"><h3 class="form-title">Сделать сегодня</h3>
-                            <img
-                                src="/static/vendor/js/trash.jpg" style="width: 30px; margin-left: 5px;"><img
-                                src="/static/vendor/js/plus_lg.jpg" class="form-button"></div>
-                            <div class="task-container" style="border: 1px solid black; padding: 10px; margin-bottom: 10px;">
-                                <label>Название задачи: <input type="text" style="margin-left: 5px;" value="{{ task.name }}"></label>
-                                <p>Дата создания: {{ task.date|date:"d.m.Y" }}</p>
-                                <p>Дата дедлайна: {{ task.expired|date:"d.m.Y" }}</p>
+        <h1 class="mt-4 mb-4">Kanban Board</h1>
 
-                                <label>Статус задачи:
-                                    <select id="task" name="task_list" onChange="redirectUrl()">
-                                        <option selected="selected">{{ task.get_status_display }}</option>
-                                        {% for task in tasks %}
-                                            <option
-                                                {% if task == current_task %} selected="selected" {% endif %}>
-                                                {{task.get_status_display|capfirst}}
-                                            </option>
-                                        {% endfor %}
-                                    </select>
-                                </label>
-                                <label>Описание задачи: <input type="text" value="{{ task.description }}"</label>
-                                <label>Исполнитель: <input type="text" value="{{ task.initiator }}" disabled></label>
-                                <p>
-                                    <a href="{% url 'orders:upload' %}">
-                                        <img src="/static/vendor/js/paperclip.jpg" style="width: 30px; margin-left: 5px;">
-                                    </a>
-                                </p>
-                                <img src="/static/vendor/js/trash.jpg" style="width: 30px; margin-left: 5px;">
-                            </div>
-                    </div>
-            {% else %}
-                <div class="small-form" draggable="true">
-                        <div class="form-container"><h3 class="form-title">Сделать позже</h3>
-                        <img
-                            src="/static/vendor/js/trash.jpg" style="width: 30px; margin-left: 5px;"><img
-                            src="/static/vendor/js/plus_lg.jpg" class="form-button"></div>
-                        <div class="task-container" style="border: 1px solid black; padding: 10px; margin-bottom: 10px;">
-                        <label>Название задачи: <input type="text" style="margin-left: 5px;" value="{{ task.name }}"></label>
-                        <p>Дата создания: {{ task.date|date:"d.m.Y" }}</p>
-                        <label>Дата окончания задачи: <p><input type="date" value="{{ task.expired }}"></p></label>
-                        <label>Статус задачи:
-        <!--                    <select class="mdb-select md-form" id="material" name="material">-->
-        <!--                        {% for task in form.task.field.choices.queryset %}-->
-        <!--                        <option value="{{ task.id }}">{{ task.title }}</option>-->
-        <!--                        {% endfor %}-->
-        <!--                    </select>-->
-        <!--                    <select>-->
-        <!--                        <option selected="selected">{{ task.get_status_display }}</option>-->
-        <!--                        <option value="inProgress">В процессе</option>-->
-        <!--                        <option value="completed">Готово</option>-->
-        <!--                    </select></label>-->
-                            <select id="task" name="task_list" onChange="redirectUrl()">
-                                <option selected="selected">{{ task.get_status_display }}</option>
-                                {% for task in tasks %}
-                                    <option
-                                        {% if task == current_task %} selected="selected" {% endif %}>
-                                        {{task.get_status_display|capfirst}}
-                                    </option>
-                                {% endfor %}
-                            </select>
-                        </label>
-                        <label>Описание задачи: <textarea rows="4" style="width: 100%;"></textarea></label>
-                        <label>Исполнитель: <input type="text" value="{{ task.initiator }}" disabled></label>
-                        <p>
-                            <a href="{% url 'orders:upload' %}">
-                                <img src="/static/vendor/js/paperclip.jpg" style="width: 30px; margin-left: 5px;">
-                            </a>
-                        </p>
-                        <img src="/static/vendor/js/trash.jpg" style="width: 30px; margin-left: 5px;"></div>
+        <div class="row mt-4" style="align-items: center;">
+            <div class="col">
+                <div class="form-group">
+                    <label for="columnName">Название колонки</label>
+                    <input type="text" class="form-control" id="columnName" placeholder="Введите название колонки">
                 </div>
-            {% endif %}
-        {% endfor %}
-<!--        {% for task in tasks %}-->
-<!--                -->
-<!--        {% endfor %}-->
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="columnPosition">Позиция колонки</label>
+                    <input type="number" class="form-control" id="columnPosition" placeholder="Введите позицию колонки">
+                </div>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-primary" id="addColumnButton" style="margin-top:12.7px;">Добавить колонку</button>
+            </div>
+        </div>
 
+        <div class="cbox d-flex flex-row flex-nowrap overflow-x-auto" style="border-radius: calc(0.85rem - 1px) calc(0.85rem - 1px)
+                     calc(0.85rem - 1px) calc(0.85rem - 1px);border-left: 2px
+                     solid #212529 !important;border-right: 2px solid #212529
+                     !important;border-top: 2px solid #212529; !important;border-bottom:
+                     2px solid #212529 !important;">
+
+            <div class="card" id="card-1">
+                <div class="card-header" style="background-color: teal; text-align: center;">
+                    Сделать
+                </div>
+                <div class="card-body" id="todoColumn" style="min-height: 50vh;">
+                </div>
+                <div class="card-footer">
+                    <div class="svg-container">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                             class="bi bi-arrow-left-circle" viewBox="0 0 16 16" id="moveLeftIcon-1">
+                            <path fill-rule="evenodd"
+                                  d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                             class="bi bi-x-circle" viewBox="0 0 16 16" id="deleteIcon-1">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                             class="bi bi-arrow-right-circle" viewBox="0 0 16 16" id="moveRightIcon-1">
+                            <path fill-rule="evenodd"
+                                  d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" id="card-2">
+                <div class="card-header" style="background-color: teal; text-align: center;">
+                    В процессе
+                </div>
+                <div class="card-body" id="inProgressColumn" style="min-height: 50vh;">
+                </div>
+                <div class="card-footer">
+                    <div class="svg-container">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                             class="bi bi-arrow-left-circle" viewBox="0 0 16 16" id="moveLeftIcon-2">
+                            <path fill-rule="evenodd"
+                                  d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                             class="bi bi-x-circle" viewBox="0 0 16 16" id="deleteIcon-2">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                             class="bi bi-arrow-right-circle" viewBox="0 0 16 16" id="moveRightIcon-2">
+                            <path fill-rule="evenodd"
+                                  d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card" id="card-3">
+                <div class="card-header" style="background-color: teal; text-align: center;">
+                    Сделано
+                </div>
+                <div class="card-body" id="doneColumn" style="min-height: 50vh;">
+                </div>
+                <div class="card-footer">
+                    <div class="svg-container">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                             class="bi bi-arrow-left-circle" viewBox="0 0 16 16" id="moveLeftIcon-3">
+                            <path fill-rule="evenodd"
+                                  d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                             class="bi bi-x-circle" viewBox="0 0 16 16" id="deleteIcon-3">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                             class="bi bi-arrow-right-circle" viewBox="0 0 16 16" id="moveRightIcon-3">
+                            <path fill-rule="evenodd"
+                                  d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col">
+                <div class="form-group">
+                    <label for="taskName">Название задачи</label>
+                    <input type="text" class="form-control" id="taskName" placeholder="Введите название задачи">
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="taskDescription">Описание задачи</label>
+                    <textarea class="form-control" id="taskDescription" rows="1"
+                              placeholder="Введите описание задачи"></textarea>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="taskDate">Выбор даты</label>
+                    <input type="date" class="form-control" id="taskDate">
+                </div>
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-primary" id="addTaskButton">Добавить задачу</button>
+    </div>
+
+    <div class="modal fade" id="confirmModal-1" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel-1"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmModalLabel-1">Удаление колонки</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Вы уверены, что хотите удалить колонку?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancelDelete-1">Отмена</button>
+                    <button type="button" class="btn btn-danger" id="confirmDelete-1">Удалить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="confirmModal-2" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel-2"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmModalLabel-2">Удаление колонки</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Вы уверены, что хотите удалить колонку?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancelDelete-2">Отмена</button>
+                    <button type="button" class="btn btn-danger" id="confirmDelete-2">Удалить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="confirmModal-3" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel-3"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmModalLabel-3">Удаление колонки</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Вы уверены, что хотите удалить колонку?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancelDelete-1">Отмена</button>
+                    <button type="button" class="btn btn-danger" id="confirmDelete-1">Удалить</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
-
-<script src="{% static 'vendor/js/tasks.js' %}"></script>
-
-<!--{% for task in tasks %}-->
-<!--    <a href="#"><h5>{{ task.name }}</h5></a>-->
-<!--    <p>{{ task.date }}</p>-->
-<!--    <select value>-->
-<!--        <option selected="selected">{{ task.get_status_display }}</option>-->
-<!--        <option> {{ task.get_status_display }}</option>-->
-<!--    </select>-->
-<!--    <hr>-->
-<!--{% endfor %}-->
