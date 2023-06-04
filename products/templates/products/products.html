@@ -5,6 +5,10 @@
 <link href="{% static 'vendor/css/products.css' %}" rel="stylesheet">
 {% endblock %}
 
+{% block title %}
+<title>{{ title }}</title>
+{% endblock %}
+
 {% block content %}
 <main>
     <div class="container">
@@ -23,7 +27,7 @@
                 <div class="card shadow-lg border-0 rounded-lg mt-5">
 
                     <div class="card-body">
-                        <form method="post">
+                        <form action="{% url 'products:support' %}" method="post">
                             {% csrf_token %}
                             <div class="form-row">
                                 <div class="col-md-6">

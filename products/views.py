@@ -32,20 +32,25 @@ class ProductsListView(TitleMixin, ListView):
 
 class SupportListView(TitleMixin, ListView):
     model = Support
-    form_class = Supporting
-    template_name = 'products/support.html'
+    form = Supporting
+    template_name = 'products/products.html'
     paginate_by = 3
-    title = 'KanbanPM-Техническая поддержка'
+    title = 'KanbanPM - Техническая поддержка'
 
-    def get_queryset(self):
-        queryset = super(SupportListView, self).get_queryset()
-        category_id = self.kwargs.get('category_id')
-        return queryset.filter(category_id=category_id) if category_id else queryset
+    # def get_queryset(self):
+    #     queryset = super(SupportListView, self).get_queryset()
+    #     category_id = self.kwargs.get('category_id')
+    #     return queryset.filter(category_id=category_id) if category_id else queryset
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(SupportListView, self).get_context_data()
-        context['categories'] = ProductCategory.objects.all()
-        return context
+    # def get_context_data(self, *, object_list=None, **kwargs):
+    #     context = super(SupportListView, self).get_context_data()
+    #     context['categories'] = ProductCategory.objects.all()
+    #     return context
+
+
+def support_function(request):
+    form = Supporting()
+    return render(request, 'products/products.html', {'form': form})
 
 
 @login_required
@@ -68,8 +73,3 @@ def basket_remove(request, basket_id):
     basket = Basket.objects.get(id=basket_id)
     basket.delete()
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
-
-
-def support_function(request):
-    form = Supporting()
-    return render(request, 'products/products.html', {'form': form})

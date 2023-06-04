@@ -125,6 +125,7 @@ def main(request):
 @login_required
 def mytasks(request):
     context = {
+        'title': 'KanbanPM - Задачи',
         'tasks': Task.objects.filter(initiator=request.user)
     }
     return render(request, 'orders/my-tasks.html', context)

@@ -103,7 +103,7 @@ class Support(models.Model):
     last_name = models.CharField(max_length=256)
     # country = models.CharField(max_length=256)
     email = models.EmailField(blank=True)
-    number = models.CharField(max_length=11)
+    number = models.CharField(max_length=11, blank=False)
     discussion = models.TextField()
 
     class Meta:

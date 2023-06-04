@@ -10,10 +10,6 @@
 {% endblock %}
 
 {% block content %}
-<script src="{% static 'vendor/js/board1.js'%}"></script>
-<script src="{% static 'vendor/js/board2.js'%}"></script>
-<script src="{% static 'vendor/js/board3.js'%}"></script>
-
 <div class="test" id="test">
     <div class="container-fluid" style="padding: 300px; margin-top: -200px;">
 
@@ -48,6 +44,26 @@
                     Сделать
                 </div>
                 <div class="card-body" id="todoColumn" style="min-height: 50vh;">
+                    {% for task in tasks %}
+                    <div class="card-task-body">
+                        <label>Название задачи: </label>
+                        <h6 class="card-title">{{ task.name }}</h6>
+                        <label>Описание задачи: </label>
+                        <p class="card-text">{{ task.description }}</p>
+                        <label>Статус задачи: </label>
+                        <select id="taskStatus" style="margin-left: 10px;">
+                            <option value="notCompleted">Не завершена</option>
+                            <option value="inProgress">В процессе</option>
+                            <option value="completed">Готово</option>
+                        </select><br>
+                        <label>Срок выполнения: </label>
+                        <p class="card-text">{{ task.expired }}</p>
+                        <label>Дата создания: </label>
+                        <p class="card-text">{{ task.date }}</p>
+                        <label>Исполнитель: </label>
+                        <p class="card-text">{{ task.initiator }}</p>
+                    </div>
+                    {% endfor %}
                 </div>
                 <div class="card-footer">
                     <div class="svg-container">
@@ -214,4 +230,8 @@
         </div>
     </div>
 </div>
+
+<script src="{% static 'vendor/js/board1.js' %}"></script>
+<script src="{% static 'vendor/js/board2.js' %}"></script>
+<script src="{% static 'vendor/js/board3.js' %}"></script>
 {% endblock %}

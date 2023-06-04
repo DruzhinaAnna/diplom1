@@ -28,3 +28,7 @@ class Supporting(forms.ModelForm):
     class Meta:
         model = Support
         fields = ('first_name', 'last_name', 'email', 'number', 'discussion')
+
+    def __init__(self, *args, **kwargs):
+        super(Supporting, self).__init__(*args, **kwargs)
+        self.fields['number'].required = False
