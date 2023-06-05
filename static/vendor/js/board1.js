@@ -348,4 +348,105 @@ document.getElementById('addTaskButton').addEventListener('click', function() {
     document.getElementById('taskName').value = '';
     document.getElementById('taskDescription').value = '';
     document.getElementById('taskDate').value = '';
+
+   // Создаем элемент для отображения файла
+var fileElement = document.createElement('div');
+fileElement.className = 'file-element';
+
+// Создаем элемент для отображения имени файла
+var fileName = document.createElement('p');
+fileName.textContent = 'Файл не выбран';
+
+// Создаем ссылку для открытия окна выбора файла
+var chooseLink = document.createElement('a');
+chooseLink.href = '#';
+// chooseLink.textContent = 'Обзор';
+
+// Создаем элемент input для выбора файла
+var fileInput = document.createElement('input');
+fileInput.type = 'file';
+fileInput.accept = '.jpg, .png, .docx';
+fileInput.style.display = 'none';
+
+// Функция для отображения информации о файле
+function showFileInfo(file) {
+  // Очищаем предыдущее содержимое
+  fileElement.innerHTML = '';
+
+  // Отображаем имя файла
+  fileName.textContent = file.name;
+
+  // Проверяем тип файла
+  if (file.type.includes('image')) {
+    // Если файл является изображением, создаем элемент <img> размером 40x40 и посередине
+    var fileImage = document.createElement('img');
+    fileImage.src = URL.createObjectURL(file);
+    fileImage.alt = 'Изображение';
+    fileImage.style.width = '40px';
+    fileImage.style.height = '40px';
+    fileImage.style.display = 'block';
+
+
+    // Добавляем изображение в файловый элемент
+    fileElement.appendChild(fileImage);
+
+    // Добавляем ссылку для скачивания изображения
+    var imageLink = document.createElement('a');
+    imageLink.href = URL.createObjectURL(file);
+    imageLink.download = file.name;
+    imageLink.textContent = 'Скачать изображение';
+
+    // Добавляем ссылку в файловый элемент
+    fileElement.appendChild(imageLink);
+  } else {
+    // Если файл не является изображением, создаем ссылку для скачивания
+    var fileLink = document.createElement('a');
+    fileLink.href = URL.createObjectURL(file);
+    fileLink.download = file.name;
+    fileLink.textContent = 'Скачать файл';
+
+    // Добавляем ссылку в файловый элемент
+    fileElement.appendChild(fileLink);
+  }
+
+  // Добавляем название файла
+  fileElement.appendChild(fileName);
+
+  // Добавляем кнопку удаления файла
+  var deleteButton = document.createElement('button');
+  deleteButton.className = 'btn btn-danger btn-sm';
+  deleteButton.textContent = 'Удалить';
+  deleteButton.addEventListener('click', function() {
+    // Очищаем содержимое fileInput
+    fileInput.value = '';
+
+    // Очищаем информацию о файле
+    fileName.textContent = 'Файл не выбран';
+
+    // Удаляем файловый элемент
+    fileElement.innerHTML = '';
+  });
+
+  // Добавляем кнопку удаления в файловый элемент
+  fileElement.appendChild(deleteButton);
+}
+
+// Обработчик нажатия на svg1
+svg1.addEventListener('click', function() {
+  fileInput.click();
 });
+
+// Обработчик изменения значения input
+fileInput.addEventListener('change', function(event) {
+  var file = event.target.files[0];
+  if (file) {
+    showFileInfo(file);
+  }
+});
+
+// Добавляем элементы в card-body-task
+taskCardBody.appendChild(chooseLink);
+taskCardBody.appendChild(fileInput);
+taskCardBody.appendChild(fileElement);
+});
+

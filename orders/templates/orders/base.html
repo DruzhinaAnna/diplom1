@@ -81,6 +81,28 @@
 {% endblock %}
 
 {% block sidebar %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Получаем все ссылки внутри списка навигации
+        var navLinks = document.querySelectorAll(".nav-link");
+
+        // Обрабатываем каждую ссылку
+        navLinks.forEach(function (link) {
+            // Слушаем событие клика на ссылке
+            link.addEventListener("click", function () {
+                // Удаляем классы "active" и "aria-current" у всех ссылок
+                navLinks.forEach(function (navLink) {
+                    navLink.classList.remove("active");
+                    navLink.removeAttribute("aria-current");
+                });
+
+                // Добавляем классы "active" и "aria-current" на выбранную ссылку
+                this.classList.add("active");
+                this.setAttribute("aria-current", "page");
+            });
+        });
+    });
+</script>
     <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark sidebar">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
         <svg class="bi me-2" width="40" height="32">
