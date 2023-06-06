@@ -52,7 +52,7 @@ class Task(models.Model):
         (DONE, 'Готово'),
     )
 
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=40)
     date = models.DateTimeField(auto_now_add=True)
     expired = models.DateTimeField()
     status = models.SmallIntegerField(default=NOT_COMPLETE, choices=STATUSES)
