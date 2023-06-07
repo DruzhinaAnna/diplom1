@@ -1,112 +1,427 @@
 {% extends 'orders/base.html' %}
-{% load humanize %}
 {% load static %}
 
+{% block title %}
+<title>{{ title }}</title>
+{% endblock %}
+
 {% block css %}
-<link href="{% static 'vendor/css/main.css' %}" rel="stylesheet">
+<link href="{% static 'vendor/css/list.css' %}">
 {% endblock %}
 
 {% block content %}
 
-<script src="{% static 'vendor/js/date.js' %}"></script>
-<!-- Основное содержимое страницы -->
-<!--<div class=" sidebar" style="width: 180px; height: 800px">-->
-<!--    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">-->
-<!--        <svg class="bi me-2" width="40" height="32">-->
-<!--            <use xlink:href="#bootstrap"></use>-->
-<!--        </svg>-->
+<style>
 
-<!--    </a>-->
-<!--    <hr>-->
-<!--    <ul class="nav nav-pills flex-column mb-auto">-->
-<!--        <li class="nav-item">-->
-<!--            <a href="{% url 'orders:main' %}" class="nav-link active" aria-current="page">-->
-<!--                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house"-->
-<!--                     viewBox="0 0 16 16">-->
-<!--                    <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>-->
-<!--                </svg>-->
-<!--                Главная-->
-<!--            </a>-->
-<!--        </li>-->
-<!--        <li>-->
-<!--            <a href="{% url 'orders:my-tasks' %}" class="nav-link link-dark">-->
-<!--                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"-->
-<!--                     class="bi bi-list-task" viewBox="0 0 16 16">-->
-<!--                    <path fill-rule="evenodd"-->
-<!--                          d="M2 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5H2zM3 3H2v1h1V3z"/>-->
-<!--                    <path d="M5 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM5.5 7a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 4a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9z"/>-->
-<!--                    <path fill-rule="evenodd"-->
-<!--                          d="M1.5 7a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5V7zM2 7h1v1H2V7zm0 3.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5H2zm1 .5H2v1h1v-1z"/>-->
-<!--                </svg>-->
-<!--                Мои задачи-->
-<!--            </a>-->
-<!--        </li>-->
-<!--        <li>-->
-<!--            <a href="#" class="nav-link link-dark">-->
-<!--                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"-->
-<!--                     class="bi bi-envelope" viewBox="0 0 16 16">-->
-<!--                    <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>-->
-<!--                </svg>-->
-<!--                Входящие-->
-<!--            </a>-->
-<!--        </li>-->
-<!--    </ul>-->
-<!--    <hr>-->
-<!--    <div class="dropdown">-->
-<!--        <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2"-->
-<!--           data-bs-toggle="dropdown" aria-expanded="false">-->
-<!--            <img src="{% static 'vendor/img/users/default_avatar.jpg'%}" alt="" class="rounded-circle me-2" width="32" height="32">-->
-<!--            <strong>Админ</strong>-->
-<!--        </a>-->
-<!--        <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">-->
-<!--&lt;!&ndash;           <li><a class="dropdown-item" href="#">Создать задачу</a></li>&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;            <li><a class="dropdown-item" href="#">Создать проект</a></li>&ndash;&gt;-->
 
-<!--&lt;!&ndash;            <li>&ndash;&gt;-->
-<!--&lt;!&ndash;                <hr class="dropdown-divider">&ndash;&gt;-->
-<!--&lt;!&ndash;            </li>&ndash;&gt;-->
-<!--            <li><a class="dropdown-item" href="{% url 'users:logout' %}">Выйти</a></li>-->
-<!--        </ul>-->
-<!--    </div>-->
-<!--</div>-->
+h1{
+  color: black;
+  text-align: center;
+  font-size: 40px;
+  font-weight: 100;
+  padding-top:14vh;
+  padding-left:18vw;
+  position:relative;
+}
 
-<div class="content" ondragover="allowDrop(event)" ondrop="drop(event)">
+ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.forma{
+      width: 406px;
+    height: 442px;
+    top: 60%;
+    left: 36%;
+    right: 0px;
+    margin: 0px 20px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    border: 2px solid #ccc;
+    padding: 20px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    border-radius: calc(0.65rem - 1px) calc(0.65rem - 1px) calc(0.65rem - 1px) calc(0.65rem - 1px);
+}
+.steps{
+         min-width: 406px;
+    height: 442px;
+    top: 60%;
+    left: 80%;
+    right: 0px;
+    margin: 0px 20px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+ border: 2px solid #ccc;
+  padding: 20px;
+   overflow-y: auto;
+    margin-bottom: 20px;
+    border-radius: calc(0.65rem - 1px) calc(0.65rem - 1px) calc(0.65rem - 1px) calc(0.65rem - 1px);
+}
 
-    <h1 class="mt-5">Главная</h1>
-    <p id="current-date"></p>
-    <div class="form-container" ondragover="allowDrop(event)" ondrop="drop(event)">
-        <div class="form-row">
-            <div class="form" draggable="true" id="form1" ondragstart="dragStart(event, 'form1')">
-                <h3><a href="{% url 'orders:my-tasks' %}">Мои задачи</a></h3>
+/* Обновите следующие CSS свойства для настройки полосы прокрутки */
+.steps::-webkit-scrollbar {
+  width: 10px; /* Измените ширину по вашему усмотрению */
+}
 
-                {% for task in tasks %}
-                    <a><h6>{{ task.name }}</h6></a>
-                    <label>Создано: <p>{{ task.date|date:"d.m.Y" }}</p></label><hr>
-                {% endfor %}
+.steps::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Задайте цвет фона для полосы прокрутки */
+  calc(0.65rem - 1px) calc(0.65rem - 1px) calc(0.65rem - 1px) calc(0.65rem - 1px);
+}
 
-<!--                <form method="post" , enctype="multipart/form-data">-->
-<!--                    {% csrf_token %}-->
-<!--                    {{ form.as_p }}-->
-<!--                    <button type="submit"> Submit</button>-->
-<!--                </form>-->
+.steps::-webkit-scrollbar-thumb {
+  background: #6d6d6d; /* Задайте цвет для ползунка полосы прокрутки */
+  calc(0.65rem - 1px) calc(0.65rem - 1px) calc(0.65rem - 1px) calc(0.65rem - 1px);
+}
 
-                <div class="actions-button">
-                    <img src="{% static 'vendor/img/three-dots.jpg' %}" onclick="toggleFormDropdown(event)">
-                    <div class="form-dropdown-content" id="form-dropdown-content">
-                        <a href="#" onclick="handleFormDropdownSelection('half')">Половина</a>
-                        <a href="#" onclick="handleFormDropdownSelection('fullscreen')">Полный экран</a>
-                        <a href="#" onclick="handleFormDropdownSelection('view-tasks')">Просмотр всех моих задач</a>
-                        <a href="#" onclick="handleFormDropdownSelection('delete-widget')">Удалить виджет</a>
-                    </div>
-                </div>
-            </div>
+input[type=checkbox] {
+  display: none;
+}
 
-            <div class="form" draggable="true" id="form2" ondragstart="dragStart(event, 'form2')">
-                <h3>Проекты</h3>
-                <p>Здесь будут Ваши проекты</p>
-            </div>
-        </div>
-    </div>
+.ui-sortable-placeholder{
+  border: 1px dotted #fff;
+  padding: 30px 20px;
+  position: relative;
+}
+
+.ui-sortable-placeholder:after{
+
+  position: absolute;
+  top: 30%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  color: #fff;
+  text-align: center;
+}
+ #sortable li.center-message {
+    text-align: center;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 150px;
+  }
+
+label{
+  background: #34495E;
+      height: 128px;
+    width: 361px;
+  display: block;
+  border-bottom: 1px solid #2C3E50;
+  color: #fff;
+  text-transform: capitalize;
+  font-weight: 900;
+  font-size: 11px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.7s ease;
+  position: relative;
+  padding: 5px 5px 5px 70px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  word-break: break-word;
+}
+
+
+label h2 span{
+  display: block;
+  font-size: 12px;
+  text-transform: capitalize;
+  font-weight: normal;
+  color: #bdc3c7;
+}
+
+label:before{
+  content:"";
+  width: 19px;
+  height: 19px;
+  border: 1px solid #416282;
+  display: block;
+  position: absolute;
+  border-radius: 100%;
+  left: 20px;
+  top: 30%;
+  transition: border 0.7s ease;
+  z-index: 9999;
+}
+
+label:after{
+  content: "";
+  width: 55px;
+  height: 127px;
+  background: #2C3E50;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+
+#label-1:checked ~ label[for=label-1],
+#label-2:checked ~ label[for=label-2],
+#label-3:checked ~ label[for=label-3],
+#label-4:checked ~ label[for=label-4],
+#label-5:checked ~ label[for=label-5],
+#label-6:checked ~ label[for=label-6],
+#label-7:checked ~ label[for=label-7],
+#label-8:checked ~ label[for=label-8],
+#label-9:checked ~ label[for=label-9],
+#label-10:checked ~ label[for=label-10],
+#label-11:checked ~ label[for=label-11],
+#label-12:checked ~ label[for=label-12],
+#label-13:checked ~ label[for=label-13],
+#label-14:checked ~ label[for=label-14],
+#label-15:checked ~ label[for=label-15],
+#label-16:checked ~ label[for=label-16],
+#label-17:checked ~ label[for=label-17],
+#label-18:checked ~ label[for=label-18],
+#label-19:checked ~ label[for=label-19],
+#label-20:checked ~ label[for=label-20]{
+  background: #2C3E50;
+  border-bottom: 1px solid #34495E;
+  color: #1ABC9C;
+}
+
+#label-1:checked ~ label[for=label-1] h2 span,
+#label-2:checked ~ label[for=label-2] h2 span,
+#label-3:checked ~ label[for=label-3] h2 span,
+#label-4:checked ~ label[for=label-4] h2 span,
+#label-5:checked ~ label[for=label-5] h2 span,
+#label-6:checked ~ label[for=label-6] h2 span,
+#label-7:checked ~ label[for=label-7] h2 span,
+#label-8:checked ~ label[for=label-8] h2 span,
+#label-9:checked ~ label[for=label-9] h2 span,
+#label-10:checked ~ label[for=label-10] h2 span,
+#label-11:checked ~ label[for=label-11] h2 span,
+#label-12:checked ~ label[for=label-12] h2 span,
+#label-13:checked ~ label[for=label-13] h2 span,
+#label-14:checked ~ label[for=label-14] h2 span,
+#label-15:checked ~ label[for=label-15] h2 span,
+#label-16:checked ~ label[for=label-16] h2 span,
+#label-17:checked ~ label[for=label-17] h2 span,
+#label-18:checked ~ label[for=label-18] h2 span,
+#label-19:checked ~ label[for=label-19] h2 span,
+#label-20:checked ~ label[for=label-20] h2 span{
+  color: #1ABC9C;
+}
+
+
+
+#label-1:checked ~ label[for=label-1]:before,
+#label-2:checked ~ label[for=label-2]:before,
+#label-3:checked ~ label[for=label-3]:before,
+#label-4:checked ~ label[for=label-4]:before,
+#label-5:checked ~ label[for=label-5]:before,
+#label-6:checked ~ label[for=label-6]:before,
+#label-7:checked ~ label[for=label-7]:before,
+#label-8:checked ~ label[for=label-8]:before,
+#label-9:checked ~ label[for=label-9]:before,
+#label-10:checked ~ label[for=label-10]:before,
+#label-11:checked ~ label[for=label-11]:before,
+#label-12:checked ~ label[for=label-12]:before,
+#label-13:checked ~ label[for=label-13]:before,
+#label-14:checked ~ label[for=label-14]:before,
+#label-15:checked ~ label[for=label-15]:before,
+#label-16:checked ~ label[for=label-16]:before,
+#label-17:checked ~ label[for=label-17]:before,
+#label-18:checked ~ label[for=label-18]:before,
+#label-19:checked ~ label[for=label-19]:before,
+#label-20:checked ~ label[for=label-20]:before{
+  background: url("https://designmodo.github.io/Flat-UI/images/todo/done.png") no-repeat center center;
+  border: 1px solid #1abc9d;
+}
+
+li:first-child label{
+  height: 200px;
+  text-transform: uppercase;
+  font-size: 15px;
+  border-right: 8px solid #f52f2f;
+  padding-top: 8%;
+}
+
+
+li:first-child label:before{
+  top: 40%;
+}
+
+li:first-child label:after{
+  height: 200px;
+}
+
+li:nth-child(2) label{
+  border-right: 8px solid #ff6d49;
+}
+
+li:nth-child(3) label{
+  border-right: 8px solid #ff8349;
+}
+
+li:nth-child(4) label{
+  border-right: 8px solid #faa63e;
+}
+li:nth-child(5) label{
+  border-right: 8px solid #fac23e;
+}
+li:nth-child(6) label{
+  border-right: 8px solid #fad13e;
+}
+li:nth-child(7) label{
+  border-right: 8px solid #fae13e;
+}
+li:nth-child(8) label{
+  border-right: 8px solid #e1fa3e;
+}
+li:nth-child(9) label{
+  border-right: 8px solid #c2fa3e;
+}
+li:nth-child(10) label{
+  border-right: 8px solid #9ffa3e;
+}
+li:nth-child(11) label{
+  border-right: 8px solid #74fa3e;
+}
+li:nth-child(12) label{
+  border-right: 8px solid #3efa5b;
+}
+li:nth-child(13) label{
+  border-right: 8px solid #3efa86;
+}
+li:nth-child(14) label{
+  border-right: 8px solid #3efaa6;
+}
+li:nth-child(15) label{
+  border-right: 8px solid #3eface;
+}
+li:nth-child(16) label{
+  border-right: 8px solid #3e57fa;
+}
+li:nth-child(17) label{
+  border-right: 8px solid #453efa;
+}
+li:nth-child(18) label{
+  border-right: 8px solid #6a3efa;
+}
+li:nth-child(19) label{
+  border-right: 8px solid #863efa;
+}
+
+li:last-child label{
+  border-right: 8px solid #a63efa;
+}
+
+
+
+
+</style>
+
+
+<h1 style="min-height: 2rem;">Добро пожаловать, {{ user.username }}!</h1>
+
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!-- Подключите остальные файлы Bootstrap, если требуется -->
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+<script>
+  $(function() {
+    $("#sortable").sortable();
+  });
+
+
+
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+<script>
+$(document).ready(function() {
+  function displayTasksWithinWeek() {
+    // Определяем текущую дату
+    var currentDate = new Date();
+
+    // Функция для проверки, что срок выполнения задачи находится в пределах следующих 7 дней
+    function isDeadlineWithinWeek(deadline) {
+      var deadlineDate = new Date(deadline);
+      var oneWeekLater = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 7);
+
+      return deadlineDate >= currentDate && deadlineDate <= oneWeekLater;
+    }
+
+    // Скрываем все задачи
+    $("#sortable li").hide();
+
+    // Показываем только задачи, у которых срок выполнения находится в пределах следующих 7 дней
+    $("#sortable li").each(function() {
+      var deadlineText = $(this).find("span:contains('Срок выполнения:')").text();
+      var deadlineMatch = deadlineText.match(/(\d{2})\.(\d{2})\.(\d{4})/);
+
+      if (deadlineMatch) {
+        var day = deadlineMatch[1];
+        var month = deadlineMatch[2] - 1; // Месяцы в JavaScript начинаются с 0 (январь = 0, февраль = 1, и т.д.)
+        var year = deadlineMatch[3];
+
+        var deadline = new Date(year, month, day);
+
+        // Проверяем, что срок выполнения задачи находится в пределах следующих 7 дней
+        if (isDeadlineWithinWeek(deadline)) {
+          $(this).show();
+        }
+      }
+    });
+
+    // Проверяем наличие задач и выводим соответствующий текст
+    if ($("#sortable li:visible").length === 0) {
+         $("#sortable").append("<li class='center-message'>На ближайшую неделю не запланированы задачи для выполнения.</li>");
+    }
+  }
+
+  // Вызываем функцию для отображения задач на странице
+  displayTasksWithinWeek();
+
+  // Инициализируем сортировку элементов списка с помощью jQuery UI
+  $("#sortable").sortable();
+});
+
+</script>
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<div class="forma">
+ <img src=" {{ user.image }}" alt="Аватар пользователя">
+  <h2>{{ user.username }}</h2>
+  <p> Количество задач: {{ user.tasks_count }}</p>
 </div>
+<div class="steps">
+    <ul id="sortable">
+        {% for task in tasks %}
+        <li>
+            <input id='label-{{ task.id }}' type='checkbox'/>
+            <label for='label-{{ task.id }}'>
+                <h2 style="font-size:1.1rem;">{{ task.name }}
+
+                    <span> Дата создания: {{ task.date|date:"d.m.Y" }}</span>
+                    <span> Срок выполнения: {{ task.expired|date:"d.m.Y" }}</span>
+                    <span> Статус задачи: {{ task.get_status_display }}</span>
+                    <span> Описание задачи: {{ task.description }}</span>
+                    <span> Исполнитель: {{ task.initiator }}</span>
+                    <span>{{ task.file }}</span>
+                </h2>
+
+            </label>
+        </li>
+        {% endfor %}
+
+
+    </ul>
+</div>
+</div>
+</div>
+</div>
+
 
 {% endblock %}
