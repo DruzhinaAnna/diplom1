@@ -1,15 +1,19 @@
 from django.contrib import messages
 from django.contrib.auth.views import LoginView, PasswordResetDoneView, PasswordResetView, PasswordResetConfirmView
+from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.messages.views import SuccessMessageMixin
-from django.shortcuts import HttpResponseRedirect
+from django.shortcuts import HttpResponseRedirect, render, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView
 from django.template.loader import render_to_string
 from django.contrib.sites.shortcuts import get_current_site
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes, force_str
-from django.core.mail import EmailMessage
+from django.db.models.query_utils import Q
+from django.contrib.auth.tokens import default_token_generator
+from django.core.mail import EmailMessage, send_mail
+from django.http import HttpResponse
 
 from common.views import TitleMixin
 from users.forms import UserLoginForm, UserProfileForm, UserRegistrationForm
@@ -74,3 +78,35 @@ class PassConfirmView(PasswordResetConfirmView):
     template_name = 'users/password_reset_confirm.html'
     success_url = reverse_lazy('users:password_reset_complete')
 
+
+def reset_password_message(request):
+    if request.method == "POST":
+        password_form = PasswordResetForm(request.POST)
+        if password_form.is_valid():
+            data = password_form.cleaned_data['email']
+            user_email = User.objects.filter(Q(email=data))
+            if user_email.exists():
+                for user in user_email:
+                    subject = 'Password Request'
+                    email_template_name = 'users/password_message.txt'
+                    parameters = {
+                        'email': user.email,
+                        'domain': '127.0.0.1:8000',
+                        'temp': '/users/password-reset/confirm',
+                        'site_name': 'KanbanPM',
+                        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                        'token': default_token_generator.make_token(user),
+                        'protocol': 'http'
+                    }
+                    email = render_to_string(email_template_name, parameters)
+                    try:
+                        send_mail(subject, email, '', [user.email], fail_silently=False)
+                    except:
+                        return HttpResponse('Invalid Header')
+                    return redirect('users:password_reset_done')
+    else:
+        password_form = PasswordResetForm()
+    context = {
+        'form': password_form
+    }
+    return render(request, 'users/password_reset_form.html', context)

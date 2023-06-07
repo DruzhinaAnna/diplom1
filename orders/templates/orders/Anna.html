@@ -1,541 +1,480 @@
 {% extends 'orders/base.html' %}
-{% load humanize %}
 {% load static %}
 
-{% block css %}
-<link href="{% static 'vendor/css/Anna.css' %}" rel="stylesheet">
-<link href="{% static 'vendor/fullcalendar/packages/core/main.css' %}" rel="stylesheet">
-<link href="{% static 'vendor/fullcalendar/packages/daygrid/main.css' %}" rel="stylesheet">
-<link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="{% static 'vendor/fonts/icomoon/style.css' %}">
-<link href="https://fonts.googleapis.com/css?family=Roboto:300,400&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{% static 'vendor/css/style.css' %}">
+{% block title %}
+<title>{{ title }}</title>
 {% endblock %}
 
-<script defer="" referrerpolicy="origin"
-        src="/cdn-cgi/zaraz/s.js?z=JTdCJTIyZXhlY3V0ZWQlMjIlM0ElNUIlNUQlMkMlMjJ0JTIyJTNBJTIyQ2FsZW5kYXIlMjAlMjM5JTIyJTJDJTIyeCUyMiUzQTAuODYyMzcwNDY4NDM3ODgzMiUyQyUyMnclMjIlM0ExOTIwJTJDJTIyaCUyMiUzQTEwODAlMkMlMjJqJTIyJTNBOTA2JTJDJTIyZSUyMiUzQTE5MjAlMkMlMjJsJTIyJTNBJTIyaHR0cHMlM0ElMkYlMkZwcmV2aWV3LmNvbG9ybGliLmNvbSUyRnRoZW1lJTJGYm9vdHN0cmFwJTJGY2FsZW5kYXItMTklMkYlMjIlMkMlMjJyJTIyJTNBJTIyaHR0cHMlM0ElMkYlMkZhZG1pbmx0ZS5pbyUyRiUyMiUyQyUyMmslMjIlM0EyNCUyQyUyMm4lMjIlM0ElMjJVVEYtOCUyMiUyQyUyMm8lMjIlM0EtMTgwJTJDJTIycSUyMiUzQSU1QiU1RCU3RA=="></script>
-<script nonce="d4559d23-3a81-45a9-8705-c5e680139deb">
-    (function(w,d){!function(a,b,c,d){a[c]=a[c]||{};a[c].executed=[];a.zaraz={deferred:[],listeners:[]};a.zaraz.q=[];a.zaraz._f=function(e){return function(){var f=Array.prototype.slice.call(arguments);a.zaraz.q.push({m:e,a:f})}};for(const g of["track","set","debug"])a.zaraz[g]=a.zaraz._f(g);a.zaraz.init=()=>{var h=b.getElementsByTagName(d)[0],i=b.createElement(d),j=b.getElementsByTagName("title")[0];j&&(a[c].t=b.getElementsByTagName("title")[0].text);a[c].x=Math.random();a[c].w=a.screen.width;a[c].h=a.screen.height;a[c].j=a.innerHeight;a[c].e=a.innerWidth;a[c].l=a.location.href;a[c].r=b.referrer;a[c].k=a.screen.colorDepth;a[c].n=b.characterSet;a[c].o=(new Date).getTimezoneOffset();if(a.dataLayer)for(const n of Object.entries(Object.entries(dataLayer).reduce(((o,p)=>({...o[1],...p[1]})),{})))zaraz.set(n[0],n[1],{scope:"page"});a[c].q=[];for(;a.zaraz.q.length;){const q=a.zaraz.q.shift();a[c].q.push(q)}i.defer=!0;for(const r of[localStorage,sessionStorage])Object.keys(r||{}).filter((t=>t.startsWith("_zaraz_"))).forEach((s=>{try{a[c]["z_"+s.slice(7)]=JSON.parse(r.getItem(s))}catch{a[c]["z_"+s.slice(7)]=r.getItem(s)}}));i.referrerPolicy="origin";i.src="/cdn-cgi/zaraz/s.js?z="+btoa(encodeURIComponent(JSON.stringify(a[c])));h.parentNode.insertBefore(i,h)};["complete","interactive"].includes(b.readyState)?zaraz.init():a.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document);
-</script>
+{% block css %}
+<link href="{% static 'vendor/css/list.css' %}">
+{% endblock %}
 
 {% block content %}
-<script src="{% static 'vendor/js/date.js' %}"></script>
-<main>
-    <div class="content">
-        <div id="current-week"></div>
-    <script>
-      var currentWeekElement = document.getElementById('current-week');
-      var currentDate = new Date();
-      var currentWeek = getWeekNumber(currentDate);
 
-      var startDate = new Date();
-      startDate.setDate(currentDate.getDate() - currentDate.getDay() + 1);
-      var endDate = new Date(startDate);
-      endDate.setDate(startDate.getDate() + 6);
+<style>
 
-      var startDateString = formatDate(startDate);
-      var endDateString = formatDate(endDate);
 
-      currentWeekElement.innerHTML = 'Текущая неделя: ' + startDateString + ' - ' + endDateString;
+h1{
+  color: black;
+  text-align: center;
+  font-size: 40px;
+  font-weight: 100;
+  padding-top:10vh;
+  padding-left:18vw;
+  position:relative;
+}
 
-      function getWeekNumber(date) {
-        var newDate = new Date(date);
-        newDate.setHours(0, 0, 0, 0);
-        newDate.setDate(newDate.getDate() + 4 - (newDate.getDay() || 7));
-        var yearStart = new Date(newDate.getFullYear(), 0, 1);
-        var weekNumber = Math.ceil(((newDate - yearStart) / 86400000 + 1) / 7);
-        return weekNumber;
-      }
+ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
 
-      function formatDate(date) {
-        var day = date.getDate();
-        var month = date.getMonth() + 1;
-        var year = date.getFullYear();
-        return ('0' + day).slice(-2) + '.' + ('0' + month).slice(-2) + '.' + year;
-      }
-    </script>
- <div id="calendar" class="fc fc-ltr fc-unthemed" style="">
-<!--        <div class="fc-toolbar fc-header-toolbar">-->
-<!--            <div class="fc-left"><h2>Май 2023</h2></div>-->
-<!--            <div class="fc-center"></div>-->
-<!--            <div class="fc-right">-->
-<!--                <button type="button" class="fc-today-button fc-button fc-button-primary" disabled="">today</button>-->
-<!--                <div class="fc-button-group">-->
-<!--                    <button type="button" class="fc-prev-button fc-button fc-button-primary" aria-label="prev"><span-->
-<!--                            class="fc-icon fc-icon-chevron-left"></span></button>-->
-<!--                    <button type="button" class="fc-next-button fc-button fc-button-primary" aria-label="next"><span-->
-<!--                            class="fc-icon fc-icon-chevron-right"></span></button>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="fc-view-container">-->
-<!--            <div class="fc-view fc-dayGridMonth-view fc-dayGrid-view" style="">-->
-<!--                <table class="">-->
-<!--                    <thead class="fc-head">-->
-<!--                    <tr>-->
-<!--                        <td class="fc-head-container fc-widget-header">-->
-<!--                            <div class="fc-row fc-widget-header">-->
-<!--                                <table class="">-->
-<!--                                    <thead>-->
-<!--                                    <tr>-->
-<!--                                        <th class="fc-day-header fc-widget-header fc-sun"><span>ВС</span></th>-->
-<!--                                        <th class="fc-day-header fc-widget-header fc-mon"><span>ПН</span></th>-->
-<!--                                        <th class="fc-day-header fc-widget-header fc-tue"><span>ВТ</span></th>-->
-<!--                                        <th class="fc-day-header fc-widget-header fc-wed"><span>СР</span></th>-->
-<!--                                        <th class="fc-day-header fc-widget-header fc-thu"><span>ЧТ</span></th>-->
-<!--                                        <th class="fc-day-header fc-widget-header fc-fri"><span>ПТ</span></th>-->
-<!--                                        <th class="fc-day-header fc-widget-header fc-sat"><span>СБ</span></th>-->
-<!--                                    </tr>-->
-<!--                                    </thead>-->
-<!--                                </table>-->
-<!--                            </div>-->
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                    </thead>-->
-<!--                    <tbody class="fc-body">-->
-<!--                    <tr>-->
-<!--                        <td class="fc-widget-content">-->
-<!--                            <div class="fc-scroller fc-day-grid-container" style="overflow: hidden; height: 640px;">-->
-<!--                                <div class="fc-day-grid">-->
-<!--                                    <div class="fc-row fc-week fc-widget-content fc-rigid" style="height: 106px;">-->
-<!--                                        <div class="fc-bg">-->
-<!--                                            <table class="">-->
-<!--                                                <tbody>-->
-<!--                                                <tr>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-sun fc-other-month fc-past"-->
-<!--                                                        data-date="2023-04-30"></td>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-mon fc-past"-->
-<!--                                                        data-date="2023-05-01"></td>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-tue fc-past"-->
-<!--                                                        data-date="2023-05-02"></td>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-wed fc-past"-->
-<!--                                                        data-date="2023-05-03"></td>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-thu fc-past"-->
-<!--                                                        data-date="2023-05-04"></td>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-fri fc-past"-->
-<!--                                                        data-date="2023-05-05"></td>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-sat fc-past"-->
-<!--                                                        data-date="2023-05-06"></td>-->
-<!--                                                </tr>-->
-<!--                                                </tbody>-->
-<!--                                            </table>-->
-<!--                                        </div>-->
-<!--                                        <div class="fc-content-skeleton">-->
-<!--                                            <table>-->
-<!--                                                <thead>-->
-<!--                                                <tr>-->
-<!--                                                    <td class="fc-day-top fc-sun fc-other-month fc-past"-->
-<!--                                                        data-date="2023-04-30"><span class="fc-day-number">30</span>-->
-<!--                                                    </td>-->
-<!--                                                    <td class="fc-day-top fc-mon fc-past" data-date="2023-05-01"><span-->
-<!--                                                            class="fc-day-number">1</span></td>-->
-<!--                                                    <td class="fc-day-top fc-tue fc-past" data-date="2023-05-02"><span-->
-<!--                                                            class="fc-day-number">2</span></td>-->
-<!--                                                    <td class="fc-day-top fc-wed fc-past" data-date="2023-05-03"><span-->
-<!--                                                            class="fc-day-number">3</span></td>-->
-<!--                                                    <td class="fc-day-top fc-thu fc-past" data-date="2023-05-04"><span-->
-<!--                                                            class="fc-day-number">4</span></td>-->
-<!--                                                    <td class="fc-day-top fc-fri fc-past" data-date="2023-05-05"><span-->
-<!--                                                            class="fc-day-number">5</span></td>-->
-<!--                                                    <td class="fc-day-top fc-sat fc-past" data-date="2023-05-06"><span-->
-<!--                                                            class="fc-day-number">6</span></td>-->
-<!--                                                </tr>-->
-<!--                                                </thead>-->
-<!--                                                <tbody>-->
-<!--                                                <tr>-->
-<!--                                                    <td></td>-->
-<!--                                                    <td></td>-->
-<!--                                                    <td></td>-->
-<!--                                                    <td></td>-->
-<!--                                                    <td></td>-->
-<!--                                                    <td></td>-->
-<!--                                                    <td></td>-->
-<!--                                                </tr>-->
-<!--                                                </tbody>-->
-<!--                                            </table>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                    <div class="fc-row fc-week fc-widget-content fc-rigid" style="height: 106px;">-->
-<!--                                        <div class="fc-bg">-->
-<!--                                            <table class="">-->
-<!--                                                <tbody>-->
-<!--                                                <tr>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-sun fc-past"-->
-<!--                                                        data-date="2023-05-07"></td>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-mon fc-past"-->
-<!--                                                        data-date="2023-05-08"></td>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-tue fc-past"-->
-<!--                                                        data-date="2023-05-09"></td>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-wed fc-past"-->
-<!--                                                        data-date="2023-05-10"></td>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-thu fc-past"-->
-<!--                                                        data-date="2023-05-11"></td>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-fri fc-past"-->
-<!--                                                        data-date="2023-05-12"></td>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-sat fc-past"-->
-<!--                                                        data-date="2023-05-13"></td>-->
-<!--                                                </tr>-->
-<!--                                                </tbody>-->
-<!--                                            </table>-->
-<!--                                        </div>-->
-<!--                                        <div class="fc-content-skeleton">-->
-<!--                                            <table>-->
-<!--                                                <thead>-->
-<!--                                                <tr>-->
-<!--                                                    <td class="fc-day-top fc-sun fc-past" data-date="2023-05-07"><span-->
-<!--                                                            class="fc-day-number">7</span></td>-->
-<!--                                                    <td class="fc-day-top fc-mon fc-past" data-date="2023-05-08"><span-->
-<!--                                                            class="fc-day-number">8</span></td>-->
-<!--                                                    <td class="fc-day-top fc-tue fc-past" data-date="2023-05-09"><span-->
-<!--                                                            class="fc-day-number">9</span></td>-->
-<!--                                                    <td class="fc-day-top fc-wed fc-past" data-date="2023-05-10"><span-->
-<!--                                                            class="fc-day-number">10</span></td>-->
-<!--                                                    <td class="fc-day-top fc-thu fc-past" data-date="2023-05-11"><span-->
-<!--                                                            class="fc-day-number">11</span></td>-->
-<!--                                                    <td class="fc-day-top fc-fri fc-past" data-date="2023-05-12"><span-->
-<!--                                                            class="fc-day-number">12</span></td>-->
-<!--                                                    <td class="fc-day-top fc-sat fc-past" data-date="2023-05-13"><span-->
-<!--                                                            class="fc-day-number">13</span></td>-->
-<!--                                                </tr>-->
-<!--                                                </thead>-->
-<!--                                                <tbody>-->
-<!--                                                <tr>-->
-<!--                                                    <td></td>-->
-<!--                                                    <td></td>-->
-<!--                                                    <td></td>-->
-<!--                                                    <td></td>-->
-<!--                                                    <td></td>-->
-<!--                                                    <td></td>-->
-<!--                                                    <td></td>-->
-<!--                                                </tr>-->
-<!--                                                </tbody>-->
-<!--                                            </table>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                    <div class="fc-row fc-week fc-widget-content fc-rigid" style="height: 106px;">-->
-<!--                                        <div class="fc-bg">-->
-<!--                                            <table class="">-->
-<!--                                                <tbody>-->
-<!--                                                <tr>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-sun fc-past"-->
-<!--                                                        data-date="2023-05-14"></td>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-mon fc-past"-->
-<!--                                                        data-date="2023-05-15"></td>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-tue fc-past"-->
-<!--                                                        data-date="2023-05-16"></td>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-wed fc-past"-->
-<!--                                                        data-date="2023-05-17"></td>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-thu fc-past"-->
-<!--                                                        data-date="2023-05-18"></td>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-fri fc-past"-->
-<!--                                                        data-date="2023-05-19"></td>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-sat fc-past"-->
-<!--                                                        data-date="2023-05-20"></td>-->
-<!--                                                </tr>-->
-<!--                                                </tbody>-->
-<!--                                            </table>-->
-<!--                                        </div>-->
-<!--                                        <div class="fc-content-skeleton">-->
-<!--                                            <table>-->
-<!--                                                <thead>-->
-<!--                                                <tr>-->
-<!--                                                    <td class="fc-day-top fc-sun fc-past" data-date="2023-05-14"><span-->
-<!--                                                            class="fc-day-number">14</span></td>-->
-<!--                                                    <td class="fc-day-top fc-mon fc-past" data-date="2023-05-15"><span-->
-<!--                                                            class="fc-day-number">15</span></td>-->
-<!--                                                    <td class="fc-day-top fc-tue fc-past" data-date="2023-05-16"><span-->
-<!--                                                            class="fc-day-number">16</span></td>-->
-<!--                                                    <td class="fc-day-top fc-wed fc-past" data-date="2023-05-17"><span-->
-<!--                                                            class="fc-day-number">17</span></td>-->
-<!--                                                    <td class="fc-day-top fc-thu fc-past" data-date="2023-05-18"><span-->
-<!--                                                            class="fc-day-number">18</span></td>-->
-<!--                                                    <td class="fc-day-top fc-fri fc-past" data-date="2023-05-19"><span-->
-<!--                                                            class="fc-day-number">19</span></td>-->
-<!--                                                    <td class="fc-day-top fc-sat fc-past" data-date="2023-05-20"><span-->
-<!--                                                            class="fc-day-number">20</span></td>-->
-<!--                                                </tr>-->
-<!--                                                </thead>-->
-<!--                                                <tbody>-->
-<!--                                                <tr>-->
-<!--                                                    <td></td>-->
-<!--                                                    <td></td>-->
-<!--                                                    <td></td>-->
-<!--                                                    <td></td>-->
-<!--                                                    <td></td>-->
-<!--                                                    <td></td>-->
-<!--                                                    <td></td>-->
-<!--                                                </tr>-->
-<!--                                                </tbody>-->
-<!--                                            </table>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                    <div class="fc-row fc-week fc-widget-content fc-rigid" style="height: 106px;">-->
-<!--                                        <div class="fc-bg">-->
-<!--                                            <table class="">-->
-<!--                                                <tbody>-->
-<!--                                                <tr>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-sun fc-past"-->
-<!--                                                        data-date="2023-05-21"></td>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-mon fc-past"-->
-<!--                                                        data-date="2023-05-22"></td>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-tue fc-past"-->
-<!--                                                        data-date="2023-05-23"></td>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-wed fc-past"-->
-<!--                                                        data-date="2023-05-24"></td>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-thu fc-past"-->
-<!--                                                        data-date="2023-05-25"></td>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-fri fc-past"-->
-<!--                                                        data-date="2023-05-26"></td>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-sat fc-past"-->
-<!--                                                        data-date="2023-05-27"></td>-->
-<!--                                                </tr>-->
-<!--                                                </tbody>-->
-<!--                                            </table>-->
-<!--                                        </div>-->
-<!--                                        <div class="fc-content-skeleton">-->
-<!--                                            <table>-->
-<!--                                                <thead>-->
-<!--                                                <tr>-->
-<!--                                                    <td class="fc-day-top fc-sun fc-past" data-date="2023-05-21"><span-->
-<!--                                                            class="fc-day-number">21</span></td>-->
-<!--                                                    <td class="fc-day-top fc-mon fc-past" data-date="2023-05-22"><span-->
-<!--                                                            class="fc-day-number">22</span></td>-->
-<!--                                                    <td class="fc-day-top fc-tue fc-past" data-date="2023-05-23"><span-->
-<!--                                                            class="fc-day-number">23</span></td>-->
-<!--                                                    <td class="fc-day-top fc-wed fc-past" data-date="2023-05-24"><span-->
-<!--                                                            class="fc-day-number">24</span></td>-->
-<!--                                                    <td class="fc-day-top fc-thu fc-past" data-date="2023-05-25"><span-->
-<!--                                                            class="fc-day-number">25</span></td>-->
-<!--                                                    <td class="fc-day-top fc-fri fc-past" data-date="2023-05-26"><span-->
-<!--                                                            class="fc-day-number">26</span></td>-->
-<!--                                                    <td class="fc-day-top fc-sat fc-past" data-date="2023-05-27"><span-->
-<!--                                                            class="fc-day-number">27</span></td>-->
-<!--                                                </tr>-->
-<!--                                                </thead>-->
-<!--                                                <tbody>-->
-<!--                                                <tr>-->
-<!--                                                    <td></td>-->
-<!--                                                    <td></td>-->
-<!--                                                    <td></td>-->
-<!--                                                    <td></td>-->
-<!--                                                    <td></td>-->
-<!--                                                    <td></td>-->
-<!--                                                    <td></td>-->
-<!--                                                </tr>-->
-<!--                                                </tbody>-->
-<!--                                            </table>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                    <div class="fc-row fc-week fc-widget-content fc-rigid" style="height: 106px;">-->
-<!--                                        <div class="fc-bg">-->
-<!--                                            <table class="">-->
-<!--                                                <tbody>-->
-<!--                                                <tr>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-sun fc-past"-->
-<!--                                                        data-date="2023-05-28"></td>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-mon fc-past"-->
-<!--                                                        data-date="2023-05-29"></td>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-tue fc-past"-->
-<!--                                                        data-date="2023-05-30"></td>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-wed fc-today "-->
-<!--                                                        data-date="2023-05-31"></td>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-thu fc-other-month fc-future"-->
-<!--                                                        data-date="2023-06-01"></td>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-fri fc-other-month fc-future"-->
-<!--                                                        data-date="2023-06-02"></td>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-sat fc-other-month fc-future"-->
-<!--                                                        data-date="2023-06-03"></td>-->
-<!--                                                </tr>-->
-<!--                                                </tbody>-->
-<!--                                            </table>-->
-<!--                                        </div>-->
-<!--                                        <div class="fc-content-skeleton">-->
-<!--                                            <table>-->
-<!--                                                <thead>-->
-<!--                                                <tr>-->
-<!--                                                    <td class="fc-day-top fc-sun fc-past" data-date="2023-05-28"><span-->
-<!--                                                            class="fc-day-number">28</span></td>-->
-<!--                                                    <td class="fc-day-top fc-mon fc-past" data-date="2023-05-29"><span-->
-<!--                                                            class="fc-day-number">29</span></td>-->
-<!--                                                    <td class="fc-day-top fc-tue fc-past" data-date="2023-05-30"><span-->
-<!--                                                            class="fc-day-number">30</span></td>-->
-<!--                                                    <td class="fc-day-top fc-wed fc-today " data-date="2023-05-31"><span-->
-<!--                                                            class="fc-day-number">31</span></td>-->
-<!--                                                    <td class="fc-day-top fc-thu fc-other-month fc-future"-->
-<!--                                                        data-date="2023-06-01"><span class="fc-day-number">1</span></td>-->
-<!--                                                    <td class="fc-day-top fc-fri fc-other-month fc-future"-->
-<!--                                                        data-date="2023-06-02"><span class="fc-day-number">2</span></td>-->
-<!--                                                    <td class="fc-day-top fc-sat fc-other-month fc-future"-->
-<!--                                                        data-date="2023-06-03"><span class="fc-day-number">3</span></td>-->
-<!--                                                </tr>-->
-<!--                                                </thead>-->
-<!--                                                <tbody>-->
-<!--                                                <tr>-->
-<!--                                                    <td></td>-->
-<!--                                                    <td></td>-->
-<!--                                                    <td></td>-->
-<!--                                                    <td></td>-->
-<!--                                                    <td></td>-->
-<!--                                                    <td></td>-->
-<!--                                                    <td></td>-->
-<!--                                                </tr>-->
-<!--                                                </tbody>-->
-<!--                                            </table>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                    <div class="fc-row fc-week fc-widget-content fc-rigid" style="height: 110px;">-->
-<!--                                        <div class="fc-bg">-->
-<!--                                            <table class="">-->
-<!--                                                <tbody>-->
-<!--                                                <tr>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-sun fc-other-month fc-future"-->
-<!--                                                        data-date="2023-06-04"></td>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-mon fc-other-month fc-future"-->
-<!--                                                        data-date="2023-06-05"></td>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-tue fc-other-month fc-future"-->
-<!--                                                        data-date="2023-06-06"></td>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-wed fc-other-month fc-future"-->
-<!--                                                        data-date="2023-06-07"></td>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-thu fc-other-month fc-future"-->
-<!--                                                        data-date="2023-06-08"></td>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-fri fc-other-month fc-future"-->
-<!--                                                        data-date="2023-06-09"></td>-->
-<!--                                                    <td class="fc-day fc-widget-content fc-sat fc-other-month fc-future"-->
-<!--                                                        data-date="2023-06-10"></td>-->
-<!--                                                </tr>-->
-<!--                                                </tbody>-->
-<!--                                            </table>-->
-<!--                                        </div>-->
-<!--                                        <div class="fc-content-skeleton">-->
-<!--                                            <table>-->
-<!--                                                <thead>-->
-<!--                                                <tr>-->
-<!--                                                    <td class="fc-day-top fc-sun fc-other-month fc-future"-->
-<!--                                                        data-date="2023-06-04"><span class="fc-day-number">4</span></td>-->
-<!--                                                    <td class="fc-day-top fc-mon fc-other-month fc-future"-->
-<!--                                                        data-date="2023-06-05"><span class="fc-day-number">5</span></td>-->
-<!--                                                    <td class="fc-day-top fc-tue fc-other-month fc-future"-->
-<!--                                                        data-date="2023-06-06"><span class="fc-day-number">6</span></td>-->
-<!--                                                    <td class="fc-day-top fc-wed fc-other-month fc-future"-->
-<!--                                                        data-date="2023-06-07"><span class="fc-day-number">7</span></td>-->
-<!--                                                    <td class="fc-day-top fc-thu fc-other-month fc-future"-->
-<!--                                                        data-date="2023-06-08"><span class="fc-day-number">8</span></td>-->
-<!--                                                    <td class="fc-day-top fc-fri fc-other-month fc-future"-->
-<!--                                                        data-date="2023-06-09"><span class="fc-day-number">9</span></td>-->
-<!--                                                    <td class="fc-day-top fc-sat fc-other-month fc-future"-->
-<!--                                                        data-date="2023-06-10"><span class="fc-day-number">10</span>-->
-<!--                                                    </td>-->
-<!--                                                </tr>-->
-<!--                                                </thead>-->
-<!--                                                <tbody>-->
-<!--                                                <tr>-->
-<!--                                                    <td></td>-->
-<!--                                                    <td></td>-->
-<!--                                                    <td></td>-->
-<!--                                                    <td></td>-->
-<!--                                                    <td></td>-->
-<!--                                                    <td></td>-->
-<!--                                                    <td></td>-->
-<!--                                                </tr>-->
-<!--                                                </tbody>-->
-<!--                                            </table>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                    </tbody>-->
-<!--                </table>-->
-<!--            </div>-->
-<!--        </div>-->
-    </div>
+.steps{
+  width: 560px;
+  height: 405px;
+  position: absolute;
+  top: -76px;
+  left: 124px;
+  right: 0px;
+  margin: 0px auto;
+  position:relative;
+}
+
+input[type=checkbox] {
+  display: none;
+}
+
+.ui-sortable-placeholder{
+  border: 1px dotted #fff;
+  padding: 30px 20px;
+  position: relative;
+}
+
+.ui-sortable-placeholder:after{
+
+  position: absolute;
+  top: 30%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  color: #fff;
+  text-align: center;
+}
+
+
+label{
+  background: #34495E;
+  height: 135px;
+  width: 100%;
+  display: block;
+  border-bottom: 1px solid #2C3E50;
+  color: #fff;
+  text-transform: capitalize;
+  font-weight: 900;
+  font-size: 11px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.7s ease;
+  position: relative;
+  padding: 5px 5px 5px 70px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+
+label h2 span{
+  display: block;
+  font-size: 12px;
+  text-transform: capitalize;
+  font-weight: normal;
+  color: #bdc3c7;
+}
+
+label:before{
+  content:"";
+  width: 19px;
+  height: 19px;
+  border: 1px solid #416282;
+  display: block;
+  position: absolute;
+  border-radius: 100%;
+  left: 20px;
+  top: 30%;
+  transition: border 0.7s ease;
+  z-index: 9999;
+}
+
+label:after{
+  content: "";
+  width: 60px;
+  height: 135px;
+  background: #2C3E50;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+
+#label-1:checked ~ label[for=label-1],
+#label-2:checked ~ label[for=label-2],
+#label-3:checked ~ label[for=label-3],
+#label-4:checked ~ label[for=label-4],
+#label-5:checked ~ label[for=label-5],
+#label-6:checked ~ label[for=label-6],
+#label-7:checked ~ label[for=label-7],
+#label-8:checked ~ label[for=label-8],
+#label-9:checked ~ label[for=label-9],
+#label-10:checked ~ label[for=label-10],
+#label-11:checked ~ label[for=label-11],
+#label-12:checked ~ label[for=label-12],
+#label-13:checked ~ label[for=label-13],
+#label-14:checked ~ label[for=label-14],
+#label-15:checked ~ label[for=label-15],
+#label-16:checked ~ label[for=label-16],
+#label-17:checked ~ label[for=label-17],
+#label-18:checked ~ label[for=label-18],
+#label-19:checked ~ label[for=label-19],
+#label-20:checked ~ label[for=label-20]{
+  background: #2C3E50;
+  border-bottom: 1px solid #34495E;
+  color: #1ABC9C;
+}
+
+#label-1:checked ~ label[for=label-1] h2 span,
+#label-2:checked ~ label[for=label-2] h2 span,
+#label-3:checked ~ label[for=label-3] h2 span,
+#label-4:checked ~ label[for=label-4] h2 span,
+#label-5:checked ~ label[for=label-5] h2 span,
+#label-6:checked ~ label[for=label-6] h2 span,
+#label-7:checked ~ label[for=label-7] h2 span,
+#label-8:checked ~ label[for=label-8] h2 span,
+#label-9:checked ~ label[for=label-9] h2 span,
+#label-10:checked ~ label[for=label-10] h2 span,
+#label-11:checked ~ label[for=label-11] h2 span,
+#label-12:checked ~ label[for=label-12] h2 span,
+#label-13:checked ~ label[for=label-13] h2 span,
+#label-14:checked ~ label[for=label-14] h2 span,
+#label-15:checked ~ label[for=label-15] h2 span,
+#label-16:checked ~ label[for=label-16] h2 span,
+#label-17:checked ~ label[for=label-17] h2 span,
+#label-18:checked ~ label[for=label-18] h2 span,
+#label-19:checked ~ label[for=label-19] h2 span,
+#label-20:checked ~ label[for=label-20] h2 span{
+  color: #1ABC9C;
+}
+
+
+
+#label-1:checked ~ label[for=label-1]:before,
+#label-2:checked ~ label[for=label-2]:before,
+#label-3:checked ~ label[for=label-3]:before,
+#label-4:checked ~ label[for=label-4]:before,
+#label-5:checked ~ label[for=label-5]:before,
+#label-6:checked ~ label[for=label-6]:before,
+#label-7:checked ~ label[for=label-7]:before,
+#label-8:checked ~ label[for=label-8]:before,
+#label-9:checked ~ label[for=label-9]:before,
+#label-10:checked ~ label[for=label-10]:before,
+#label-11:checked ~ label[for=label-11]:before,
+#label-12:checked ~ label[for=label-12]:before,
+#label-13:checked ~ label[for=label-13]:before,
+#label-14:checked ~ label[for=label-14]:before,
+#label-15:checked ~ label[for=label-15]:before,
+#label-16:checked ~ label[for=label-16]:before,
+#label-17:checked ~ label[for=label-17]:before,
+#label-18:checked ~ label[for=label-18]:before,
+#label-19:checked ~ label[for=label-19]:before,
+#label-20:checked ~ label[for=label-20]:before{
+  background: url("https://designmodo.github.io/Flat-UI/images/todo/done.png") no-repeat center center;
+  border: 1px solid #1abc9d;
+}
+
+li:first-child label{
+  height: 200px;
+  text-transform: uppercase;
+  font-size: 15px;
+  border-right: 8px solid #f52f2f;
+  padding-top: 8%;
+}
+
+
+li:first-child label:before{
+  top: 40%;
+}
+
+li:first-child label:after{
+  height: 200px;
+}
+
+li:nth-child(2) label{
+  border-right: 8px solid #ff6d49;
+}
+
+li:nth-child(3) label{
+  border-right: 8px solid #ff8349;
+}
+
+li:nth-child(4) label{
+  border-right: 8px solid #faa63e;
+}
+li:nth-child(5) label{
+  border-right: 8px solid #fac23e;
+}
+li:nth-child(6) label{
+  border-right: 8px solid #fad13e;
+}
+li:nth-child(7) label{
+  border-right: 8px solid #fae13e;
+}
+li:nth-child(8) label{
+  border-right: 8px solid #e1fa3e;
+}
+li:nth-child(9) label{
+  border-right: 8px solid #c2fa3e;
+}
+li:nth-child(10) label{
+  border-right: 8px solid #9ffa3e;
+}
+li:nth-child(11) label{
+  border-right: 8px solid #74fa3e;
+}
+li:nth-child(12) label{
+  border-right: 8px solid #3efa5b;
+}
+li:nth-child(13) label{
+  border-right: 8px solid #3efa86;
+}
+li:nth-child(14) label{
+  border-right: 8px solid #3efaa6;
+}
+li:nth-child(15) label{
+  border-right: 8px solid #3eface;
+}
+li:nth-child(16) label{
+  border-right: 8px solid #3e57fa;
+}
+li:nth-child(17) label{
+  border-right: 8px solid #453efa;
+}
+li:nth-child(18) label{
+  border-right: 8px solid #6a3efa;
+}
+li:nth-child(19) label{
+  border-right: 8px solid #863efa;
+}
+
+li:last-child label{
+  border-right: 8px solid #a63efa;
+}
+
+</style>
+
+
+<h1 style="min-height:2.5rem;">Мои задачи</h1>
+<div class="form-group sort-dropdown" style="width:17vw;  position: relative;
+  top: -25px;
+  left:300px;">
+    <span id="sort-label">Сортировать:</span>
+    <select id="sort-select" class="form-control">
+        <option value="default">По умолчанию</option>
+        <option value="alphabetically">По алфавиту</option>
+        <option value="creation-date">По дате создания</option>
+        <option value="deadline">По сроку выполнения</option>
+    </select>
 </div>
-<script src="{% static 'vendor/js/jquery-3.3.1.min.js' %}"></script>
-<script src="{% static 'vendor/js/popper.min.js' %}"></script>
-<script src="{% static 'vendor/js/bootstrap.min.js' %}"></script>
-<script src="{% static 'vendor/fullcalendar/packages/core/main.js' %}"></script>
-<script src="{% static 'vendor/fullcalendar/packages/interaction/main.js' %}"></script>
-<script src="{% static 'vendor/fullcalendar/packages/daygrid/main.js' %}"></script>
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!-- Подключите остальные файлы Bootstrap, если требуется -->
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
 <script>
-      document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
+  $(function() {
+    $("#sortable").sortable();
+  });
 
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-      plugins: [ 'interaction', 'dayGrid' ],
-      defaultDate: '2023-05-12',
-      editable: true,
-      eventLimit: true, // allow "more" link when too many events
-      events: [
-        {
-          title: 'All Day Event',
-          start: '2023-05-01'
-        },
-        {
-          title: 'Long Event',
-          start: '2023-05-07',
-          end: '2023-05-10'
-        },
-        {
-          groupId: 999,
-          title: 'Repeating Event',
-          start: '2023-05-09T16:00:00'
-        },
-        {
-          groupId: 999,
-          title: 'Repeating Event',
-          start: '2023-05-16T16:00:00'
-        },
-        {
-          title: 'Conference',
-          start: '2023-05-11',
-          end: '2023-05-13'
-        },
-        {
-          title: 'Meeting',
-          start: '2023-05-12T10:30:00',
-          end: '2023-05-12T12:30:00'
-        },
-        {
-          title: 'Lunch',
-          start: '2023-05-12T12:00:00'
-        },
-        {
-          title: 'Meeting',
-          start: '2023-05-12T14:30:00'
-        },
-        {
-          title: 'Happy Hour',
-          start: '2023-05-12T17:30:00'
-        },
-        {
-          title: 'Dinner',
-          start: '2023-05-12T20:00:00'
-        },
-        {
-          title: 'Birthday Party',
-          start: '2023-05-13T07:00:00'
-        },
-        {
-          title: 'Click for Google',
-          url: 'http://google.com/',
-          start: '2023-05-28'
-        }
-      ]
+  // Функция для сортировки задач по алфавиту
+  function sortByAlphabet() {
+    var tasks = $("#sortable li");
+    tasks.sort(function(a, b) {
+      var taskA = $(a).find("h2").text().toUpperCase();
+      var taskB = $(b).find("h2").text().toUpperCase();
+      return taskA.localeCompare(taskB);
     });
+    $("#sortable").html(tasks);
+  }
 
-    calendar.render();
+// Функция для сортировки задач по сроку выполнения
+function sortByDeadline() {
+  var tasks = $("#sortable li");
+  tasks.sort(function(a, b) {
+    var taskA = new Date($(a).find("span").filter(function() {
+      return $(this).text().trim().startsWith('Срок выполнения:');
+    }).text().trim().split(":")[1].trim().split(".").reverse().join("-"));
+    var taskB = new Date($(b).find("span").filter(function() {
+      return $(this).text().trim().startsWith('Срок выполнения:');
+    }).text().trim().split(":")[1].trim().split(".").reverse().join("-"));
+    return taskA - taskB;
+  });
+  $("#sortable").html(tasks);
+}
+
+// Функция для сортировки задач по дате создания
+function sortByCreationDate() {
+  var tasks = $("#sortable li");
+  tasks.sort(function(a, b) {
+    var taskA = new Date($(a).find("span").filter(function() {
+      return $(this).text().trim().startsWith('Дата создания:');
+    }).text().trim().split(":")[1].trim().split(".").reverse().join("-"));
+    var taskB = new Date($(b).find("span").filter(function() {
+      return $(this).text().trim().startsWith('Дата создания:');
+    }).text().trim().split(":")[1].trim().split(".").reverse().join("-"));
+    return taskA - taskB;
+  });
+  $("#sortable").html(tasks);
+}
+
+
+  // Обработчик события для изменения выбранной опции в селекте сортировки
+  $("#sort-select").change(function() {
+    var selectedOption = $(this).val();
+    if (selectedOption === "alphabetically") {
+      sortByAlphabet();
+    } else if (selectedOption === "deadline") {
+      sortByDeadline();
+    } else if (selectedOption === "creation-date") {
+      sortByCreationDate();
+    }
   });
 
 
 
 </script>
-<script src="{% static 'vendor/js/main.js' %}"></script>
-<script defer=""
-        src="https://static.cloudflareinsights.com/beacon.min.js/v52afc6f149f6479b8c77fa569edb01181681764108816"
-        integrity="sha512-jGCTpDpBAYDGNYR5ztKt4BQPGef1P0giN6ZGVUi835kFF88FOmmn8jBQWNgrNd8g/Yu421NdgWhwQoaOPFflDw=="
-        data-cf-beacon="{&quot;rayId&quot;:&quot;7cf92f7d0d582d83&quot;,&quot;token&quot;:&quot;cd0b4b3a733644fc843ef0b185f98241&quot;,&quot;version&quot;:&quot;2023.4.0&quot;,&quot;si&quot;:100}"
-        crossorigin="anonymous"></script>
+
+
+
+
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<div class="status-filter" style="
+    width: 17vw;
+    position: relative;
+    top: -101px;
+    left: 994px;
+">
+  <span  for="filter-select">Фильтр:</span>
+  <select id="filter-select"class="form-control" >
+    <option value="all">Все</option>
+    <option value="not-completed">Не завершено</option>
+    <option value="in-progress">В процессе</option>
+    <option value="completed">Готово</option>
+  </select>
+</div>
+<div class="steps">
+    <ul id="sortable">
+        {% for task in tasks %}
+        <li>
+            <input id='label-{{ task.id }}' type='checkbox'/>
+            <label for='label-{{ task.id }}'>
+                <h2>{{ task.name }}
+
+                    <span> Дата создания: {{ task.date|date:"d.m.Y" }}</span>
+                    <span> Срок выполнения: {{ task.expired|date:"d.m.Y" }}</span>
+                    <span> Статус задачи: {{ task.get_status_display }}</span>
+                    <span> Описание задачи: {{ task.description }}</span>
+                    <span> Исполнитель: {{ task.initiator }}</span>
+                                <span>{{ task.file }}</span>
+                </h2>
+
+            </label>
+        </li>
+        {% endfor %}
+
+
+    </ul>
+</div>
+</div>
+<script>
+$("#filter-select").change(function() {
+  var selectedValue = $(this).val();
+  var tasks = $("#sortable li");
+
+  tasks.each(function() {
+    var statusElement = $(this).find("span:contains('Статус задачи:')");
+    var status = statusElement.text().split(":")[1].trim();
+
+    if (selectedValue === "all") {
+      $(this).show();
+    } else if (selectedValue === "in-progress" && status.toLowerCase() === "в процессе") {
+      $(this).show();
+    } else if (selectedValue === "completed" && status.toLowerCase() === "готово") {
+      $(this).show();
+    } else if (selectedValue === "not-completed" && status.toLowerCase() === "не завершено") {
+      $(this).show();
+    } else {
+      $(this).hide();
+    }
+  });
+});
+
+</script>
+
+<button id="export-btn" class="btn btn-primary" style="position: relative;
+    min-height: auto;
+    min-width: auto;
+    top: -546px;
+    left: 649px;">Экспортировать в Excel</button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.1/xlsx.core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
+
+<script>
+  function exportToExcel() {
+    var tasks = [];
+
+    // Собираем данные о задачах
+    $("#sortable li").each(function() {
+      var task = {
+        name: $(this).find("h2").text().trim(),
+        dateCreated: $(this).find("span:contains('Дата создания:')").text().split(':')[1].trim(),
+        deadline: $(this).find("span:contains('Срок выполнения:')").text().split(':')[1].trim(),
+        status: $(this).find("span:contains('Статус задачи:')").text().split(':')[1].trim(),
+        description: $(this).find("span:contains('Описание задачи:')").text().split(':')[1].trim(),
+        initiator: $(this).find("span:contains('Исполнитель:')").text().split(':')[1].trim(),
+        file: $(this).find("span").last().text().trim()
+      };
+      tasks.push(task);
+    });
+
+    // Создаем новую таблицу Excel
+    var workbook = XLSX.utils.book_new();
+    var worksheet = XLSX.utils.json_to_sheet(tasks);
+
+    // Добавляем заголовки столбцов
+    var header = ['Задача', 'Дата создания', 'Срок выполнения', 'Статус', 'Описание', 'Исполнитель', 'Файл'];
+    XLSX.utils.sheet_add_aoa(worksheet, [header], { origin: 'A1' });
+
+    // Добавляем данные задач
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Задачи');
+
+    // Сохраняем файл Excel
+    var excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    var excelBlob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    saveAs(excelBlob, 'tasks.xlsx');
+  }
+
+  // Обработчик события для кнопки экспорта
+  $(document).ready(function() {
+    $("#export-btn").click(function() {
+      exportToExcel();
+    });
+  });
+</script>
 
 {% endblock %}

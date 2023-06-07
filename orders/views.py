@@ -216,4 +216,8 @@ def calender(request):
 
 @login_required
 def anna(request):
-    return render(request, 'orders/Anna.html')
+    context = {
+        'title': 'Kanban - Список',
+        'tasks': Task.objects.filter(initiator=request.user)
+    }
+    return render(request, 'orders/Anna.html', context)
