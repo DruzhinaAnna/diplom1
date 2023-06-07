@@ -91,6 +91,7 @@ def reset_password_message(request):
                     email_template_name = 'users/password_message.txt'
                     parameters = {
                         'email': user.email,
+                        'username': user.username,
                         'domain': '127.0.0.1:8000',
                         'temp': '/users/password-reset/confirm',
                         'site_name': 'KanbanPM',
