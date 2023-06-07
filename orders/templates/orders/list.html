@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    <title>{{ title }}</title>
+<title>{{ title }}</title>
 {% endblock %}
 
 {% block css %}
@@ -10,14 +10,18 @@
 {% endblock %}
 
 {% block content %}
+
 <style>
 
 
 h1{
-  color: #fff;
+  color: black;
   text-align: center;
   font-size: 40px;
   font-weight: 100;
+  padding-top:10vh;
+  padding-left:18vw;
+  position:relative;
 }
 
 ul{
@@ -27,13 +31,14 @@ ul{
 }
 
 .steps{
-  width: 300px;
+  width: 560px;
   height: 405px;
   position: absolute;
-  top: 15%;
-  left: 0px;
+  top: -76px;
+  left: 124px;
   right: 0px;
   margin: 0px auto;
+  position:relative;
 }
 
 input[type=checkbox] {
@@ -60,7 +65,7 @@ input[type=checkbox] {
 
 label{
   background: #34495E;
-  height: 69px;
+  height: 135px;
   width: 100%;
   display: block;
   border-bottom: 1px solid #2C3E50;
@@ -104,7 +109,7 @@ label:before{
 label:after{
   content: "";
   width: 60px;
-  height: 68px;
+  height: 135px;
   background: #2C3E50;
   position: absolute;
   left: 0;
@@ -116,7 +121,22 @@ label:after{
 #label-2:checked ~ label[for=label-2],
 #label-3:checked ~ label[for=label-3],
 #label-4:checked ~ label[for=label-4],
-#label-5:checked ~ label[for=label-5]{
+#label-5:checked ~ label[for=label-5],
+#label-6:checked ~ label[for=label-6],
+#label-7:checked ~ label[for=label-7],
+#label-8:checked ~ label[for=label-8],
+#label-9:checked ~ label[for=label-9],
+#label-10:checked ~ label[for=label-10],
+#label-11:checked ~ label[for=label-11],
+#label-12:checked ~ label[for=label-12],
+#label-13:checked ~ label[for=label-13],
+#label-14:checked ~ label[for=label-14],
+#label-15:checked ~ label[for=label-15],
+#label-16:checked ~ label[for=label-16],
+#label-17:checked ~ label[for=label-17],
+#label-18:checked ~ label[for=label-18],
+#label-19:checked ~ label[for=label-19],
+#label-20:checked ~ label[for=label-20]{
   background: #2C3E50;
   border-bottom: 1px solid #34495E;
   color: #1ABC9C;
@@ -126,7 +146,22 @@ label:after{
 #label-2:checked ~ label[for=label-2] h2 span,
 #label-3:checked ~ label[for=label-3] h2 span,
 #label-4:checked ~ label[for=label-4] h2 span,
-#label-5:checked ~ label[for=label-5] h2 span{
+#label-5:checked ~ label[for=label-5] h2 span,
+#label-6:checked ~ label[for=label-6] h2 span,
+#label-7:checked ~ label[for=label-7] h2 span,
+#label-8:checked ~ label[for=label-8] h2 span,
+#label-9:checked ~ label[for=label-9] h2 span,
+#label-10:checked ~ label[for=label-10] h2 span,
+#label-11:checked ~ label[for=label-11] h2 span,
+#label-12:checked ~ label[for=label-12] h2 span,
+#label-13:checked ~ label[for=label-13] h2 span,
+#label-14:checked ~ label[for=label-14] h2 span,
+#label-15:checked ~ label[for=label-15] h2 span,
+#label-16:checked ~ label[for=label-16] h2 span,
+#label-17:checked ~ label[for=label-17] h2 span,
+#label-18:checked ~ label[for=label-18] h2 span,
+#label-19:checked ~ label[for=label-19] h2 span,
+#label-20:checked ~ label[for=label-20] h2 span{
   color: #1ABC9C;
 }
 
@@ -136,17 +171,32 @@ label:after{
 #label-2:checked ~ label[for=label-2]:before,
 #label-3:checked ~ label[for=label-3]:before,
 #label-4:checked ~ label[for=label-4]:before,
-#label-5:checked ~ label[for=label-5]:before{
+#label-5:checked ~ label[for=label-5]:before,
+#label-6:checked ~ label[for=label-6]:before,
+#label-7:checked ~ label[for=label-7]:before,
+#label-8:checked ~ label[for=label-8]:before,
+#label-9:checked ~ label[for=label-9]:before,
+#label-10:checked ~ label[for=label-10]:before,
+#label-11:checked ~ label[for=label-11]:before,
+#label-12:checked ~ label[for=label-12]:before,
+#label-13:checked ~ label[for=label-13]:before,
+#label-14:checked ~ label[for=label-14]:before,
+#label-15:checked ~ label[for=label-15]:before,
+#label-16:checked ~ label[for=label-16]:before,
+#label-17:checked ~ label[for=label-17]:before,
+#label-18:checked ~ label[for=label-18]:before,
+#label-19:checked ~ label[for=label-19]:before,
+#label-20:checked ~ label[for=label-20]:before{
   background: url("https://designmodo.github.io/Flat-UI/images/todo/done.png") no-repeat center center;
   border: 1px solid #1abc9d;
 }
 
 li:first-child label{
-  height: 150px;
+  height: 200px;
   text-transform: uppercase;
   font-size: 15px;
-  border-right: 8px solid #f87c85;
-  padding-top: 10%;
+  border-right: 8px solid #f52f2f;
+  padding-top: 8%;
 }
 
 
@@ -155,56 +205,277 @@ li:first-child label:before{
 }
 
 li:first-child label:after{
-  height: 149px;
+  height: 200px;
 }
 
 li:nth-child(2) label{
-  border-right: 8px solid #feb47f;
+  border-right: 8px solid #ff6d49;
 }
 
 li:nth-child(3) label{
-  border-right: 8px solid #3498db;
+  border-right: 8px solid #ff8349;
 }
 
 li:nth-child(4) label{
-  border-right: 8px solid #b985ea;
+  border-right: 8px solid #faa63e;
+}
+li:nth-child(5) label{
+  border-right: 8px solid #fac23e;
+}
+li:nth-child(6) label{
+  border-right: 8px solid #fad13e;
+}
+li:nth-child(7) label{
+  border-right: 8px solid #fae13e;
+}
+li:nth-child(8) label{
+  border-right: 8px solid #e1fa3e;
+}
+li:nth-child(9) label{
+  border-right: 8px solid #c2fa3e;
+}
+li:nth-child(10) label{
+  border-right: 8px solid #9ffa3e;
+}
+li:nth-child(11) label{
+  border-right: 8px solid #74fa3e;
+}
+li:nth-child(12) label{
+  border-right: 8px solid #3efa5b;
+}
+li:nth-child(13) label{
+  border-right: 8px solid #3efa86;
+}
+li:nth-child(14) label{
+  border-right: 8px solid #3efaa6;
+}
+li:nth-child(15) label{
+  border-right: 8px solid #3eface;
+}
+li:nth-child(16) label{
+  border-right: 8px solid #3e57fa;
+}
+li:nth-child(17) label{
+  border-right: 8px solid #453efa;
+}
+li:nth-child(18) label{
+  border-right: 8px solid #6a3efa;
+}
+li:nth-child(19) label{
+  border-right: 8px solid #863efa;
 }
 
 li:last-child label{
-  border-right: 8px solid #43d6b0;
+  border-right: 8px solid #a63efa;
 }
+
 </style>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+
+<h1 style="min-height:2.5rem;">Мои задачи</h1>
+<div class="form-group sort-dropdown" style="width:17vw;  position: relative;
+  top: -25px;
+  left:300px;">
+    <span id="sort-label">Сортировать:</span>
+    <select id="sort-select" class="form-control">
+        <option value="default">По умолчанию</option>
+        <option value="alphabetically">По алфавиту</option>
+        <option value="creation-date">По дате создания</option>
+        <option value="deadline">По сроку выполнения</option>
+    </select>
+</div>
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!-- Подключите остальные файлы Bootstrap, если требуется -->
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
 <script>
-  $( function() {
-    $( "#sortable" ).sortable();
-  } );
+  $(function() {
+    $("#sortable").sortable();
+  });
+
+  // Функция для сортировки задач по алфавиту
+  function sortByAlphabet() {
+    var tasks = $("#sortable li");
+    tasks.sort(function(a, b) {
+      var taskA = $(a).find("h2").text().toUpperCase();
+      var taskB = $(b).find("h2").text().toUpperCase();
+      return taskA.localeCompare(taskB);
+    });
+    $("#sortable").html(tasks);
+  }
+
+// Функция для сортировки задач по сроку выполнения
+function sortByDeadline() {
+  var tasks = $("#sortable li");
+  tasks.sort(function(a, b) {
+    var taskA = new Date($(a).find("span").filter(function() {
+      return $(this).text().trim().startsWith('Срок выполнения:');
+    }).text().trim().split(":")[1].trim().split(".").reverse().join("-"));
+    var taskB = new Date($(b).find("span").filter(function() {
+      return $(this).text().trim().startsWith('Срок выполнения:');
+    }).text().trim().split(":")[1].trim().split(".").reverse().join("-"));
+    return taskA - taskB;
+  });
+  $("#sortable").html(tasks);
+}
+
+// Функция для сортировки задач по дате создания
+function sortByCreationDate() {
+  var tasks = $("#sortable li");
+  tasks.sort(function(a, b) {
+    var taskA = new Date($(a).find("span").filter(function() {
+      return $(this).text().trim().startsWith('Дата создания:');
+    }).text().trim().split(":")[1].trim().split(".").reverse().join("-"));
+    var taskB = new Date($(b).find("span").filter(function() {
+      return $(this).text().trim().startsWith('Дата создания:');
+    }).text().trim().split(":")[1].trim().split(".").reverse().join("-"));
+    return taskA - taskB;
+  });
+  $("#sortable").html(tasks);
+}
+
+
+  // Обработчик события для изменения выбранной опции в селекте сортировки
+  $("#sort-select").change(function() {
+    var selectedOption = $(this).val();
+    if (selectedOption === "alphabetically") {
+      sortByAlphabet();
+    } else if (selectedOption === "deadline") {
+      sortByDeadline();
+    } else if (selectedOption === "creation-date") {
+      sortByCreationDate();
+    }
+  });
+
+
+
 </script>
 
-<h1>Task List</h1>
 
-  <div class="steps">
+
+
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<div class="status-filter" style="
+    width: 17vw;
+    position: relative;
+    top: -101px;
+    left: 994px;
+">
+  <span  for="filter-select">Фильтр:</span>
+  <select id="filter-select"class="form-control" >
+    <option value="all">Все</option>
+    <option value="not-completed">Не завершено</option>
+    <option value="in-progress">В процессе</option>
+    <option value="completed">Готово</option>
+  </select>
+</div>
+<div class="steps">
     <ul id="sortable">
-      {% for task in tasks %}
-      <li>
-        <input id='label-{{ task.id }}' type='checkbox'/>
-      <label for='label-{{ task.id }}'>
-          <h2>{{ task.name }}
-            <span>{{ task.date|date:"d.m.Y" }}</span>
-            <span>{{ task.expired }}</span>
-            <span>{{ task.status }}</span>
-            <span>{{ task.description }}</span>
-            <span>{{ task.description }}</span>
-<!--            <span>{{ task.file }}</span>-->
-          </h2>
+        {% for task in tasks %}
+        <li>
+            <input id='label-{{ task.id }}' type='checkbox'/>
+            <label for='label-{{ task.id }}'>
+                <h2>{{ task.name }}
 
-        </label>
-      </li>
-      {% endfor %}
+                    <span> Дата создания: {{ task.date|date:"d.m.Y" }}</span>
+                    <span> Срок выполнения: {{ task.expired|date:"d.m.Y" }}</span>
+                    <span> Статус задачи: {{ task.get_status_display }}</span>
+                    <span> Описание задачи: {{ task.description }}</span>
+                    <span> Исполнитель: {{ task.initiator }}</span>
+                                <span>{{ task.file }}</span>
+                </h2>
+
+            </label>
+        </li>
+        {% endfor %}
 
 
     </ul>
-  </div>
+</div>
+</div>
+<script>
+$("#filter-select").change(function() {
+  var selectedValue = $(this).val();
+  var tasks = $("#sortable li");
+
+  tasks.each(function() {
+    var statusElement = $(this).find("span:contains('Статус задачи:')");
+    var status = statusElement.text().split(":")[1].trim();
+
+    if (selectedValue === "all") {
+      $(this).show();
+    } else if (selectedValue === "in-progress" && status.toLowerCase() === "в процессе") {
+      $(this).show();
+    } else if (selectedValue === "completed" && status.toLowerCase() === "готово") {
+      $(this).show();
+    } else if (selectedValue === "not-completed" && status.toLowerCase() === "не завершено") {
+      $(this).show();
+    } else {
+      $(this).hide();
+    }
+  });
+});
+
+</script>
+
+<button id="export-btn" class="btn btn-primary" style="position: relative;
+    min-height: auto;
+    min-width: auto;
+    top: -546px;
+    left: 649px;">Экспортировать в Excel</button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.1/xlsx.core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
+
+<script>
+  function exportToExcel() {
+    var tasks = [];
+
+    // Собираем данные о задачах
+    $("#sortable li").each(function() {
+      var task = {
+        name: $(this).find("h2").text().trim(),
+        dateCreated: $(this).find("span:contains('Дата создания:')").text().split(':')[1].trim(),
+        deadline: $(this).find("span:contains('Срок выполнения:')").text().split(':')[1].trim(),
+        status: $(this).find("span:contains('Статус задачи:')").text().split(':')[1].trim(),
+        description: $(this).find("span:contains('Описание задачи:')").text().split(':')[1].trim(),
+        initiator: $(this).find("span:contains('Исполнитель:')").text().split(':')[1].trim(),
+        file: $(this).find("span").last().text().trim()
+      };
+      tasks.push(task);
+    });
+
+    // Создаем новую таблицу Excel
+    var workbook = XLSX.utils.book_new();
+    var worksheet = XLSX.utils.json_to_sheet(tasks);
+
+    // Добавляем заголовки столбцов
+    var header = ['Задача', 'Дата создания', 'Срок выполнения', 'Статус', 'Описание', 'Исполнитель', 'Файл'];
+    XLSX.utils.sheet_add_aoa(worksheet, [header], { origin: 'A1' });
+
+    // Добавляем данные задач
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Задачи');
+
+    // Сохраняем файл Excel
+    var excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    var excelBlob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    saveAs(excelBlob, 'tasks.xlsx');
+  }
+
+  // Обработчик события для кнопки экспорта
+  $(document).ready(function() {
+    $("#export-btn").click(function() {
+      exportToExcel();
+    });
+  });
+</script>
+
 
 {% endblock %}

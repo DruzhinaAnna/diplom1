@@ -4765,7 +4765,7 @@ input[type=button].btn-block {
 }
 
 .card-footer:last-child {
-    border-radius: 0 0 calc(0.25rem - 1px) calc(0.25rem - 1px);
+    border-radius: 0 0 calc(0.65rem - 1px) calc(0.65rem - 1px);
 }
 
 .card-header-tabs {
