@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, PasswordResetDoneView, PasswordResetView, PasswordResetConfirmView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
@@ -58,11 +58,19 @@ class EmailVerificationView(TitleMixin, TemplateView):
             return HttpResponseRedirect(reverse('index'))
 
 
-# def activateEmail(request, user, to_email): mail_subject = "Activate your user account." message =
-# render_to_string("template_activate_account.html", { 'user': user.username, 'domain': get_current_site(
-# request).domain, 'uid': urlsafe_base64_encode(force_bytes(user.pk)), 'token': account_activation_token.make_token(
-# user), "protocol": 'https' if request.is_secure() else 'http' }) email = EmailMessage(mail_subject, message,
-# to=[to_email]) if email.send(): messages.success(request, f'Dear <b>{user}</b>, please go to you email <b>{
-# to_email}</b> inbox and click on \ received activation link to confirm and complete the registration. <b>Note:</b>
-# Check your spam folder.') else: messages.error(request, f'Problem sending email to {to_email}, check if you typed
-# it correctly.')
+class PassResetView(PasswordResetView):
+    title = 'KanbanPM - Восстановление пароля'
+    template_name = "users/password_reset_form.html"
+    success_url = reverse_lazy('users:password_reset_done')
+
+
+class PassDoneView(PasswordResetDoneView):
+    title = 'KanbanPM - Восстановление пароля'
+    template_name = 'users/password_reset_done.html'
+
+
+class PassConfirmView(PasswordResetConfirmView):
+    title = 'KanbanPM - Изменение пароля'
+    template_name = 'users/password_reset_confirm.html'
+    success_url = reverse_lazy('users:password_reset_complete')
+

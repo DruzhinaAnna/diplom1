@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from orders.models import Order, Task
+from orders.models import Order, Task, Resume
 
 
 @admin.register(Order)
@@ -21,6 +21,15 @@ class TaskAdmin(admin.ModelAdmin):
     fields = (
         'date',
         ('name', 'initiator'),
-        'status', 'expired', 'description'
+        'status', 'expired', 'description', 'file'
     )
     readonly_fields = ('date',)
+
+
+@admin.register(Resume)
+class ResumeAdmin(admin.ModelAdmin):
+    list_display = ('initiator',)
+    fields = (
+        'file', 'initiator'
+    )
+    # readonly_fields = ('file',)

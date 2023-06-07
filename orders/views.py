@@ -13,6 +13,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
+from django.http import FileResponse
 
 from common.views import TitleMixin
 from orders.forms import OrderForm, ResumeForm
@@ -138,6 +139,22 @@ def board(request):
         'tasks': Task.objects.filter(initiator=request.user)
     }
     return render(request, 'orders/board.html', context)
+
+
+@login_required
+def listing(request):
+    context = {
+        'title': 'Kanban - Список',
+        'tasks': Task.objects.filter(initiator=request.user)
+    }
+    return render(request, 'orders/list.html', context)
+
+
+def download(request, id):
+    obj = Resume.objects.get(id=id)
+    filename = obj.file.path
+    response = FileResponse(open(filename, 'rb'))
+    return response
 
 
 def saving(request):

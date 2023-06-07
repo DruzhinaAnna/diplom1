@@ -41,6 +41,21 @@ class Order(models.Model):
         self.save()
 
 
+class Resume(models.Model):
+    file = models.FileField(upload_to='files/', null=True)
+    initiator = models.ForeignKey(to=User, on_delete=models.CASCADE, null=True)
+
+    class Meta:
+        verbose_name = 'files'
+        verbose_name_plural = 'files'
+
+    def __repr__(self):
+        return 'Resume(%s)' % self.file
+
+    # def __str__(self):
+    #     return self.file
+
+
 class Task(models.Model):
     NOT_COMPLETE = 0
     IN_PROGRESS = 1
@@ -52,12 +67,13 @@ class Task(models.Model):
         (DONE, 'Готово'),
     )
 
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=40)
     date = models.DateTimeField(auto_now_add=True)
     expired = models.DateTimeField()
     status = models.SmallIntegerField(default=NOT_COMPLETE, choices=STATUSES)
     description = models.CharField(max_length=256)
     initiator = models.ForeignKey(to=User, on_delete=models.CASCADE)
+    file = models.ForeignKey(to=Resume, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'tasks'
@@ -65,21 +81,6 @@ class Task(models.Model):
 
     def __str__(self):
         return self.name
-
-
-class Resume(models.Model):
-    file = models.FileField(upload_to='orders/', null=True)
-    initiator = models.ForeignKey(to=User, on_delete=models.CASCADE, null=True)
-
-    class Meta:
-        verbose_name = 'files'
-        verbose_name_plural = 'files'
-
-    def __repr__(self):
-        return 'Resume(%s)' % self.file
-
-    def __str__(self):
-        return self.file
 
 
 @property
