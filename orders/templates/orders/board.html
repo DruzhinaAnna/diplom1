@@ -2,11 +2,11 @@
 {% load static %}
 
 {% block additional_css %}
-    <link href="{% static 'vendor/css/board.css' %}">
+<link href="{% static 'vendor/css/board.css' %}">
 {% endblock %}
 
 {% block title %}
-    <title>{{ title }}</title>
+<title>{{ title }}</title>
 {% endblock %}
 
 {% block content %}
@@ -73,6 +73,7 @@ min-width: 350px;
 }
 
 
+
 </style>
 <div class="test " id="test">
     <div class="container-fluid " style="padding: 300px; margin-top: -200px;">
@@ -93,7 +94,9 @@ min-width: 350px;
                 </div>
             </div>
             <div class="col">
-                <button type="button" class="btn btn-primary" id="addColumnButton" style="margin-top:12.7px;">Добавить колонку</button>
+                <button type="button" class="btn btn-primary" id="addColumnButton" style="margin-top:12.7px;">Добавить
+                    колонку
+                </button>
             </div>
         </div>
 
@@ -109,23 +112,28 @@ min-width: 350px;
                 </div>
                 <div class="card-body" id="todoColumn" style="min-height: 50vh;">
                     {% for task in tasks %}
-                    <div class="card-task-body">
-                        <label>Название задачи: </label>
-                        <h6 class="card-title">{{ task.name }}</h6>
-                        <label>Описание задачи: </label>
-                        <p class="card-text">{{ task.description }}</p>
-                        <label>Статус задачи: </label>
-                        <select id="taskStatus" style="margin-left: 10px;">
-                            <option value="notCompleted">Не завершена</option>
-                            <option value="inProgress">В процессе</option>
-                            <option value="completed">Готово</option>
-                        </select><br>
-                        <label>Срок выполнения: </label>
-                        <p class="card-text">{{ task.expired }}</p>
-                        <label>Дата создания: </label>
-                        <p class="card-text">{{ task.date }}</p>
-                        <label>Исполнитель: </label>
-                        <p class="card-text">{{ task.initiator }}</p>
+                    <div class="card mb-2">
+                        <div class="card-task-body">
+                            <label>Название задачи: </label>
+                            <h6 class="card-title">{{ task.name }}</h6>
+                            <label>Описание задачи: </label>
+                            <p class="card-text">{{ task.description }}</p>
+                            <label>Статус задачи: </label>
+                            <select id="taskStatus" style="margin-left: 10px;">
+                                <option value="notCompleted">Не завершена</option>
+                                <option value="inProgress">В процессе</option>
+                                <option value="completed">Готово</option>
+                            </select><br>
+                            <label>Срок выполнения: </label>
+                            <p class="card-text">{{ task.expired }}</p>
+                            <label>Дата создания: </label>
+                            <p class="card-text">{{ task.date }}</p>
+                            <label>Исполнитель: </label>
+                            <p class="card-text">{{ task.initiator }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <div class="svg-small-container"></div>
+                        </div>
                     </div>
                     {% endfor %}
                 </div>
