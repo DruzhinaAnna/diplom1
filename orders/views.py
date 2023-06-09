@@ -116,8 +116,11 @@ def fulfill_order(session):
 
 @login_required
 def main(request):
+    count = len(Task.objects.filter(initiator=request.user))
     context = {
+        'title': 'Kanban - Главная',
         'tasks': Task.objects.filter(initiator=request.user),
+        'count': count
     }
     return render(request, 'orders/main.html', context)
 
