@@ -26,4 +26,5 @@ urlpatterns = [
     # path('add-task/', AddTask.as_view(), name='add-task')
 
     path('anna/', anna, name="anna")
+
 ]

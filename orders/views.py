@@ -6,7 +6,7 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import TemplateView
@@ -199,7 +199,13 @@ def calender(request):
 
 @login_required
 def anna(request):
-    return render(request, 'orders/Anna.html')
+    count=len(Task.objects.filter(initiator=request.user))
+    context = {
+        'title': 'Kanban - Главная',
+        'tasks': Task.objects.filter(initiator=request.user),
+        'count': count
+    }
+    return render(request, 'orders/Anna.html', context)
 
 
 @login_required
@@ -209,3 +215,5 @@ def listing(request):
         'tasks': Task.objects.filter(initiator=request.user)
     }
     return render(request, 'orders/list.html', context)
+
+
