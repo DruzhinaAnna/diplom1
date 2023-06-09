@@ -462,7 +462,7 @@ $(document).ready(function() {
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <div class="forma">
     <div class="avatar">
-        <img src=" {{ user.image.url }}" alt="Аватар пользователя" >
+        <img src="{% if user.image %}{{ user.image.url }}{% else %}{% static 'vendor/img/users/default_avatar.jpg' %}{% endif %}" alt="Аватар пользователя">
     </div>
     <span class="username-label" for="username">Имя пользователя:</span>
     <input type="text" style="border-radius: calc(0.45rem - 1px) calc(0.45rem - 1px) calc(0.45rem - 1px) calc(0.45rem - 1px);" value="{{ user.username }}" readonly>
