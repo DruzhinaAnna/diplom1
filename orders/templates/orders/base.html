@@ -203,7 +203,7 @@
            data-bs-toggle="dropdown" aria-expanded="false">
             <img src="{% static 'vendor/img/users/default_avatar.jpg'%}" alt="" width="32" height="32"
                  class="rounded-circle me-2">
-            <strong style="padding-left:5px;">Админ</strong>
+            <strong style="padding-left:5px;">{{ user.username }}</strong>
         </a>
         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
 
@@ -212,7 +212,7 @@
             <li>
                 <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" href="#">Выйти</a></li>
+            <li><a class="dropdown-item" href="{% url 'users:logout' %}">Выйти</a></li>
         </ul>
     </div>
 </div>
