@@ -111,4 +111,4 @@ class Support(models.Model):
         verbose_name_plural = 'support'
 
     def __str__(self):
-        return self.name
+        return self.first_name

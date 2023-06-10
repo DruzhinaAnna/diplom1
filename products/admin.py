@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from products.models import Basket, Product, ProductCategory
+from products.models import Basket, Product, ProductCategory, Support
 
 admin.site.register(ProductCategory)
 
@@ -12,6 +12,15 @@ class ProductAdmin(admin.ModelAdmin):
     readonly_fields = ('description',)
     search_fields = ('name',)
     ordering = ('-name',)
+
+
+@admin.register(Support)
+class SupportAdmin(admin.ModelAdmin):
+    list_display = ('first_name', 'last_name', 'email', 'number')
+    fields = ('first_name', 'last_name', 'email', 'number', 'discussion')
+    readonly_fields = ('first_name', 'last_name', 'email', 'number', 'discussion')
+    search_fields = ('email',)
+    ordering = ('-first_name',)
 
 
 class BasketAdmin(admin.TabularInline):

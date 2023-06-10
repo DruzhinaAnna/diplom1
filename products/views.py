@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import HttpResponseRedirect, render
+from django.shortcuts import HttpResponseRedirect, render, redirect
+from django.urls import reverse_lazy
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 
@@ -30,11 +31,10 @@ class ProductsListView(TitleMixin, ListView):
         return context
 
 
-class SupportListView(TitleMixin, ListView):
+class SupportListView(TemplateView):
     model = Support
-    form = Supporting
+    form_class = Supporting
     template_name = 'products/products.html'
-    paginate_by = 3
     title = 'KanbanPM - Техническая поддержка'
 
     # def get_queryset(self):
@@ -49,8 +49,17 @@ class SupportListView(TitleMixin, ListView):
 
 
 def support_function(request):
-    form = Supporting()
-    return render(request, 'products/products.html', {'form': form})
+    if request.method == "POST":
+        form = Supporting(request.POST)
+        form.save()
+        return redirect('index')
+    else:
+        form = Supporting()
+    context = {
+        'title': 'Техническая поддержка',
+        'form': form
+    }
+    return render(request, 'products/products.html', context)
 
 
 @login_required
