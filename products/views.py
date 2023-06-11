@@ -7,6 +7,7 @@ from django.views.generic.list import ListView
 from common.views import TitleMixin
 from products.models import Basket, Product, Support, ProductCategory
 from products.forms import Supporting
+from django.forms import ValidationError
 
 
 class IndexView(TitleMixin, TemplateView):
@@ -51,8 +52,12 @@ class SupportListView(TemplateView):
 def support_function(request):
     if request.method == "POST":
         form = Supporting(request.POST)
-        form.save()
-        return redirect('index')
+        if form.is_valid():
+            if 'happy' not in request.POST:
+                form.add_error(None, 'Подтвердите согласие')
+            else:
+                form.save()
+                return redirect('index')
     else:
         form = Supporting()
     context = {
@@ -60,6 +65,7 @@ def support_function(request):
         'form': form
     }
     return render(request, 'products/products.html', context)
+
 
 
 @login_required

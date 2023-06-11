@@ -105,6 +105,7 @@ class Support(models.Model):
     email = models.EmailField(blank=True)
     number = models.CharField(max_length=11, blank=False)
     discussion = models.TextField()
+    happy = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = 'support'

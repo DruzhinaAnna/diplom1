@@ -10,7 +10,11 @@
 {% endblock %}
 
 {% block content %}
-
+<style>
+    .error {
+    border: 2px solid red;
+}
+</style>
 <main>
 
     <div class="container">
@@ -21,7 +25,7 @@
                 <div class="card shadow-lg border-0 rounded-lg mt-5">
 
                     <div class="card-body">
-                        <form action="{% url 'products:support' %}" method="post">
+                        <form action="{% url 'products:support' %}" method="post" >
                             {% csrf_token %}
                             <div class="form-row">
                                 <div class="col-md-6">
@@ -75,7 +79,7 @@
 
                             <p style="color: orange;font-size: 110%;"> Поля, отмеченные звёздочкой(<span
                                     class="orange-star">*</span>) , являются обязательными.</p>
-                            <input type="checkbox" class="custom-checkbox" id="happy" name="happy" value="yes">
+                            <input type="checkbox" class="custom-checkbox required" id="happy" name="happy" value="yes" required>
                             <label for="happy" style="font-size: 110%;">
                                 Отправляя эту форму, вы соглашаетесь с тем, что вы предоставляете KanbanPM свои личные
                                 данные
@@ -83,7 +87,7 @@
                             <div class="form-group mt-4 mb-0">
                                 <input class="btn btn-primary btn-block"
                                        style="background-color: #4169E1;font-size:1.1rem;border-color: #4169E1;"
-                                       type="submit" value="Отправить ">
+                                       type="submit" value="Отправить " onclick="return validateForm()">
                             </div>
                         </form>
                     </div>
@@ -93,6 +97,23 @@
         </div>
     </div>
 </main>
+<script>
+    function validateForm() {
+        var happyCheckbox = document.getElementById('happy');
+        var happyError = document.getElementById('happy-error');
+
+        if (!happyCheckbox.checked) {
+            happyCheckbox.classList.add('error');
+            happyError.style.display = 'block';
+            return false;
+        } else {
+            happyCheckbox.classList.remove('error');
+            happyError.style.display = 'none';
+            return true;
+        }
+    }
+</script>
+
 {% endblock %}
 
 

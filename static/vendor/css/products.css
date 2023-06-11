@@ -69,3 +69,22 @@ body {
 .custom-checkbox:disabled+label::before {
   background-color: #e9ecef;
 }
+.custom-checkbox.error:not(:disabled)+label::before {
+  border-color: red;
+  background-color: red;
+}
+
+.custom-checkbox.error:not(:disabled)+label::before {
+  border-color: red;
+}
+
+.custom-checkbox.error:not(:disabled):hover+label::before {
+  border-color: red;
+}
+.custom-checkbox.error:not(:disabled) {
+  outline-color: red;
+}
+.custom-checkbox:invalid+label::before {
+  border-color: red;
+  background-color: red;
+}
