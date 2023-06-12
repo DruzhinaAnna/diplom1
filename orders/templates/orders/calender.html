@@ -23,7 +23,7 @@
 <script src="{% static 'vendor/js/date.js' %}"></script>
 <main>
     <div class="content">
-        <div id="current-week"></div>
+        <div id="current-week" style="text-align:center;"></div>
     <script>
       var currentWeekElement = document.getElementById('current-week');
       var currentDate = new Date();
@@ -459,74 +459,32 @@
 <script src="{% static 'vendor/fullcalendar/packages/interaction/main.js' %}"></script>
 <script src="{% static 'vendor/fullcalendar/packages/daygrid/main.js' %}"></script>
 <script>
-      document.addEventListener('DOMContentLoaded', function() {
+
+  document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
       plugins: [ 'interaction', 'dayGrid' ],
       defaultDate: '2023-05-12',
       editable: true,
-      eventLimit: true, // allow "more" link when too many events
+      eventLimit: true, // allow "more" link when too many events,
       events: [
+        {% for task in tasks %}
         {
-          title: 'All Day Event',
-          start: '2023-05-01'
+          title: '{{ task.name }}',
+          start: '{{ task.date|date:"Y-m-d" }}',
+          end: '{{ task.date|date:"Y-m-d" }}',
+          description: '{{ task.description }}',
+          status: '{{ task.status }}',
+          initiator: '{{ task.initiator }}'
         },
-        {
-          title: 'Long Event',
-          start: '2023-05-07',
-          end: '2023-05-10'
-        },
-        {
-          groupId: 999,
-          title: 'Repeating Event',
-          start: '2023-05-09T16:00:00'
-        },
-        {
-          groupId: 999,
-          title: 'Repeating Event',
-          start: '2023-05-16T16:00:00'
-        },
-        {
-          title: 'Conference',
-          start: '2023-05-11',
-          end: '2023-05-13'
-        },
-        {
-          title: 'Meeting',
-          start: '2023-05-12T10:30:00',
-          end: '2023-05-12T12:30:00'
-        },
-        {
-          title: 'Lunch',
-          start: '2023-05-12T12:00:00'
-        },
-        {
-          title: 'Meeting',
-          start: '2023-05-12T14:30:00'
-        },
-        {
-          title: 'Happy Hour',
-          start: '2023-05-12T17:30:00'
-        },
-        {
-          title: 'Dinner',
-          start: '2023-05-12T20:00:00'
-        },
-        {
-          title: 'Birthday Party',
-          start: '2023-05-13T07:00:00'
-        },
-        {
-          title: 'Click for Google',
-          url: 'http://google.com/',
-          start: '2023-05-28'
-        }
+        {% endfor %}
       ]
     });
 
     calendar.render();
   });
+
 </script>
 <script src="{% static 'vendor/js/main.js' %}"></script>
 <script defer=""

@@ -189,7 +189,11 @@ def upload_file(request):
 
 @login_required
 def calender(request):
-    return render(request, 'orders/calender.html')
+    context = {
+        'title': 'Kanban - Календарь',
+        'tasks': Task.objects.filter(initiator=request.user)
+    }
+    return render(request, 'orders/calender.html',context)
 
 
 # class AddTask(TitleMixin, SuccessMessageMixin, CreateView):

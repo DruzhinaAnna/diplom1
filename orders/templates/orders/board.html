@@ -72,7 +72,7 @@ min-width: 350px;
 }
 .search-box {
       position: absolute;
-      top: 7vh;
+      top: 11vh;
       left: 100vh;
       transform: translate(-50%, -50%);
       background: #efefef;
@@ -126,208 +126,208 @@ min-width: 350px;
 
 
 
+
 </style>
 <!--<div class="test " id="test">-->
 <div class="search-box">
-  <input type="text" name="" class="search-txt" placeholder="Введите название колонки">
-  <a class="search-btn" href="#">
-    <i class="fa fa-search" aria-hidden="true"></i>
-  </a>
+    <input type="text" name="" class="search-txt" placeholder="Введите название колонки">
+    <a class="search-btn" href="#">
+        <i class="fa fa-search" aria-hidden="true"></i>
+    </a>
 </div>
-    <div class="container-fluid " style="padding: 300px; margin-top: -200px;">
+<div class="container-fluid " style="padding: 300px; margin-top: -200px;">
 
-        <h1 class="mt-1 mb-1">Kanban Board</h1>
-
-
+    <h1 class="mt-1 mb-1">Kanban Board</h1>
 
 
-        <div class="row mt-4" style="align-items: center;">
-            <div class="col">
-                <div class="form-group">
-                    <label for="columnName">Название колонки</label>
-                    <input type="text" class="form-control" id="columnName" placeholder="Введите название колонки">
-                </div>
-            </div>
-            <div class="col">
-                <div class="form-group">
-                    <label for="columnPosition">Позиция колонки</label>
-                    <input type="number" class="form-control" id="columnPosition" placeholder="Введите позицию колонки">
-                </div>
-            </div>
-            <div class="col">
-                <button type="button" class="btn btn-primary" id="addColumnButton" style="margin-top:12.7px;">Добавить
-                    колонку
-                </button>
+    <div class="row mt-4" style="align-items: center;">
+        <div class="col">
+            <div class="form-group">
+                <label for="columnName">Название колонки</label>
+                <input type="text" class="form-control" id="columnName" placeholder="Введите название колонки">
             </div>
         </div>
+        <div class="col">
+            <div class="form-group">
+                <label for="columnPosition">Позиция колонки</label>
+                <input type="number" class="form-control" id="columnPosition" placeholder="Введите позицию колонки">
+            </div>
+        </div>
+        <div class="col">
+            <button type="button" class="btn btn-primary" id="addColumnButton" style="margin-top:12.7px;">Добавить
+                колонку
+            </button>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-4">
+            <div class="form-group">
+                <label for="taskName">Название задачи</label>
+                <input type="text" class="form-control" id="taskName" placeholder="Введите название задачи">
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+                <label for="taskDescription">Описание задачи</label>
+                <textarea class="form-control" id="taskDescription" rows="1"
+                          placeholder="Введите описание задачи"></textarea>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label for="taskDate">Выбор даты</label>
+                <input type="date" class="form-control" id="taskDate">
+            </div>
+        </div>
+        <div class="col">
+            <button type="button" class="btn btn-primary" id="addTaskButton" style="margin-top:30.7px;">Добавить задачу</button>
+        </div>
+    </div>
 
-        <div class="cbox d-flex flex-row flex-nowrap overflow-x-auto " style="border-radius: calc(0.85rem - 1px) calc(0.85rem - 1px)
+
+    <div class="cbox d-flex flex-row flex-nowrap overflow-x-auto " style="border-radius: calc(0.85rem - 1px) calc(0.85rem - 1px)
                      calc(0.85rem - 1px) calc(0.85rem - 1px);border-left: 2px
                      solid #212529 !important;border-right: 2px solid #212529
                      !important;border-top: 2px solid #212529; !important;border-bottom:
                      2px solid #212529 !important;">
 
-            <div class="card" id="card-1">
-                <div class="card-header" style="background-color: teal; text-align: center;">
-                    Сделать
-                </div>
-                <div class="card-body" id="todoColumn" style="min-height: 50vh;">
-                    {% for task in tasks %}
-                    <div class="card mb-2">
-                        <div class="card-task-body">
-                            <label>Название задачи: </label>
-                            <h6 class="card-title">{{ task.name }}</h6>
-                            <label>Описание задачи: </label>
-                            <p class="card-text">{{ task.description }}</p>
-                            <label>Статус задачи: </label>
-                            <select id="taskStatus" style="margin-left: 10px;">
-                                <option value="notCompleted">Не завершена</option>
-                                <option value="inProgress">В процессе</option>
-                                <option value="completed">Готово</option>
-                            </select><br>
-                            <label>Срок выполнения: </label>
-                            <p class="card-text">{{ task.expired|date:"Y-m-d" }}</p>
-                            <label>Дата создания: </label>
-                            <p class="card-text">{{ task.date |date:"Y-m-d"}}</p>
-                            <label>Исполнитель: </label>
-                            <p class="card-text">{{ task.initiator }}</p>
-                        </div>
-                        <div class="card-footer">
-                            <div class="svg-small-container">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                                     class="bi bi-box-arrow-in-left" viewBox="0 0 16 16" id="leftIcon"
-                                     onclick="moveTaskLeft(this)">
-                                    <path fill-rule="evenodd"
-                                          d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0v-2z"/>
-                                    <path fill-rule="evenodd"
-                                          d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                                     class="bi bi-clipboard-plus" viewBox="0 0 16 16" id="docIcon"
-                                     onclick="handleDocIconClick(this)">
-                                    <path fill-rule="evenodd"
-                                          d="M8 7a.5.5 0 0 1 .5.5V9H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V10H6a.5.5 0 0 1 0-1h1.5V7.5A.5.5 0 0 1 8 7z"/>
-                                    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
-                                    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                                     class="bi bi-trash3" viewBox="0 0 16 16" id="exIcon" onclick="deleteTask(this)">
-                                    <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                                     class="bi bi-box-arrow-in-right" viewBox="0 0 16 16" id="rightIcon"
-                                     onclick="moveTaskRight(this)">
-                                    <path fill-rule="evenodd"
-                                          d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
-                                    <path fill-rule="evenodd"
-                                          d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-                <div class="card-footer">
-                    <div class="svg-container">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                             class="bi bi-arrow-left-circle" viewBox="0 0 16 16" id="moveLeftIcon-1">
-                            <path fill-rule="evenodd"
-                                  d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                             class="bi bi-x-circle" viewBox="0 0 16 16" id="deleteIcon-1">
-                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                             class="bi bi-arrow-right-circle" viewBox="0 0 16 16" id="moveRightIcon-1">
-                            <path fill-rule="evenodd"
-                                  d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
-                        </svg>
-                    </div>
-                </div>
+        <div class="card" id="card-1">
+            <div class="card-header" style="background-color: teal; text-align: center;">
+                Сделать
             </div>
-
-            <div class="card" id="card-2">
-                <div class="card-header" style="background-color: teal; text-align: center;">
-                    В процессе
-                </div>
-                <div class="card-body" id="inProgressColumn" style="min-height: 50vh;">
-                </div>
-                <div class="card-footer">
-                    <div class="svg-container">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                             class="bi bi-arrow-left-circle" viewBox="0 0 16 16" id="moveLeftIcon-2">
-                            <path fill-rule="evenodd"
-                                  d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                             class="bi bi-x-circle" viewBox="0 0 16 16" id="deleteIcon-2">
-                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                             class="bi bi-arrow-right-circle" viewBox="0 0 16 16" id="moveRightIcon-2">
-                            <path fill-rule="evenodd"
-                                  d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
-                        </svg>
+            <div class="card-body" id="todoColumn" style="min-height: 50vh;">
+                {% for task in tasks %}
+                <div class="card mb-2">
+                    <div class="card-task-body">
+                        <label>Название задачи: </label>
+                        <h6 class="card-title">{{ task.name }}</h6>
+                        <label>Описание задачи: </label>
+                        <p class="card-text">{{ task.description }}</p>
+                        <label>Статус задачи: </label>
+                        <select id="taskStatus" style="margin-left: 10px;">
+                            <option value="notCompleted">Не завершена</option>
+                            <option value="inProgress">В процессе</option>
+                            <option value="completed">Готово</option>
+                        </select><br>
+                        <label>Срок выполнения: </label>
+                        <p class="card-text">{{ task.expired|date:"Y-m-d" }}</p>
+                        <label>Дата создания: </label>
+                        <p class="card-text">{{ task.date |date:"Y-m-d"}}</p>
+                        <label>Исполнитель: </label>
+                        <p class="card-text">{{ task.initiator }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="svg-small-container">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                 class="bi bi-box-arrow-in-left" viewBox="0 0 16 16" id="leftIcon"
+                                 onclick="moveTaskLeft(this)">
+                                <path fill-rule="evenodd"
+                                      d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0v-2z"/>
+                                <path fill-rule="evenodd"
+                                      d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                 class="bi bi-clipboard-plus" viewBox="0 0 16 16" id="docIcon"
+                                 onclick="handleDocIconClick(this)">
+                                <path fill-rule="evenodd"
+                                      d="M8 7a.5.5 0 0 1 .5.5V9H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V10H6a.5.5 0 0 1 0-1h1.5V7.5A.5.5 0 0 1 8 7z"/>
+                                <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                                <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                 class="bi bi-trash3" viewBox="0 0 16 16" id="exIcon" onclick="deleteTask(this)">
+                                <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                 class="bi bi-box-arrow-in-right" viewBox="0 0 16 16" id="rightIcon"
+                                 onclick="moveTaskRight(this)">
+                                <path fill-rule="evenodd"
+                                      d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
+                                <path fill-rule="evenodd"
+                                      d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                            </svg>
+                        </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-
-
-            <div class="card" id="card-3">
-                <div class="card-header" style="background-color: teal; text-align: center;">
-                    Сделано
-                </div>
-                <div class="card-body" id="doneColumn" style="min-height: 50vh;">
-                </div>
-                <div class="card-footer">
-                    <div class="svg-container">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                             class="bi bi-arrow-left-circle" viewBox="0 0 16 16" id="moveLeftIcon-3">
-                            <path fill-rule="evenodd"
-                                  d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                             class="bi bi-x-circle" viewBox="0 0 16 16" id="deleteIcon-3">
-                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                             class="bi bi-arrow-right-circle" viewBox="0 0 16 16" id="moveRightIcon-3">
-                            <path fill-rule="evenodd"
-                                  d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
-                        </svg>
-                    </div>
+            <div class="card-footer">
+                <div class="svg-container">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                         class="bi bi-arrow-left-circle" viewBox="0 0 16 16" id="moveLeftIcon-1">
+                        <path fill-rule="evenodd"
+                              d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                         class="bi bi-x-circle" viewBox="0 0 16 16" id="deleteIcon-1">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                         class="bi bi-arrow-right-circle" viewBox="0 0 16 16" id="moveRightIcon-1">
+                        <path fill-rule="evenodd"
+                              d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                    </svg>
                 </div>
             </div>
         </div>
 
-        <div class="row mt-4">
-            <div class="col">
-                <div class="form-group">
-                    <label for="taskName">Название задачи</label>
-                    <input type="text" class="form-control" id="taskName" placeholder="Введите название задачи">
-                </div>
+        <div class="card" id="card-2">
+            <div class="card-header" style="background-color: teal; text-align: center;">
+                В процессе
             </div>
-            <div class="col">
-                <div class="form-group">
-                    <label for="taskDescription">Описание задачи</label>
-                    <textarea class="form-control" id="taskDescription" rows="1"
-                              placeholder="Введите описание задачи"></textarea>
-                </div>
+            <div class="card-body" id="inProgressColumn" style="min-height: 50vh;">
             </div>
-            <div class="col">
-                <div class="form-group">
-                    <label for="taskDate">Выбор даты</label>
-                    <input type="date" class="form-control" id="taskDate">
+            <div class="card-footer">
+                <div class="svg-container">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                         class="bi bi-arrow-left-circle" viewBox="0 0 16 16" id="moveLeftIcon-2">
+                        <path fill-rule="evenodd"
+                              d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                         class="bi bi-x-circle" viewBox="0 0 16 16" id="deleteIcon-2">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                         class="bi bi-arrow-right-circle" viewBox="0 0 16 16" id="moveRightIcon-2">
+                        <path fill-rule="evenodd"
+                              d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                    </svg>
                 </div>
             </div>
         </div>
 
-        <button type="button" class="btn btn-primary" id="addTaskButton">Добавить задачу</button>
+
+        <div class="card" id="card-3">
+            <div class="card-header" style="background-color: teal; text-align: center;">
+                Сделано
+            </div>
+            <div class="card-body" id="doneColumn" style="min-height: 50vh;">
+            </div>
+            <div class="card-footer">
+                <div class="svg-container">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                         class="bi bi-arrow-left-circle" viewBox="0 0 16 16" id="moveLeftIcon-3">
+                        <path fill-rule="evenodd"
+                              d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                         class="bi bi-x-circle" viewBox="0 0 16 16" id="deleteIcon-3">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                         class="bi bi-arrow-right-circle" viewBox="0 0 16 16" id="moveRightIcon-3">
+                        <path fill-rule="evenodd"
+                              d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
     </div>
+
 
     <div class="modal fade" id="confirmModal-1" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel-1"
          aria-hidden="true">
@@ -391,11 +391,11 @@ min-width: 350px;
             </div>
         </div>
     </div>
-<!--</div>-->
-<script src="{% static 'vendor/js/board3.js' %}"></script>
-<script src="{% static 'vendor/js/board1.js' %}"></script>
-<script src="{% static 'vendor/js/board2.js' %}"></script>
-<script>
+    <!--</div>-->
+    <script src="{% static 'vendor/js/board3.js' %}"></script>
+    <script src="{% static 'vendor/js/board1.js' %}"></script>
+    <script src="{% static 'vendor/js/board2.js' %}"></script>
+    <script>
     function deleteTask(svgElement) {
   var taskCard = svgElement.closest('.card.mb-2');
 
@@ -484,14 +484,17 @@ function handleDocIconClick(svgElement) {
       fileContainer.appendChild(deleteButton);
 
       taskBody.insertBefore(fileContainer, taskBody.querySelector('.card-footer'));
+
+
     }
   });
 
   fileInput.click();
 }
 
-</script>
-  <script type="text/javascript">
+
+    </script>
+    <script type="text/javascript">
 
   // Получаем ссылку на элементы
   var searchBtn = document.querySelector('.search-btn');
@@ -553,7 +556,8 @@ function handleDocIconClick(svgElement) {
       }
     }
   });
-</script>
+
+    </script>
 
 
-{% endblock %}
+    {% endblock %}
