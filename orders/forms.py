@@ -1,9 +1,6 @@
-from datetime import datetime
-
 from django import forms
 
 from orders.models import Order, Resume, Task
-from datetime import date
 
 
 class OrderForm(forms.ModelForm):
@@ -23,27 +20,28 @@ class OrderForm(forms.ModelForm):
         fields = ('first_name', 'last_name', 'email', 'address')
 
 
-# class TaskForm(forms.ModelForm):
-#     name = forms.CharField(widget=forms.TextInput(
-#         attrs={'class': 'form-control', 'placeholder': 'Введите название'}))
-#     date = forms.DateTimeField(widget=forms.DateTimeInput(
-#         attrs={'class': 'form-control', 'placeholder': '2'}))
-#     expired = forms.DateTimeField(widget=forms.DateTimeInput(
-#         attrs={'class': 'form-control', 'placeholder': '01.01.1900'}))
-#     status = forms.MultipleChoiceField(widget=forms.MultipleHiddenInput())
-#     description = forms.CharField(widget=forms.TextInput(
-#         attrs={'class': 'form-control', 'placeholder': 'Введите описание'}))
-#     # initiator = forms.CharField(widget=)
+class TaskForm(forms.ModelForm):
+    name = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'Введите название задачи'}))
+    # date = forms.DateTimeField(widget=forms.DateTimeInput(
+    #     attrs={'class': 'form-control', 'placeholder': '2'}))
+    expired = forms.DateTimeField(widget=forms.DateInput(
+        attrs={'class': 'form-control', 'placeholder': '01.01.1900'}))
+    status = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
+    description = forms.CharField(widget=forms.Textarea(
+        attrs={'class': 'form-control', 'placeholder': 'Введите описание',
+               'rows': 1}))
+    initiator = forms.CharField(widget=forms.HiddenInput(), initial=1)
 
-    # class Meta:
-    #     model = Task
-    #     fields = ['name', 'date', 'expired', 'status', 'description']
-    #     # labels = {
-    #     #     'title': 'Название Модели',
-    #     #     'material': 'Материал',
-    #     #     'priority': 'Приоритет сортировки',
-    #     #     'is_active': 'Активна (включена)',
-    #     # }
+    class Meta:
+        model = Task
+        fields = ['name', 'expired', 'status', 'description']
+        # labels = {
+        #     'title': 'Название Модели',
+        #     'material': 'Материал',
+        #     'priority': 'Приоритет сортировки',
+        #     'is_active': 'Активна (включена)',
+        # }
 
 
 class ResumeForm(forms.ModelForm):

@@ -3,29 +3,19 @@
 {% load static %}
 
 {% block css %}
-  <link href="{% static 'vendor/css/upload.css' %}" rel="stylesheet">
+<link href="{% static 'vendor/css/upload.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
-<h2>Загрузка файлов</h2>
-
-<form id="file-upload-form" class="uploader">
-  <input id="file-upload" type="file" name="fileUpload" accept="image/*" />
-
-  <label for="file-upload" id="file-drag">
-    <img id="file-image" src="#" alt="Preview" class="hidden">
-    <div id="start">
-      <i class="fa fa-download" aria-hidden="true"></i>
-      <div>Выберите файл и переместите сюда</div>
-      <div id="notimage" class="hidden">Please select an image</div>
-      <span id="file-upload-btn" class="btn btn-primary">Выбрать файл</span>
-    </div>
-    <div id="response" class="hidden">
-      <div id="messages"></div>
-      <progress class="progress" id="file-progress" value="0">
-        <span>0</span>
-      </progress>
-    </div>
-  </label>
-</form>
+<h2>Documents</h2>
+<ul>
+  {% for file in files %}
+  <li>
+    {{ file.file }} -
+    <a href="{% url 'orders:download_file' file.id %}">Download</a>
+  </li>
+  {% empty %}
+  <li>No documents found.</li>
+  {% endfor %}
+</ul>
 {% endblock %}

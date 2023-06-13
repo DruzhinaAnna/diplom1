@@ -73,7 +73,7 @@ class Task(models.Model):
     status = models.SmallIntegerField(default=NOT_COMPLETE, choices=STATUSES)
     description = models.CharField(max_length=256)
     initiator = models.ForeignKey(to=User, on_delete=models.CASCADE)
-    file = models.ForeignKey(to=Resume, on_delete=models.CASCADE, null=True)
+    file = models.ForeignKey(to=Resume, on_delete=models.CASCADE, null=True, blank=True)
 
     class Meta:
         verbose_name = 'tasks'

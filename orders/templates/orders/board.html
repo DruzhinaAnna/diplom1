@@ -159,31 +159,40 @@ min-width: 350px;
             </button>
         </div>
     </div>
-    <div class="row mt-2">
-        <div class="col-4">
-            <div class="form-group">
-                <label for="taskName">Название задачи</label>
-                <input type="text" class="form-control" id="taskName" placeholder="Введите название задачи">
-            </div>
-        </div>
-        <div class="col-4">
-            <div class="form-group">
-                <label for="taskDescription">Описание задачи</label>
-                <textarea class="form-control" id="taskDescription" rows="1"
-                          placeholder="Введите описание задачи"></textarea>
-            </div>
-        </div>
-        <div class="col">
-            <div class="form-group">
-                <label for="taskDate">Выбор даты</label>
-                <input type="date" class="form-control" id="taskDate">
-            </div>
-        </div>
-        <div class="col">
-            <button type="button" class="btn btn-primary" id="addTaskButton" style="margin-top:30.7px;">Добавить задачу</button>
-        </div>
-    </div>
 
+    <form action="{% url 'orders:board' %}" method="POST">
+        {% csrf_token %}
+        <div class="row mt-2">
+            <div class="col-4">
+                <div class="form-group">
+                    <label for="taskName">Название задачи</label>
+                    <!--                <input type="text" class="form-control" id="taskName" placeholder="Введите название задачи">-->
+                    {{ form.name }}
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-group">
+                    <label for="taskDescription">Описание задачи</label>
+                    <!--                <textarea class="form-control" id="taskDescription" rows="1"-->
+                    <!--                          placeholder="Введите описание задачи"></textarea>-->
+                    {{ form.description }}
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="taskDate">Выбор даты</label>
+                    <!--                <input type="date" class="form-control" id="taskDate">-->
+                    {{ form.expired }}
+                </div>
+            </div>
+            {{ form.status }}
+            {{ form.initiator }}
+            <div class="col">
+                <input class="btn btn-primary" type="submit" style="margin-top:30.7px;" value="Добавить задачу"
+                       onclick="return validateForm()">
+            </div>
+        </div>
+    </form>
 
     <div class="cbox d-flex flex-row flex-nowrap overflow-x-auto " style="border-radius: calc(0.85rem - 1px) calc(0.85rem - 1px)
                      calc(0.85rem - 1px) calc(0.85rem - 1px);border-left: 2px

@@ -1,12 +1,10 @@
-from datetime import date
 from http import HTTPStatus
 
 import stripe
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import TemplateView
@@ -15,10 +13,9 @@ from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 
 from common.views import TitleMixin
-from orders.forms import OrderForm, ResumeForm
+from orders.forms import OrderForm, TaskForm
 from orders.models import Order, Task, Resume
 from products.models import Basket
-
 from .forms import ResumeForm
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -136,24 +133,24 @@ def mytasks(request):
 
 @login_required
 def board(request):
+    if request.method == 'POST':
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            temp = form.save(commit=False)
+            temp.initiator = request.user
+            temp.save()
+            return redirect('orders:board')
+        else:
+            print("ERROR : Form is invalid")
+            print(form.errors)
+    else:
+        form = TaskForm()
     context = {
-        'title': 'Kanban - Board',
-        'tasks': Task.objects.filter(initiator=request.user)
+        'title': 'Kanban - Доска',
+        'tasks': Task.objects.filter(initiator=request.user),
+        'form': form
     }
     return render(request, 'orders/board.html', context)
-
-
-def saving(request):
-    if request.method == "POST":
-        task = Task()
-        task.name = request.POST.get("name")
-        task.date = request.POST.get("date")
-        task.expired = request.POST.get("expired")
-        task.status = request.POST.get("status")
-        task.description = request.POST.get("description")
-        task.initiator = request.POST.get("initiator")
-        task.save()
-    return HttpResponseRedirect("/")
 
 
 def handle_uploaded_file(f):
@@ -188,12 +185,20 @@ def upload_file(request):
 
 
 @login_required
+def download_file(request, file_id):
+    file = get_object_or_404(Resume, pk=file_id)
+    response = HttpResponse(file.file, content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="{file.file}"'
+    return response
+
+
+@login_required
 def calender(request):
     context = {
         'title': 'Kanban - Календарь',
         'tasks': Task.objects.filter(initiator=request.user)
     }
-    return render(request, 'orders/calender.html',context)
+    return render(request, 'orders/calender.html', context)
 
 
 # class AddTask(TitleMixin, SuccessMessageMixin, CreateView):
@@ -206,7 +211,7 @@ def calender(request):
 
 @login_required
 def anna(request):
-    count=len(Task.objects.filter(initiator=request.user))
+    count = len(Task.objects.filter(initiator=request.user))
     context = {
         'title': 'Kanban - Главная',
         'tasks': Task.objects.filter(initiator=request.user),
@@ -222,5 +227,3 @@ def listing(request):
         'tasks': Task.objects.filter(initiator=request.user)
     }
     return render(request, 'orders/list.html', context)
-
-
