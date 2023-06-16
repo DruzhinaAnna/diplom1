@@ -428,7 +428,7 @@ Docs & License: https://fullcalendar.io/
         });
     }
 
-    var DAY_IDS = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+    var DAY_IDS = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
     // Adding
     function addWeeks(m, n) {
         var a = dateToUtcArray(m);
@@ -4580,7 +4580,7 @@ Docs & License: https://fullcalendar.io/
     }
 
     var RAW_EN_LOCALE = {
-        code: 'en',
+        code: 'ru',
         week: {
             dow: 0,
             doy: 4 // 4 days need to be within the year to be considered the first week
